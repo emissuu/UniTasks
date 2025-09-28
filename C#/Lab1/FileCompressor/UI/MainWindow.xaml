@@ -5,8 +5,65 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileCompressor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Archivator" Height="142" Width="520" MinHeight="142" MinWidth="428" MaxHeight="142" MaxWidth="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="32"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="96"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- First row -->
+        <Image Grid.Row="0" Grid.Column="0" Margin="2"
+               Source="../Resources/Icon.png"/>
+        <Label Grid.Row="0" Grid.Column="1" 
+               FontSize="14pt" Content="Simple archiver!" VerticalContentAlignment="Center"/>
 
+        <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="6,14,6,6"
+                  Name="LevelSelector" Width="128" HorizontalAlignment="Right" SelectedIndex="3"
+                  SelectionChanged="LevelSelector_SelectionChanged">
+            <ComboBoxItem Content="Level 0 - Store"/>
+            <ComboBoxItem Content="Level 1 - Fastest"/>
+            <ComboBoxItem Content="Level 3 - Fast"/>
+            <ComboBoxItem Content="Level 5 - Normal"/>
+            <ComboBoxItem Content="Level 7 - Maximum"/>
+            <ComboBoxItem Content="Level 9 - Ultra"/>
+        </ComboBox>
+        <ComboBox Grid.Row="0" Grid.Column="3" Margin="6,14,6,6"
+                  Name="FormatSelector" Height="20" SelectedIndex="0" 
+                  SelectionChanged="FormatSelector_SelectionChanged">
+            <ComboBoxItem Content="zip"/>
+            <ComboBoxItem Content="tar"/>
+        </ComboBox>
+
+        <!-- Second row -->
+        <Label Grid.Row="1" Grid.Column="0" 
+               Content="From:" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="6" 
+                 Name="TextBoxFrom" Text="C:\" IsHitTestVisible="False"/>
+        <Button Grid.Row="1" Grid.Column="2" Margin="6"
+                Content="..." Tag="0" 
+                Click="PathButton_Click"/>
+        <Button Grid.Row="1" Grid.Column="3" Margin="6"
+                Content="Add to archive"
+                Click="AddToArchiveButton_Click"/>
+
+        <!-- Third row -->
+        <Label Grid.Row="2" Grid.Column="0" 
+               Content="To:" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="6" 
+                 Name="TextBoxTo" Text="C:\" IsHitTestVisible="False"/>
+        <Button Grid.Row="2" Grid.Column="2" Margin="6"
+                Content="..." Tag="1" 
+                Click="PathButton_Click"/>
+        <Button Grid.Row="2" Grid.Column="3" Margin="6"
+                Content="Extract from"
+                Click="ExtractArchiveButton_Click"/>
     </Grid>
 </Window>

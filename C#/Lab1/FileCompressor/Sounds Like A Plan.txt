@@ -1,0 +1,13 @@
+To make:
+Add to archive
+Exctract from archive
+
+Interface
+    zip
+    rar
+    7zip
+
+Add to archive -> assign zip -> do the thing -> nice!
+Extract from   -> assign zip -> do the thing -> nice!
+
+SharpCompress.Compressors.Deflate.CompressionLevel
