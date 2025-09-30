@@ -9,8 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Models\" />
+    <None Remove="Resources\MusicStoreIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Logging\" />
+    <Folder Include="Models\Validation\" />
+    <Folder Include="Outputs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\MusicStoreIcon.png" />
   </ItemGroup>
 
 </Project>

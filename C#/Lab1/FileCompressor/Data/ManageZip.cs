@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.IO.Pipes;
 using System.Windows;
 using SharpCompress.Archives;
 using SharpCompress.Archives.Zip;
@@ -24,6 +25,11 @@ namespace FileCompressor.Data
                             archive.AddEntry(Path.GetFileName(pathFrom), fileStream);
                             archive.SaveTo(pathTo + '\\' + Path.GetFileName(pathFrom) + ".zip", CompressionType.Deflate);
                         }
+                    }
+                    else if (Directory.Exists(pathFrom))
+                    {
+                            archive.AddAllFromDirectory(pathFrom);
+                            archive.SaveTo(pathTo + '\\' + pathFrom.Substring(pathFrom.LastIndexOf('\\')) + ".zip", CompressionType.Deflate);
                     }
                 }
                 MessageBox.Show("Archive created successfully!", "Archivator", MessageBoxButton.OK, MessageBoxImage.Information);

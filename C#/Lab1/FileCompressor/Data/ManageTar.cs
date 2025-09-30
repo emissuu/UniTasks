@@ -5,6 +5,7 @@ using SharpCompress.Archives;
 using SharpCompress.Archives.Tar;
 using SharpCompress.Compressors.Deflate;
 using SharpCompress.Readers;
+using System.IO.Pipes;
 
 namespace FileCompressor.Data
 {
@@ -23,6 +24,11 @@ namespace FileCompressor.Data
                             archive.AddEntry(Path.GetFileName(pathFrom), fileStream);
                             archive.SaveTo(pathTo + '\\' + Path.GetFileName(pathFrom) + ".tar", new(CompressionType.None));
                         }
+                    }
+                    else if (Directory.Exists(pathFrom))
+                    {
+                        archive.AddAllFromDirectory(pathFrom);
+                        archive.SaveTo(pathTo + '\\' + pathFrom.Substring(pathFrom.LastIndexOf('\\')) + ".tar", new(CompressionType.None));
                     }
                 }
                 MessageBox.Show("Archive created successfully!", "Archivator", MessageBoxButton.OK, MessageBoxImage.Information);

@@ -1,0 +1,76 @@
+Texts:
+  Program is opening in table showing window. There is option to import data. 
+
+
+
+Windows:
+  MainWindow:
+    Demonstrate data in table and other elements
+      Table - data itself
+      Above table - basic info
+      Edit - possibility to edit data
+      StatusBar - path and statuses
+    MenuItem
+      Import, export
+      About program
+
+  Preview:
+    Show filename
+    Show 10 rows of data in table
+    Confirm, cancel
+
+  GraphBuilder:
+    Controls
+      GraphType
+      All other controls ...
+
+  PreSave: @NeedsReview
+    All that shit about:
+      csv: dividers
+      xlsx: tablenames 
+
+
+
+MainEntity:
+  Data:
+    Name
+    NumberEntries
+    DataPath
+    Songs
+    Artists
+    Genres
+
+
+
+Skeletons:
+  Models:
+    Entities:
+      Songs: id, title, artist_id, released_at, genres_ids, user_score, rating_count, album_link
+      Artists: id, name
+      Genre: id, name
+
+  Data:
+    Interfaces:
+      IReadeable
+      IWriteable
+      IReportable
+
+    Providers:
+      CsvProvider
+      JsonProvider
+      XmlProvider
+      XlsxProvider
+ 
+    Reports:
+      DocxReportService
+      XlsxReportService
+
+    Logging:
+
+  UI:
+    Windows:
+      MainWindow
+      Preview
+
+  Resources:
+    
