@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataProcessing.Data.Interfaces;
+using DataProcessing.Models.Entities;
 
 namespace DataProcessing.Data.Providers
 {
     public class XlsxProvider : IReadable, IWriteable
     {
-        public Type ReadData<Type>(string path)
+        public SessionData ReadData(string path)
         {
             throw new NotImplementedException();
         }
 
-        public void WriteData<Type>(string path, Type entity)
+        public void WriteData(string path, SessionData entity)
         {
             throw new NotImplementedException();
         }

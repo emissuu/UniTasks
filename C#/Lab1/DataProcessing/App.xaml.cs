@@ -9,6 +9,7 @@ namespace DataProcessing
     /// </summary>
     public partial class App : Application
     {
+
     }
 
 }

@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataProcessing.Models.Entities
+namespace DataProcessing.Data.Interfaces
 {
-    public partial class SessionData
-    {
-
-    }
+    interface IReadWriteable : IReadable, IWriteable
+    { }
 }

@@ -16,5 +16,35 @@ namespace DataProcessing.Models.Entities
         public byte User_Score { get; set; }
         public int Rating_Count { get; set; }
         public string Album_Link { get; set; }
+        public static int Count { get; private set; } = 0;
+
+        public string Artist
+        {
+            get
+            {
+                return Artist_Id.ToString();
+            }
+        }
+        public string ReleaseDate
+        {
+            get
+            {
+                return Released_At.ToString("dd-MM-yyyy");
+            }
+        }
+        public string Genres
+        {
+            get
+            {
+                return string.Join(", ", Genre_Ids);
+            }
+        }
+        public string Rating
+        {
+            get
+            {
+                return $"{Rating_Count} ratings";
+            }
+        }
     }
 }

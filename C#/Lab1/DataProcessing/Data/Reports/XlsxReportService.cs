@@ -10,7 +10,7 @@ namespace DataProcessing.Data.Reports
 {
     internal class XlsxReportService : IReportable
     {
-        public void CreateReport(string path, ref List<Song> songs)
+        public void CreateReport(string path, ref SessionData songs)
         {
 
         }

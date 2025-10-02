@@ -14,8 +14,11 @@
 
   <ItemGroup>
     <Folder Include="Data\Logging\" />
-    <Folder Include="Models\Validation\" />
     <Folder Include="Outputs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="33.1.0" />
   </ItemGroup>
 
   <ItemGroup>

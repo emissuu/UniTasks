@@ -10,6 +10,7 @@ namespace DataProcessing.Models.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public static int Count { get; private set; } = 0;
 
         public override string ToString()
         {

@@ -26,13 +26,17 @@
         <!-- First row -->
         <Menu Grid.Row="0">
             <MenuItem Header="File">
-                <MenuItem Header="Open"/>
-                <MenuItem Header="Save as..."/>
-                <MenuItem Header="Create report"/>
+                <MenuItem Header="Open" Click="OpenDataset_Click"/>
+                <MenuItem Header="Save as..." Click="SaveDataset_Click"/>
+            </MenuItem>
+            <MenuItem Header="Reports">
+                <MenuItem Header="Generate DOCX"/>
+                <MenuItem Header="Generate XLSX"/>
             </MenuItem>
             <MenuItem Header="Row">
-                <MenuItem Header="Remove row"/>
+                <MenuItem Header="Add row"/>
                 <MenuItem Header="Move row"/>
+                <MenuItem Header="Remove row"/>
             </MenuItem>
             <MenuItem Header="About">
                 <MenuItem Header="About program"/>
@@ -58,7 +62,16 @@
                 </Grid>
                 <DataGrid Name="MainDataGrid" Grid.Row="1"
                           Margin="2" BorderBrush="Gray" BorderThickness="1">
-                    
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
+                        <DataGridTextColumn Header="Artist" Binding="{Binding Artist}"/>
+                        <DataGridTextColumn Header="Release date" Binding="{Binding ReleaseDate}"/>
+                        <DataGridTextColumn Header="Genres" Binding="{Binding Genres}"/>
+                        <DataGridTextColumn Header="User score" Binding="{Binding User_Score}"/>
+                        <DataGridTextColumn Header="Rating count" Binding="{Binding Rating}"/>
+                        <DataGridTextColumn Header="Album link" Binding="{Binding Album_Link}"/>
+                    </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </Border>

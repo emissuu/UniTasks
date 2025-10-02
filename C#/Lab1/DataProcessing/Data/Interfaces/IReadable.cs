@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataProcessing.Models.Entities;
 
 namespace DataProcessing.Data.Interfaces
 {
     public interface IReadable
     {
-        public Type ReadData<Type>(string path);
+        public SessionData ReadData(string path);
     }
 }

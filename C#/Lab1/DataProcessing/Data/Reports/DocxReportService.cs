@@ -10,7 +10,7 @@ namespace DataProcessing.Data.Reports
 {
     internal class DocxReportService : IReportable
     {
-        public void CreateReport(string path, ref List<Song> songs)
+        public void CreateReport(string path, ref SessionData songs)
         {
 
         }
