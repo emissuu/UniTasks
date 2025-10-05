@@ -2,22 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DataProcessing.Models.Entities
 {
     public partial class SessionData
     {
+        [JsonIgnore]
+        [XmlIgnore]
         public string Name { get; set; }
+        [JsonIgnore]
+        [XmlIgnore]
         public int Number_Entries { get; set; }
+        [JsonIgnore]
+        [XmlIgnore]
         public string DataPath { get; set; }
+        [JsonInclude]
         public List<Song> Songs { get; set; } = new();
+        [JsonInclude]
         public List<Artist> Artists { get; set; } = new();
+        [JsonInclude]
         public List<Genre> Genres { get; set; } = new();
-        //public Dictionary<int, string> ArtistDict { get; set; } = new();
-        //public Dictionary<int, string> GenreDict { get; set; } = new();
+        [JsonConstructor]
+        public SessionData() { }
     }
-    public class MusicCsvDTO
+    public class MusicDTO
     {
         public int id { get; set; }
         public string title { get; set; }

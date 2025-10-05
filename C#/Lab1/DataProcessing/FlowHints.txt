@@ -1,1 +1,1 @@
-Finished at getting Artist.Name from Songs. Sucks ass
+JsonReading finished

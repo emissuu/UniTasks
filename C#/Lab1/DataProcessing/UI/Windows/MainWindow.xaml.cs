@@ -21,9 +21,6 @@ namespace DataProcessing.UI.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        private SessionData? currentSession;
-        private IReadable dataReader;
-        private IWriteable dataWriter;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,11 +29,11 @@ namespace DataProcessing.UI.Windows
 
         private void Update()
         {
-            if (currentSession != null)
+            if (CurrentSession.Data != null)
             {
-                StatusBarText.Content = $"Data loaded: {currentSession.Number_Entries} entries";
-                StatusBarPath.Content = currentSession.DataPath;
-                MainDataGrid.ItemsSource = currentSession.Songs;
+                StatusBarText.Content = $"Data loaded: {CurrentSession.Data.Number_Entries} entries";
+                StatusBarPath.Content = CurrentSession.Data.DataPath;
+                MainDataGrid.ItemsSource = CurrentSession.Data.Songs;
                 MainDataGrid.Items.Refresh();
             }
             else
@@ -51,6 +48,7 @@ namespace DataProcessing.UI.Windows
 
         private void OpenDataset_Click(object sender, RoutedEventArgs e)
         {
+            IReadable dataReader;
             OpenFileDialog openFileDialog = new()
             {
                 Filter = "JSON Files (*.json)|*.json|CSV Files (*.csv)|*.csv|MS Excel Files (*.xlsx)|*.xlsx|XML Files (*.xml)|*.xml|All Files|*.*",
@@ -78,19 +76,28 @@ namespace DataProcessing.UI.Windows
                             break;
                         default:
                             MessageBox.Show("Extension not recognized. Session terminated", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
-                            break;
+                            return;
                     }
-                    if (currentSession != null)
+                    if (CurrentSession.Data != null)
                     {
                         MessageBoxResult messageResult = MessageBox.Show("Data already loaded. Do you want to overwrite current data?", "MusicStore", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                         if (messageResult == MessageBoxResult.Cancel)
                         {
                             return;
                         }
+                        else
+                        {
+                            CurrentSession.Data = null;
+                        }
                     }
-                    currentSession = dataReader.ReadData(openFileDialog.FileName);
+                    CurrentSession.Data = dataReader.ReadData(openFileDialog.FileName);
+                    Preview previewWindow = new();
+                    bool? previewResult = previewWindow.ShowDialog();
+                    if (previewResult == false)
+                    {
+                        CurrentSession.Data = null;
+                    }
                     Update();
-                    MessageBox.Show(currentSession.Name);
                 }
                 catch (Exception ex)
                 {
@@ -101,6 +108,7 @@ namespace DataProcessing.UI.Windows
 
         private void SaveDataset_Click(object sender, RoutedEventArgs e)
         {
+            IWriteable dataWriter;
             SaveFileDialog saveFileDialog = new()
             {
                 Filter = "JSON Files (*.json)|*.json|CSV Files (*.csv)|*.csv|MS Excel Files (*.xlsx)|*.xlsx|XML Files (*.xml)|*.xml|All Files|*.*",
@@ -128,11 +136,11 @@ namespace DataProcessing.UI.Windows
                             break;
                         default:
                             MessageBox.Show("Extension not recognized. Session terminated", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
-                            break;
+                            return;
                     }
-                    if (currentSession != null)
+                    if (CurrentSession.Data != null)
                     {
-                        dataWriter.WriteData(saveFileDialog.FileName, currentSession);
+                        dataWriter.WriteData(saveFileDialog.FileName, CurrentSession.Data);
                     }
                     else
                     {

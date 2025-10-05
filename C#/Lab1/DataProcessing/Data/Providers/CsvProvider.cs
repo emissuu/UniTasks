@@ -26,7 +26,7 @@ namespace DataProcessing.Data.Providers
                 }))
                 {
                 
-                    List<MusicCsvDTO> records = csv.GetRecords<MusicCsvDTO>().ToList();
+                    List<MusicDTO> records = csv.GetRecords<MusicDTO>().ToList();
                     SessionData sessionData = new();
                     var artistDict = new Dictionary<string, int>();
                     var genreDict = new Dictionary<string, int>();
@@ -41,11 +41,12 @@ namespace DataProcessing.Data.Providers
                         }
                         foreach (string genreName in record.genres.Split(',', StringSplitOptions.RemoveEmptyEntries))
                         {
-                            if (!genreDict.ContainsKey(genreName))
+                            string genreTrimmed = genreName.Trim();
+                            if (!genreDict.ContainsKey(genreTrimmed))
                             {
-                                Genre genre = new(Genre.Count, genreName);
+                                Genre genre = new(Genre.Count, genreTrimmed);
                                 sessionData.Genres.Add(genre);
-                                genreDict[genreName] = genre.Id;
+                                genreDict[genreTrimmed] = genre.Id;
                             }
                         }
                         // Release_Date cleaning
@@ -61,7 +62,10 @@ namespace DataProcessing.Data.Providers
                         {
                             record.rating_count = record.rating_count.Remove(record.rating_count.IndexOf(','), 1);
                         }
-                        record.rating_count = record.rating_count.Substring(0, record.rating_count.IndexOf('r') - 1);
+                        if (record.rating_count.IndexOf('r') != -1)
+                        {
+                            record.rating_count = record.rating_count.Substring(0, record.rating_count.IndexOf('r') - 1);
+                        }
                         int rating = Int32.Parse(record.rating_count);
 
                         Song song = new(
@@ -69,7 +73,7 @@ namespace DataProcessing.Data.Providers
                             record.title,
                             artistDict[record.artist],
                             releaseDate,
-                            record.genres.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(g => genreDict[g]).ToList(),
+                            record.genres.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(g => genreDict[g.Trim()]).ToList(),
                             record.user_score,
                             rating,
                             record.album_link
@@ -79,8 +83,6 @@ namespace DataProcessing.Data.Providers
                     sessionData.Name = Path.GetFileNameWithoutExtension(path);
                     sessionData.Number_Entries = sessionData.Songs.Count;
                     sessionData.DataPath = path;
-                    sessionData.ArtistDict = artistDict.ToDictionary(a => a.Value, b => b.Key);
-                    sessionData.GenreDict = genreDict.ToDictionary(a => a.Value, b => b.Key);
                     return sessionData;
                 }
             }
@@ -95,7 +97,30 @@ namespace DataProcessing.Data.Providers
 
         public void WriteData(string path, SessionData entity)
         {
-            throw new NotImplementedException();
+            using (var writer = new StreamWriter(path))
+            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                csv.WriteHeader<MusicDTO>();
+                csv.NextRecord();
+                foreach (var song in entity.Songs)
+                {
+                    var artistName = entity.Artists.First(a => a.Id == song.Artist_Id).Name;
+                    var genreNames = string.Join(",", song.Genre_Ids.Select(gid => entity.Genres.First(g => g.Id == gid).Name));
+                    var record = new MusicDTO
+                    {
+                        id = song.Id + 1,
+                        title = song.Title,
+                        artist = artistName,
+                        release_date = song.Released_At.ToString("yyyy-MM-dd"),
+                        genres = genreNames,
+                        user_score = song.User_Score,
+                        rating_count = song.Rating_Count.ToString(),
+                        album_link = song.Album_Link
+                    };
+                    csv.WriteRecord(record);
+                    csv.NextRecord();
+                }
+            }
         }
     }
 }

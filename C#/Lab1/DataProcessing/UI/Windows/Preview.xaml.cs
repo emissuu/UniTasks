@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DataProcessing.Models.Entities;
 
 namespace DataProcessing.UI.Windows
 {
@@ -22,6 +23,23 @@ namespace DataProcessing.UI.Windows
         public Preview()
         {
             InitializeComponent();
+            if (CurrentSession.Data != null)
+            {
+                PreviewDataGrid.ItemsSource = CurrentSession.Data.Songs.Take(16);
+                Maintext.Content = CurrentSession.Data.Name + ": " + CurrentSession.Data.Number_Entries + " entries";
+            }
+        }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            this.Close();
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            this.Close();
         }
     }
 }

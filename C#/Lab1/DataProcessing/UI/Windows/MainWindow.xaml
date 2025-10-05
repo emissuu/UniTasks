@@ -61,9 +61,10 @@
                         Margin="2" Content="Save"/>
                 </Grid>
                 <DataGrid Name="MainDataGrid" Grid.Row="1"
-                          Margin="2" BorderBrush="Gray" BorderThickness="1">
+                          Margin="2" BorderBrush="Gray" BorderThickness="1"
+                          AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IdPlusOne}"/>
                         <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
                         <DataGridTextColumn Header="Artist" Binding="{Binding Artist}"/>
                         <DataGridTextColumn Header="Release date" Binding="{Binding ReleaseDate}"/>
