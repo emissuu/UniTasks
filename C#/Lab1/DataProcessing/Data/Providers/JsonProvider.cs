@@ -26,16 +26,7 @@ namespace DataProcessing.Data.Providers
             }
             catch (Exception ex)
             {
-                if (ex is ArgumentException)
-                {
-                    MessageBox.Show("Cannot import invalid data", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    throw new ArgumentException("Cannot import invalid data");
-                }
-                else
-                {
-                    MessageBox.Show("Error processing JSON data", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    throw new Exception($"Error processing CSV data: {ex.Message}", ex);
-                }
+                throw;
             }
         }
 

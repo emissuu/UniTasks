@@ -30,8 +30,8 @@
                 <MenuItem Header="Save as..." Click="SaveDataset_Click"/>
             </MenuItem>
             <MenuItem Header="Reports">
-                <MenuItem Header="Generate DOCX"/>
-                <MenuItem Header="Generate XLSX"/>
+                <MenuItem Header="Generate DOCX" Tag="docx" Click="CreateReport_Click"/>
+                <MenuItem Header="Generate XLSX" Tag="xlsx" Click="CreateReport_Click"/>
             </MenuItem>
             <MenuItem Header="Row">
                 <MenuItem Header="Add row"/>

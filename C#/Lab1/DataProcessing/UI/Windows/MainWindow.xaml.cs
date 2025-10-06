@@ -13,6 +13,7 @@ using DataProcessing.Data.Interfaces;
 using DataProcessing.Models.Entities;
 using DataProcessing.Data.Providers;
 using Microsoft.Win32;
+using DataProcessing.Data.Reports;
 
 namespace DataProcessing.UI.Windows
 {
@@ -99,9 +100,49 @@ namespace DataProcessing.UI.Windows
                     }
                     Update();
                 }
-                catch (Exception ex)
+                catch (FileNotFoundException ex)
                 {
-                    // Do the actual error handling here
+                    MessageBox.Show("File not found", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show("Error reading file", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (CsvHelper.HeaderValidationException ex)
+                {
+                    MessageBox.Show("Header names are missing or spelled differently.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (CsvHelper.ReaderException ex)
+                {
+                    MessageBox.Show("Error reading CSV data. Please ensure the data is formatted correctly.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (System.Runtime.InteropServices.COMException ex)
+                {
+                    MessageBox.Show("Error reading Excel data. Please ensure the file is not open in another program.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (System.Reflection.TargetInvocationException ex)
+                {
+                    MessageBox.Show("Error reading Excel data. Please ensure the file is not open in another program.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (System.InvalidCastException ex)
+                {
+                    MessageBox.Show("Error processing Excel data. Please ensure the data is formatted correctly.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (System.ArgumentException ex)
+                {
+                    MessageBox.Show("Cannot import invalid data", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (System.Text.Json.JsonException ex)
+                {
+                    MessageBox.Show("Error processing JSON data. Please ensure the data is formatted correctly.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (System.Xml.XmlException ex)
+                {
+                    MessageBox.Show("Error processing XML data. Please ensure the data is formatted correctly.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show("An unexpected error occurred: " + ex.Message, "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -147,9 +188,78 @@ namespace DataProcessing.UI.Windows
                         MessageBox.Show("No data loaded. Nothing to save.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+                catch (IOException ex)
+                {
+                    MessageBox.Show("Error writing file", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    MessageBox.Show("You do not have permission to save to this location.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 catch (Exception ex)
                 {
-                    // Do the actual error handling here
+                    MessageBox.Show("An unexpected error occurred: " + ex.Message, "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void CreateReport_Click(object sender, RoutedEventArgs e)
+        {
+            IReportable reportGenerator = new DocxReportService();
+            SaveFileDialog saveFileDialog = new();
+            if (sender is MenuItem menuItem)
+            {
+                if ((string)menuItem.Tag == "docx")
+                {
+                    saveFileDialog.Filter = "Word Document (*.docx)|*.docx|All Files|*.*";
+                    saveFileDialog.Title = "Generate report";
+                    reportGenerator = new DocxReportService();
+                }
+                else
+                {
+                    saveFileDialog.Filter = "MS Excel Files (*.xlsx)|*.xlsx|All Files|*.*";
+                    saveFileDialog.Title = "Generate report";
+                    reportGenerator = new XlsxReportService();
+                }
+            }
+            bool? result = saveFileDialog.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    if (CurrentSession.Data != null)
+                    {
+                        reportGenerator.GenerateReport(saveFileDialog.FileName, CurrentSession.Data);
+                        MessageBox.Show("Report generated successfully.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No data loaded. Cannot generate report.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show("Error writing file", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    MessageBox.Show("You do not have permission to save to this location.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (System.Runtime.InteropServices.COMException ex)
+                {
+                    MessageBox.Show("Error generating report. Please ensure the file is not open in another program.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (System.Reflection.TargetInvocationException ex)
+                {
+                    MessageBox.Show("Error generating report. Please ensure the file is not open in another program.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (System.InvalidCastException ex)
+                {
+                    MessageBox.Show("Error processing data for report. Please ensure the data is formatted correctly.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show("An unexpected error occurred: " + ex.Message, "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

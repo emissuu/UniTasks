@@ -9,6 +9,6 @@ namespace DataProcessing.Data.Interfaces
 {
     interface IReportable
     {
-        public void CreateReport(string path, ref SessionData songs);
+        public void GenerateReport(string path, SessionData entity);
     }
 }

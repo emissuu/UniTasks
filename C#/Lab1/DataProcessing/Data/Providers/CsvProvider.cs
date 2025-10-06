@@ -88,10 +88,7 @@ namespace DataProcessing.Data.Providers
             }
             catch (Exception ex)
             {
-                if (ex is ArgumentException)
-                    throw new ArgumentException("Cannot import invalid data");
-                else
-                    throw new Exception($"Error processing CSV data: {ex.Message}", ex);
+                throw;
             }
         }
 
