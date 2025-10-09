@@ -15,7 +15,7 @@ using DataProcessing.Data.Providers;
 using Microsoft.Win32;
 using DataProcessing.Data.Reports;
 
-namespace DataProcessing.UI.Windows
+namespace DataProcessing.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

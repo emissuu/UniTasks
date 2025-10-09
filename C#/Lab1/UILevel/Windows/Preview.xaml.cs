@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DataProcessing.Models.Entities;
 
-namespace DataProcessing.UI.Windows
+namespace DataProcessing.Windows
 {
     /// <summary>
     /// Interaction logic for Preview.xaml

@@ -1,11 +1,11 @@
-﻿<Window x:Class="DataProcessing.UI.Windows.MainWindow"
+﻿<Window x:Class="DataProcessing.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DataProcessing.UI.Windows"
+        xmlns:local="clr-namespace:DataProcessing.Windows"
         mc:Ignorable="d"
-        Title="Music Store" Icon="../../Resources/MusicStoreIcon.png" Height="480" Width="960" MinHeight="360" MinWidth="600">
+        Title="Music Store" Icon="../Resources/MusicStoreIcon.png" Height="480" Width="960" MinHeight="360" MinWidth="600">
     <Window.Resources>
         <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
             <StackPanel Margin="-32,0,-32,0" Background="White"/>

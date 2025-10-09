@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AllOther\DataProcessing.csproj" />
+    <ProjectReference Include="..\DataProcessing2\DataProcessing.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,12 +29,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="UI\Windows\ChartPreview.xaml.cs">
+    <Compile Update="Windows\ChartPreview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UI\Windows\Preview.xaml.cs">
+    <Compile Update="Windows\Preview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TempResources\" />
   </ItemGroup>
 
 </Project>
