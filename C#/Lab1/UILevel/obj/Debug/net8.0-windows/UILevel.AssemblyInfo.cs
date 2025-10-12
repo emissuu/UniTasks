@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UILevel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f0b10844316fb776b3a199e3aea45ae4a6143344")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48328b687a01148fe8381b0a7421667db2143922")]
 [assembly: System.Reflection.AssemblyProductAttribute("UILevel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UILevel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

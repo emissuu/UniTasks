@@ -60,7 +60,15 @@
             },
             "EPPlus": {
               "target": "Package",
-              "version": "[8.2.0, )"
+              "version": "[8.2.1, )"
+            },
+            "OxyPlot.Core": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "OxyPlot.Wpf": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             }
           },
           "imports": [

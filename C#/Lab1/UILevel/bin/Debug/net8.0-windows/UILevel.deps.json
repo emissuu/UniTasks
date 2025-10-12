@@ -9,6 +9,7 @@
       "UILevel/1.0.0": {
         "dependencies": {
           "DataProcessing": "1.0.0",
+          "DataProcessing2": "1.0.0",
           "OxyPlot.Core": "2.2.0",
           "OxyPlot.Wpf": "2.2.0"
         },
@@ -46,7 +47,7 @@
           }
         }
       },
-      "EPPlus/8.2.0": {
+      "EPPlus/8.2.1": {
         "dependencies": {
           "EPPlus.Interfaces": "8.1.0",
           "Microsoft.Extensions.Configuration.Json": "8.0.1",
@@ -58,8 +59,8 @@
         },
         "runtime": {
           "lib/net8.0/EPPlus.dll": {
-            "assemblyVersion": "8.2.0.0",
-            "fileVersion": "8.2.0.0"
+            "assemblyVersion": "8.2.1.0",
+            "fileVersion": "8.2.1.0"
           }
         }
       },
@@ -239,14 +240,16 @@
         }
       },
       "System.Text.Encoding.CodePages/8.0.0": {},
-      "DataProcessing/1.0.0": {
+      "DataProcessing2/1.0.0": {
         "dependencies": {
           "CsvHelper": "33.1.0",
           "DocumentFormat.OpenXml": "3.3.0",
-          "EPPlus": "8.2.0"
+          "EPPlus": "8.2.1",
+          "OxyPlot.Core": "2.2.0",
+          "OxyPlot.Wpf": "2.2.0"
         },
         "runtime": {
-          "DataProcessing.dll": {
+          "DataProcessing2.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -281,12 +284,12 @@
       "path": "documentformat.openxml.framework/3.3.0",
       "hashPath": "documentformat.openxml.framework.3.3.0.nupkg.sha512"
     },
-    "EPPlus/8.2.0": {
+    "EPPlus/8.2.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-UFAjVAP4UyR9rPL/adHw1uezX1gDbt2mM7Bkb7cMmqbw51y0HFKyLoHpsjvNzKRL/u05vW4pHJAmkuvrPBcgSw==",
-      "path": "epplus/8.2.0",
-      "hashPath": "epplus.8.2.0.nupkg.sha512"
+      "sha512": "sha512-bsURKrvyocJK3//ulYEJ2P6Q6DSbWv6SDDTX2he7L4c0fMvcQO32iY7PFba+1Eb4jPnCR+CkDtwh95yE4w1z3g==",
+      "path": "epplus/8.2.1",
+      "hashPath": "epplus.8.2.1.nupkg.sha512"
     },
     "EPPlus.Interfaces/8.1.0": {
       "type": "package",
@@ -414,7 +417,7 @@
       "path": "system.text.encoding.codepages/8.0.0",
       "hashPath": "system.text.encoding.codepages.8.0.0.nupkg.sha512"
     },
-    "DataProcessing/1.0.0": {
+    "DataProcessing2/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

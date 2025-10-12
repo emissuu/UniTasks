@@ -1,10 +1,9 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-/.vs
+﻿/.vs
 /C#/Lab1/.vs
-/C#/Lab1/DataProcessing/obj
+/C#/Lab1/FileCompressor/bin
 /C#/Lab1/FileCompressor/obj
-/C#/Lab1/FileCompressor/bin/Debug/net8.0-windows
-/C#/Lab1/DataProcessing/bin/Debug/net8.0-windows
+/C#/Lab1/AllOther
+/C#/Lab1/DataProcessing2/bin
+/C#/Lab1/DataProcessing2/obj
+/C#/Lab1/UILevel/bin
+/C#/Lab1/UILevel/obj

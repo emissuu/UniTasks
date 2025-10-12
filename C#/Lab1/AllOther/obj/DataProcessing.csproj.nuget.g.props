@@ -13,4 +13,7 @@
     <SourceRoot Include="C:\Users\Meri\.nuget\packages\" />
     <SourceRoot Include="D:\Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgOxyPlot_Wpf Condition=" '$(PkgOxyPlot_Wpf)' == '' ">C:\Users\Meri\.nuget\packages\oxyplot.wpf\2.2.0</PkgOxyPlot_Wpf>
+  </PropertyGroup>
 </Project>

@@ -47,7 +47,7 @@
           }
         }
       },
-      "EPPlus/8.2.0": {
+      "EPPlus/8.2.1": {
         "type": "package",
         "dependencies": {
           "EPPlus.Interfaces": "8.1.0",
@@ -397,7 +397,9 @@
         "dependencies": {
           "CsvHelper": "33.1.0",
           "DocumentFormat.OpenXml": "3.3.0",
-          "EPPlus": "8.2.0"
+          "EPPlus": "8.2.1",
+          "OxyPlot.Core": "2.2.0",
+          "OxyPlot.Wpf": "2.2.0"
         },
         "compile": {
           "bin/placeholder/DataProcessing.dll": {}
@@ -483,15 +485,15 @@
         "lib/netstandard2.0/DocumentFormat.OpenXml.Framework.xml"
       ]
     },
-    "EPPlus/8.2.0": {
-      "sha512": "UFAjVAP4UyR9rPL/adHw1uezX1gDbt2mM7Bkb7cMmqbw51y0HFKyLoHpsjvNzKRL/u05vW4pHJAmkuvrPBcgSw==",
+    "EPPlus/8.2.1": {
+      "sha512": "bsURKrvyocJK3//ulYEJ2P6Q6DSbWv6SDDTX2he7L4c0fMvcQO32iY7PFba+1Eb4jPnCR+CkDtwh95yE4w1z3g==",
       "type": "package",
-      "path": "epplus/8.2.0",
+      "path": "epplus/8.2.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "EPPlusLogo.png",
-        "epplus.8.2.0.nupkg.sha512",
+        "epplus.8.2.1.nupkg.sha512",
         "epplus.nuspec",
         "lib/net35/EPPlus.dll",
         "lib/net35/EPPlus.xml",
@@ -1078,8 +1080,8 @@
     },
     "DataProcessing/1.0.0": {
       "type": "project",
-      "path": "../AllOther/DataProcessing.csproj",
-      "msbuildProject": "../AllOther/DataProcessing.csproj"
+      "path": "../DataProcessing2/DataProcessing.csproj",
+      "msbuildProject": "../DataProcessing2/DataProcessing.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1123,6 +1125,9 @@
           "projectReferences": {
             "D:\\Other\\OA chart\\Other\\UniTasks\\C#\\Lab1\\AllOther\\DataProcessing.csproj": {
               "projectPath": "D:\\Other\\OA chart\\Other\\UniTasks\\C#\\Lab1\\AllOther\\DataProcessing.csproj"
+            },
+            "D:\\Other\\OA chart\\Other\\UniTasks\\C#\\Lab1\\DataProcessing2\\DataProcessing.csproj": {
+              "projectPath": "D:\\Other\\OA chart\\Other\\UniTasks\\C#\\Lab1\\DataProcessing2\\DataProcessing.csproj"
             }
           }
         }
