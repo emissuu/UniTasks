@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Data / Domain">
+    <Position X="3.559" Y="5.044" Height="0.298" Width="1.006" />
+  </Comment>
+  <Comment CommentText="Models">
+    <Position X="10.106" Y="5.068" Height="0.291" Width="0.7" />
+  </Comment>
+  <Comment CommentText="     UI">
+    <Position X="3.626" Y="8.52" Height="0.291" Width="0.7" />
+  </Comment>
+  <Class Name="DataProcessingRestored.ChartHandling.ChartHandler">
+    <Position X="6" Y="5.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="DataProcessingRestored.ChartHandling.ChartHandler.ChartType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ChartHandler.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChartHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataProcessing.Data.Providers.CsvProvider" Collapsed="true">
+    <Position X="2.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CsvProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataProcessing.Data.Providers.JsonProvider" Collapsed="true">
+    <Position X="4.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>JsonProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataProcessing.Data.Providers.XlsxProvider" Collapsed="true">
+    <Position X="4.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XlsxProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataProcessing.Data.Providers.XmlProvider" Collapsed="true">
+    <Position X="2.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XmlProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataProcessing.Data.Reports.DocxReportService" Collapsed="true">
+    <Position X="2.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DocxReportService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataProcessing.Data.Reports.XlsxReportService" Collapsed="true">
+    <Position X="4.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XlsxReportService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataProcessing.Models.Entities.Album">
+    <Position X="9.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DataProcessing.Models.Entities.Artist">
+    <Position X="11.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DataProcessing.Models.Entities.CurrentSession">
+    <Position X="8" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DataProcessing.Models.Entities.Genre">
+    <Position X="9.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DataProcessing.Models.Entities.SessionData">
+    <Position X="8" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DataProcessing.Models.Entities.MusicDTO">
+    <Position X="11.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UILevel.Windows.AboutProgram" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Windows\AboutProgram.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DataProcessing.Windows.ChartPreview" BaseTypeListCollapsed="true">
+    <Position X="5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QABAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Windows\ChartPreview.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DataProcessing.Windows.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAAAAAAAAAAAEAEBAAgAAAAAEAAAAAAAAABAA=</HashCode>
+      <FileName>Windows\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DataProcessing.Windows.Preview" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Windows\Preview.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="DataProcessing.Data.Interfaces.IReadable" Collapsed="true">
+    <Position X="0.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IReadable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DataProcessing.Data.Interfaces.IReportable" Collapsed="true">
+    <Position X="0.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IReportable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DataProcessing.Data.Interfaces.IWriteable" Collapsed="true">
+    <Position X="0.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IWriteable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
