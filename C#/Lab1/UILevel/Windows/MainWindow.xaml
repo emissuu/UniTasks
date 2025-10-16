@@ -31,18 +31,13 @@
             </MenuItem>
             <MenuItem Header="Reports">
                 <MenuItem Header="Generate DOCX" Tag="docx" Click="CreateReport_Click"/>
-                <MenuItem Header="Generate XLSX" Tag="xlsx" Click="CreateReport_Click"/>
+                <!-- <MenuItem Header="Generate XLSX" Tag="xlsx" Click="CreateReport_Click"/> -->
             </MenuItem>
             <MenuItem Header="Charts">
                 <MenuItem Header="Create chart" Click="CreateChart_Click"/>
             </MenuItem>
-            <MenuItem Header="Row">
-                <MenuItem Header="Add row"/>
-                <MenuItem Header="Move row"/>
-                <MenuItem Header="Remove row"/>
-            </MenuItem>
             <MenuItem Header="About">
-                <MenuItem Header="About program"/>
+                <MenuItem Header="About program" Click="AboutProgram_Click"/>
             </MenuItem>
         </Menu>
         <!-- Second row -->
@@ -55,17 +50,20 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="52"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Name="TextBoxItem" Grid.Column="0"
-                             Margin="2" Text="Selected item"/>
-                    <Button Grid.Column="1"
-                        Margin="2" Content="Save"/>
+                    <Label Name="LabelItem" Grid.Column="0" VerticalAlignment="Top"
+                           Margin="0,-2,-2,0" Content="Filter by:"/>
+                    <TextBox Name="TextBoxItem" Grid.Column="1"
+                             Margin="2" Text="" KeyDown="TextBoxItem_KeyDown"/>
+                    <Button Grid.Column="2"
+                        Margin="2" Content="Refresh" Click="RefreshButton_Click"/>
                 </Grid>
                 <DataGrid Name="MainDataGrid" Grid.Row="1"
                           Margin="2" BorderBrush="Gray" BorderThickness="1"
-                          AutoGenerateColumns="False">
+                          AutoGenerateColumns="False" CanUserAddRows="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding IdPlusOne}"/>
                         <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>

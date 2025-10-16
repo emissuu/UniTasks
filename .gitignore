@@ -1,4 +1,6 @@
 ﻿/.vs
+
+# Lab1
 /C#/Lab1/.vs
 /C#/Lab1/FileCompressor/bin
 /C#/Lab1/FileCompressor/obj
@@ -7,3 +9,4 @@
 /C#/Lab1/DataProcessing2/obj
 /C#/Lab1/UILevel/bin
 /C#/Lab1/UILevel/obj
+/C#/Lab1/ForTests

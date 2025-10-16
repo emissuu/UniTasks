@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DataProcessing.Windows"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="Chart Preview" Height="540" Width="800" MinHeight="540" MinWidth="640">
+        Title="Chart Preview" Icon="../Resources/MusicStoreIcon.png" Height="540" Width="800" MinHeight="540" MinWidth="640">
     <Border BorderBrush="DarkGray" BorderThickness="0,2,0,0">
         <Grid>
             <Grid.ColumnDefinitions>

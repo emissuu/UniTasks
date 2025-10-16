@@ -14,6 +14,7 @@ using DataProcessing.Models.Entities;
 using DataProcessing.Data.Providers;
 using Microsoft.Win32;
 using DataProcessing.Data.Reports;
+using UILevel.Windows;
 
 namespace DataProcessing.Windows
 {
@@ -34,8 +35,21 @@ namespace DataProcessing.Windows
             {
                 StatusBarText.Content = $"Data loaded: {CurrentSession.Data.Number_Entries} entries";
                 StatusBarPath.Content = CurrentSession.Data.DataPath;
-                MainDataGrid.ItemsSource = CurrentSession.Data.Albums;
-                MainDataGrid.Items.Refresh();
+                if (string.IsNullOrEmpty(TextBoxItem.Text))
+                {
+                    MainDataGrid.ItemsSource = CurrentSession.Data.Albums;
+                }
+                else
+                {
+                    var filteredSongs = CurrentSession.Data.Albums
+                        .Where(album => album.Title.Contains(TextBoxItem.Text, StringComparison.OrdinalIgnoreCase) || 
+                        album.Artist.Contains(TextBoxItem.Text, StringComparison.OrdinalIgnoreCase) ||
+                        album.Genres.Contains(TextBoxItem.Text, StringComparison.OrdinalIgnoreCase) ||
+                        (album.Id + 1).ToString() == TextBoxItem.Text)
+                        .ToList();
+                    MainDataGrid.ItemsSource = filteredSongs;
+                    MainDataGrid.Items.Refresh();
+                }
             }
             else
             {
@@ -274,6 +288,25 @@ namespace DataProcessing.Windows
             else
             {
                 MessageBox.Show("No data loaded. Cannot create chart.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AboutProgram_Click(object sender, RoutedEventArgs e)
+        {
+            AboutProgram aboutWindow = new();
+            aboutWindow.ShowDialog();
+        }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
+
+        private void TextBoxItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                Update();
             }
         }
     }

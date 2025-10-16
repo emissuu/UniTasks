@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="TempResources\**" />
+    <EmbeddedResource Remove="TempResources\**" />
+    <None Remove="TempResources\**" />
+    <Page Remove="TempResources\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="OxyPlot.Core" Version="2.2.0" />
     <PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
   </ItemGroup>
@@ -34,10 +41,6 @@
     <Compile Update="Windows\Preview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="TempResources\" />
   </ItemGroup>
 
 </Project>

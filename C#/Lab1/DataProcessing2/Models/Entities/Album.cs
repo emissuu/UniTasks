@@ -39,6 +39,10 @@ namespace DataProcessing.Models.Entities
             {
                 return Id + 1;
             }
+            set
+            {
+                return;
+            }
         }
         [JsonIgnore]
         [XmlIgnore]
@@ -47,6 +51,10 @@ namespace DataProcessing.Models.Entities
             get
             {
                 return CurrentSession.Data.Artists.FirstOrDefault(a => a.Id == Artist_Id)?.Name ?? "Unknown";
+            }
+            set
+            {
+                CurrentSession.Data.Artists.First(a => a.Name == value);
             }
         }
         [JsonIgnore]
@@ -57,6 +65,16 @@ namespace DataProcessing.Models.Entities
             {
                 return Released_At.ToString("dd-MM-yyyy");
             }
+            set
+            {
+                try {
+                    Released_At = DateTime.ParseExact(value, "dd-MM-yyyy", null);
+                }
+                catch (Exception e)
+                {
+                    return;
+                }
+            }
         }
         [JsonIgnore]
         [XmlIgnore]
@@ -66,6 +84,10 @@ namespace DataProcessing.Models.Entities
             {
                 return string.Join(", ", Genre_Ids.Select(gid => CurrentSession.Data.Genres.FirstOrDefault(g => g.Id == gid)?.Name ?? "Unknown"));
             }
+            set
+            {
+                Genre_Ids = value.Split(", ").Select(gname => CurrentSession.Data.Genres.FirstOrDefault(g => g.Name == gname)?.Id ?? -1).Where(id => id != -1).ToList();
+            }
         }
         [JsonIgnore]
         [XmlIgnore]
@@ -74,6 +96,17 @@ namespace DataProcessing.Models.Entities
             get
             {
                 return $"{Rating_Count} ratings";
+            }
+            set
+            {
+                try
+                {
+                    Rating_Count = int.Parse(value.Split(" ")[0]);
+                }
+                catch (Exception e)
+                {
+                    return;
+                }
             }
         }
     }

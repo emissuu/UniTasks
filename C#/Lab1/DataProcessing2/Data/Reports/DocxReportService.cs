@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataProcessing.Data.Interfaces;
+﻿using DataProcessing.Data.Interfaces;
 using DataProcessing.Models.Entities;
 using DocumentFormat.OpenXml;
 using A = DocumentFormat.OpenXml.Drawing;
 using DW = DocumentFormat.OpenXml.Drawing.Wordprocessing;
 using PIC = DocumentFormat.OpenXml.Drawing.Pictures;
-using Wp14 = DocumentFormat.OpenXml.Office2010.Word.Drawing;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using System.Drawing;
 using DataProcessingRestored.ChartHandling;
 
 namespace DataProcessing.Data.Reports
@@ -76,7 +69,8 @@ namespace DataProcessing.Data.Reports
                 .AppendChild(new Run(
                     new RunProperties(
                         new FontSize() { Val = fontSize.ToString() },
-                        new Bold() { Val = bold }
+                        new Bold() { Val = bold },
+                        new Languages() { Val = "en-US"}
                         ),
                     new Text(text)
                     ));
@@ -90,7 +84,11 @@ namespace DataProcessing.Data.Reports
                 new NumberingId() { Val = 1 });
             pp.Append(np);
             para.Append(pp);
-            Run run = para.AppendChild(new Run());
+            Run run = para.AppendChild(new Run(
+                    new RunProperties(
+                            new Languages() { Val = "en-US" }
+                        )
+                ));
             run.AppendChild(new Text(text));
         }
         private void AddImageToBody(WordprocessingDocument wordDoc, ChartHandler.ChartType chartType)
@@ -116,7 +114,7 @@ namespace DataProcessing.Data.Reports
         private static void AddImageToParagraph(Body body, string imagePartId)
         {
             long imageWidth = 5486400L;
-            long imageHeight = 4114800L; // Aspect ratio adjustment may be needed
+            long imageHeight = 4114800L;
 
             var element = new Drawing(
                 new DW.Inline(
