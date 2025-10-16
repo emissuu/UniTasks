@@ -25,7 +25,7 @@ namespace DataProcessing.Windows
             InitializeComponent();
             if (CurrentSession.Data != null)
             {
-                PreviewDataGrid.ItemsSource = CurrentSession.Data.Songs.Take(16);
+                PreviewDataGrid.ItemsSource = CurrentSession.Data.Albums.Take(16);
                 Maintext.Content = CurrentSession.Data.Name + ": " + CurrentSession.Data.Number_Entries + " entries";
             }
         }

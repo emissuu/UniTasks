@@ -23,7 +23,7 @@ namespace DataProcessing.Data.Providers
                     {
                         Name = Path.GetFileNameWithoutExtension(path),
                         DataPath = path,
-                        Songs = new List<Song>(),
+                        Albums = new List<Album>(),
                         Artists = new List<Artist>(),
                         Genres = new List<Genre>()
                     };
@@ -33,7 +33,7 @@ namespace DataProcessing.Data.Providers
                         int row = 2;
                         while (sheerSongs.Cells[row, 1].Value != null)
                         {
-                            var song = new Song
+                            var song = new Album
                             {
                                 Id = int.Parse(sheerSongs.Cells[row, 1].Value.ToString()),
                                 Title = sheerSongs.Cells[row, 2].Value.ToString(),
@@ -44,7 +44,7 @@ namespace DataProcessing.Data.Providers
                                 Rating_Count = int.Parse(sheerSongs.Cells[row, 7].Value.ToString()),
                                 Album_Link = sheerSongs.Cells[row, 8].Value.ToString()
                             };
-                            data.Songs.Add(song);
+                            data.Albums.Add(song);
                             row++;
                         }
                     }
@@ -78,7 +78,7 @@ namespace DataProcessing.Data.Providers
                             row++;
                         }
                     }
-                    data.Number_Entries = data.Songs.Count;
+                    data.Number_Entries = data.Albums.Count;
                     return data;
                 }
             }
@@ -104,7 +104,7 @@ namespace DataProcessing.Data.Providers
                     sheerSongs.Cells[1, 7].Value = "RatingCount";
                     sheerSongs.Cells[1, 8].Value = "AlbumLink";
                     int row = 2;
-                    foreach (var song in entity.Songs)
+                    foreach (var song in entity.Albums)
                     {
                         sheerSongs.Cells[row, 1].Value = song.Id;
                         sheerSongs.Cells[row, 2].Value = song.Title;

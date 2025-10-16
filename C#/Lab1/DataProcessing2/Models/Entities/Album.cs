@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace DataProcessing.Models.Entities
 {
-    public partial class Song
+    public partial class Album
     {
         [JsonInclude]
         public int Id { get; set; }
@@ -30,7 +30,7 @@ namespace DataProcessing.Models.Entities
         [XmlIgnore]
         public static int Count { get; private set; } = 0;
         [JsonConstructor]
-        public Song() { }
+        public Album() { }
         [JsonIgnore]
         [XmlIgnore]
         public int IdPlusOne

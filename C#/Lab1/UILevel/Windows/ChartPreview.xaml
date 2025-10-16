@@ -26,9 +26,9 @@
                     <Label Content="Chart type:" />
                     <ComboBox Name="ChartTypeComboBox" Margin="4" 
                       SelectedIndex="0">
-                        <ComboBoxItem Content="Top 12 Artists by songs"/>
+                        <ComboBoxItem Content="Top 12 Artists by albums"/>
                         <ComboBoxItem Content="Top 24 Genres"/>
-                        <ComboBoxItem Content="Songs released per year"/>
+                        <ComboBoxItem Content="Albums released per year"/>
                         <ComboBoxItem Content="Distribition of user scores"/>
                     </ComboBox>
                 </StackPanel>

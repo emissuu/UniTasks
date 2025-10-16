@@ -7,9 +7,9 @@ using ArtistClass = DataProcessing.Models.Entities.Artist;
 
 namespace DataProcessing.Models.Entities
 {
-    public partial class Song
+    public partial class Album
     {
-        public Song(int id, string title, int artistId, DateTime releasedAt, List<int> genreIds, byte userScore, int ratingsCount, string albumLink)
+        public Album(int id, string title, int artistId, DateTime releasedAt, List<int> genreIds, byte userScore, int ratingsCount, string albumLink)
         {
             if (id != Count)
             {

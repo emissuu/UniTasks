@@ -20,7 +20,7 @@ namespace DataProcessing.Models.Entities
         [XmlIgnore]
         public string DataPath { get; set; }
         [JsonInclude]
-        public List<Song> Songs { get; set; } = new();
+        public List<Album> Albums { get; set; } = new();
         [JsonInclude]
         public List<Artist> Artists { get; set; } = new();
         [JsonInclude]

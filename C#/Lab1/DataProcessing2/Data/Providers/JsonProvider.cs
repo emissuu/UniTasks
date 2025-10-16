@@ -21,7 +21,7 @@ namespace DataProcessing.Data.Providers
                 SessionData data = JsonSerializer.Deserialize<SessionData>(json);
                 data.Name = Path.GetFileNameWithoutExtension(path);
                 data.DataPath = path;
-                data.Number_Entries = data.Songs.Count;
+                data.Number_Entries = data.Albums.Count;
                 return data;
             }
             catch (Exception ex)

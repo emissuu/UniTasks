@@ -68,8 +68,9 @@ namespace DataProcessing.Data.Providers
                         }
                         int rating = Int32.Parse(record.rating_count);
 
-                        Song song = new(
-                            Song.Count,
+                        Album song
+                            = new(
+                            Album.Count,
                             record.title,
                             artistDict[record.artist],
                             releaseDate,
@@ -78,10 +79,10 @@ namespace DataProcessing.Data.Providers
                             rating,
                             record.album_link
                         );
-                        sessionData.Songs.Add(song);
+                        sessionData.Albums.Add(song);
                     }
                     sessionData.Name = Path.GetFileNameWithoutExtension(path);
-                    sessionData.Number_Entries = sessionData.Songs.Count;
+                    sessionData.Number_Entries = sessionData.Albums.Count;
                     sessionData.DataPath = path;
                     return sessionData;
                 }
@@ -99,7 +100,7 @@ namespace DataProcessing.Data.Providers
             {
                 csv.WriteHeader<MusicDTO>();
                 csv.NextRecord();
-                foreach (var song in entity.Songs)
+                foreach (var song in entity.Albums)
                 {
                     var artistName = entity.Artists.First(a => a.Id == song.Artist_Id).Name;
                     var genreNames = string.Join(",", song.Genre_Ids.Select(gid => entity.Genres.First(g => g.Id == gid).Name));

@@ -15,9 +15,9 @@ namespace DataProcessingRestored.ChartHandling
     {
         public enum ChartType
         {
-            ArtistSongCount,
+            ArtistAlbumCount,
             GenrePopularity,
-            SongsPerYear,
+            AlbumsPerYear,
             ScoreDistribution
         }
 
@@ -25,9 +25,9 @@ namespace DataProcessingRestored.ChartHandling
         {
             return chartType switch
             {
-                ChartType.ArtistSongCount => GenerateArtistSongCountChart(title),
+                ChartType.ArtistAlbumCount => GenerateArtistAlbumCountChart(title),
                 ChartType.GenrePopularity => GenerateGenrePopularityChart(title),
-                ChartType.SongsPerYear => GenerateSongsPerYearChart(title),
+                ChartType.AlbumsPerYear => GenerateSongsPerYearChart(title),
                 ChartType.ScoreDistribution => GenerateScoreDistributionChart(title)
             };
         }
@@ -45,16 +45,17 @@ namespace DataProcessingRestored.ChartHandling
 
         // Generating charts
 
-        private static PlotModel GenerateArtistSongCountChart(string title)
+        private static PlotModel GenerateArtistAlbumCountChart(string title)
         {
-            var model = new PlotModel { Title = title == "" ? "Top 12 Artists by Song Count" : title};
+            var model = new PlotModel { Title = title == "" ? "Top 12 Artists by Album Count" : title};
 
-            var artistSongCounts = CurrentSession.Data.Songs
+            var artistSongCounts = CurrentSession.Data.Albums
                 .GroupBy(s => s.Artist_Id)
                 .Select(g => new { ArtistId = g.Key, Count = g.Count() })
                 .Join(CurrentSession.Data.Artists, sc => sc.ArtistId, a => a.Id, (sc, a) => new { ArtistName = a.Name, sc.Count })
-                .OrderBy(x => x.Count)
+                .OrderByDescending(x => x.Count)
                 .Take(12)
+                .OrderBy(x => x.Count)
                 .ToList();
 
             model.Axes.Add(new CategoryAxis { Position = AxisPosition.Left, ItemsSource = artistSongCounts.Select(a => a.ArtistName).Reverse() });
@@ -71,9 +72,9 @@ namespace DataProcessingRestored.ChartHandling
 
         private static PlotModel GenerateGenrePopularityChart(string title)
         {
-            var model = new PlotModel { Title = title == "" ? "Top Genres by Song Popularity" : title};
+            var model = new PlotModel { Title = title == "" ? "Top Genres by Album Count" : title};
 
-            var genreCounts = CurrentSession.Data.Songs
+            var genreCounts = CurrentSession.Data.Albums
             .SelectMany(s => s.Genre_Ids)
             .GroupBy(genreId => genreId)
             .Select(g => new { GenreId = g.Key, Count = g.Count() })
@@ -107,9 +108,9 @@ namespace DataProcessingRestored.ChartHandling
 
         private static PlotModel GenerateSongsPerYearChart(string title)
         {
-            var model = new PlotModel { Title = title == "" ? "Songs Released Per Year" : title};
+            var model = new PlotModel { Title = title == "" ? "Albums Released Per Year" : title};
 
-            var songsPerYear = CurrentSession.Data.Songs
+            var songsPerYear = CurrentSession.Data.Albums
                 .GroupBy(s => s.Released_At.Year)
                 .Select(g => new { Year = g.Key, Count = g.Count() })
                 .OrderBy(x => x.Year)
@@ -132,7 +133,7 @@ namespace DataProcessingRestored.ChartHandling
         {
             var model = new PlotModel { Title = title == "" ? "Distribution of User Scores" : title};
 
-            var scoreBrackets = CurrentSession.Data.Songs
+            var scoreBrackets = CurrentSession.Data.Albums
                 .Select(s => (s.User_Score / 10) * 10)
                 .GroupBy(bracket => bracket)
                 .Select(g => new { ScoreBracket = g.Key, Count = g.Count() })

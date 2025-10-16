@@ -10,7 +10,7 @@ namespace DataProcessing.Data.Reports
 {
     public class XlsxReportService : IReportable
     {
-        public void GenerateReport(string path, SessionData entity)
+        public void GenerateReport(string path)
         {
             throw new NotImplementedException();
         }

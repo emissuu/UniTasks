@@ -34,7 +34,7 @@ namespace DataProcessing.Windows
             {
                 StatusBarText.Content = $"Data loaded: {CurrentSession.Data.Number_Entries} entries";
                 StatusBarPath.Content = CurrentSession.Data.DataPath;
-                MainDataGrid.ItemsSource = CurrentSession.Data.Songs;
+                MainDataGrid.ItemsSource = CurrentSession.Data.Albums;
                 MainDataGrid.Items.Refresh();
             }
             else
@@ -229,7 +229,7 @@ namespace DataProcessing.Windows
                 {
                     if (CurrentSession.Data != null)
                     {
-                        reportGenerator.GenerateReport(saveFileDialog.FileName, CurrentSession.Data);
+                        reportGenerator.GenerateReport(saveFileDialog.FileName);
                         MessageBox.Show("Report generated successfully.", "MusicStore", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
