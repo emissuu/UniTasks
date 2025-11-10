@@ -1,6 +1,6 @@
 ﻿/.vs
 
-# Lab1
+# === C#/Lab1 ===
 /C#/Lab1/.vs
 /C#/Lab1/FileCompressor/bin
 /C#/Lab1/FileCompressor/obj
@@ -10,3 +10,7 @@
 /C#/Lab1/UILevel/bin
 /C#/Lab1/UILevel/obj
 /C#/Lab1/ForTests
+
+# === C#/Lab2 ===
+/C#/Lab2/Lab2/.vs
+/C#/Lab2/Lab2/Main/obj
