@@ -41,50 +41,66 @@
 
 ![Схема бази даних в LucidApp](ReadmeResources/EventOrganizerDB_LucidApp-scheme.png)
 ### 3.2. Створення класів сутностей та контексту бази даних.
+Було створено клас C# для кожної сутності бази даних. Ось зразок одного з таких класів:
+
+```cs
+public class TeamMember
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+    [Required]
+    public string Name { get; set; }
+    public string? Role { get; set; }
+    public string? Contact_Number { get; set; }
+
+    [Required]
+    public int Participant_Id { get; set; }
+    [ForeignKey(nameof(Participant_Id))]
+    public Participant Participant { get; set; } = default!;
+
+    public ICollection<Accreditation> Accreditations { get; set; } = new List<Accreditation>();
+}
+```
+
 Фінальний код AppDbContext:
 
-```csharp
-using Microsoft.EntityFrameworkCore;
-using Main.Models;
-
-namespace Main.Context
+```cs
+public class AppDbContext : DbContext
 {
-    public class AppDbContext : DbContext
+    public DbSet<Participant> Participants => Set<Participant>();
+    public DbSet<TeamMember> TeamMembers => Set<TeamMember>();
+    public DbSet<Accreditation> Accreditations => Set<Accreditation>();
+    public DbSet<Stage> Stages => Set<Stage>();
+    public DbSet<Performance> Performances => Set<Performance>();
+    public DbSet<TechnicalBreak> TechnicalBreaks => Set<TechnicalBreak>();
+    public DbSet<Volunteer> Volunteers => Set<Volunteer>();
+    public DbSet<Zone> Zones => Set<Zone>();
+    public DbSet<VolunteerShift> VolunteersShifts => Set<VolunteerShift>();
+    public DbSet<Partner> Partners => Set<Partner>();
+    public DbSet<ActivationZone> ActivationZones => Set<ActivationZone>();
+    public DbSet<LogisticItem> LogisticItems => Set<LogisticItem>();
+    public DbSet<Ticket> Tickets => Set<Ticket>();
+    public DbSet<Incident> Incidents => Set<Incident>();
+    public DbSet<DailyReport> DailyReports => Set<DailyReport>();
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        public DbSet<Participant> Participants => Set<Participant>();
-        public DbSet<TeamMember> TeamMembers => Set<TeamMember>();
-        public DbSet<Accreditation> Accreditations => Set<Accreditation>();
-        public DbSet<Stage> Stages => Set<Stage>();
-        public DbSet<Performance> Performances => Set<Performance>();
-        public DbSet<TechnicalBreak> TechnicalBreaks => Set<TechnicalBreak>();
-        public DbSet<Volunteer> Volunteers => Set<Volunteer>();
-        public DbSet<Zone> Zones => Set<Zone>();
-        public DbSet<VolunteerShift> VolunteersShifts => Set<VolunteerShift>();
-        public DbSet<Partner> Partners => Set<Partner>();
-        public DbSet<ActivationZone> ActivationZones => Set<ActivationZone>();
-        public DbSet<LogisticItem> LogisticItems => Set<LogisticItem>();
-        public DbSet<Ticket> Tickets => Set<Ticket>();
-        public DbSet<Incident> Incidents => Set<Incident>();
-        public DbSet<DailyReport> DailyReports => Set<DailyReport>();
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=EventOrganizerDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;Command Timeout=0");
-            base.OnConfiguring(optionsBuilder);
-        }
+        optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=EventOrganizerDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;Command Timeout=0");
+        base.OnConfiguring(optionsBuilder);
     }
 }
 ```
-Таблиця міграцій зображена в DBeaver.  
+
+### 3.3. Послідовність створених міграцій (із коротким описом змін).
+Я створював міграції відразу після написання сутностей і налаштування зв'язків між ними. Перші міграції також включали в себе виправлення помилок в минулих сутностях. Ось фінальна таблиця всіх міграцій зображена в DBeaver.  
 ![Міграції показані в DBeaver](ReadmeResources/Migrations_in_DBeaver.png)
 
 
 
-Схема зв'язків зображена в DBeaver
+Схема зв'язків зображена в DBeaver.
 ![Схема бази даних в DBeaver](ReadmeResources/EventOrganizerDB_DBeaver-scheme.png)
 
 
-
-### 3.3. Послідовність створених міграцій (із коротким описом змін).
 ### 3.4. Ініціалізація даних та приклади запитів LINQ.
 
 ## 4. Результати роботи
