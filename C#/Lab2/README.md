@@ -1,7 +1,7 @@
 # Лабораторна робота №2  
 **Тема:** Моделювання предметної області та створення реляційної бази даних у C# за допомогою EF Core (Code First)  
 **Студент:** Луцюк Богдан Олександрович КН-213  
-**Варіант:** 32  
+**Варіант:** 32 - Координатор подій, що організовую фестивалі  
 **Дата:** 14.11.2025  
 **Посилання на репозиторій:** https://github.com/emissuu/UniTasks/tree/main/C%23/Lab2
 
@@ -14,12 +14,38 @@
 - поетапно розвивати структуру бази даних через **окремі міграції для кожної сутності**;
 - ініціалізувати дані та виконувати базові запити LINQ.
 
-## 2. Хід виконання 
-
-## 3. Результати роботи  
+## 3. Хід виконання
 ### 3.1. Аналіз предметної області (опис, таблиці, діаграма).
+Після аналізу діалогу студента з закажчиком було винесено 15 сутностей:  
+- Participants: *id, name, transport, arrives_at, hand_color, contact_number, notes.
+- TeamMembers: *id, participant_id, name, role, contact_number.
+- Accreditations: *id, team_member_id, valid_from, valid_to.
+
+- Stages: *id, name, location, capacity.
+- Performances: *id, participant_id, stage_id, starts_at, ends_at.
+- TechnicalBreaks: *id, stage_id, starts_at, ends_at, notes.
+
+- Volunteers: *id, name, contact_number, role.
+- VolunteerShifts: *id, volunteer_id, zone_id, starts_at, ends_at.
+  
+- Partners: *id, name, contact_number.
+- Zones: *id, name, type, location.
+- ActivationZones: *id, partner_id, zone_id, required_power, notes.
+- LogisticItems: *id, zone_id, name, quantity.
+
+- Tickets: *id, qr_code, type, buyer_name, contact_number, entrance_date, status.
+- Incidents: *id, zone_id, ticket_id, type, description, happened_at.
+- DailyReports: *id, date, summary, contents.  changes
+
+
+
+З цих сутностей було побудовано схему:  
+
+![Схема бази даних](EventOrganizerDB_scheme.png)
 ### 3.2. Створення класів сутностей та контексту бази даних.
 ### 3.3. Послідовність створених міграцій (із коротким описом змін).
 ### 3.4. Ініціалізація даних та приклади запитів LINQ.
 
-## 4. Висновки 
+## 4. Результати роботи
+
+## 5. Висновки 
