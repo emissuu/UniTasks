@@ -93,16 +93,12 @@ public class AppDbContext : DbContext
 
 ### 3.3. Послідовність створених міграцій (із коротким описом змін).
 Я створював міграції відразу після написання сутностей і налаштування зв'язків між ними. Перші міграції також включали в себе виправлення помилок в минулих сутностях. Ось фінальна таблиця всіх міграцій зображена в DBeaver.  
-![Міграції показані в DBeaver](ReadmeResources/Migrations_in_DBeaver.png)
-
-
-
-Схема зв'язків зображена в DBeaver.
-![Схема бази даних в DBeaver](ReadmeResources/EventOrganizerDB_DBeaver-scheme.png)
-
+![Міграції показані в DBeaver](ReadmeResources/Migrations_DBeaver.png)
 
 ### 3.4. Ініціалізація даних та приклади запитів LINQ.
 
 ## 4. Результати роботи
+Схема зв'язків зображена в DBeaver.
+![Схема бази даних в DBeaver](ReadmeResources/EventOrganizerDB_DBeaver-scheme.png)
 
 ## 5. Висновки 
