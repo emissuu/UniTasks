@@ -96,7 +96,29 @@ public class AppDbContext : DbContext
 ![Міграції показані в DBeaver](ReadmeResources/Migrations_DBeaver.png)
 
 ### 3.4. Ініціалізація даних та приклади запитів LINQ.
+Частина коду ініціалізації даних:
+```cs
+public static class DbInitializer
+{
+    public static void SeedTHEData(this ModelBuilder modelBuilder)
+    {
+        // ===== Participants =====
+        modelBuilder.Entity<Participant>().HasData(
+            new Participant { Id = 1, Name = "SuperCoolBand", Arrives_At = new DateTime(2024, 7, 10, 14, 0, 0), Contact_Number = "555-1234", Hand_Color = "Red", Notes = "Requires soundcheck at 3 PM" },
+            new Participant { Id = 2, Name = "JazzMasters", Arrives_At = new DateTime(2024, 7, 11, 10, 0, 0), Contact_Number = "555-5678", Hand_Color = "Blue", Notes = "Bringing their own equipment" }
+            );
 
+        // ===== TeamMembers =====
+        modelBuilder.Entity<TeamMember>().HasData(
+            new TeamMember { Id = 1, Name = "Alice", Role = "Vocalist", Participant_Id = 1, Contact_Number = "555-4128"},
+            new TeamMember { Id = 2, Name = "Bob", Role = "Guitarist", Participant_Id = 1, Contact_Number = "555-4312" },
+            new TeamMember { Id = 3, Name = "Charlie", Role = "Saxophonist", Participant_Id = 2, Contact_Number = "555-9412" },
+            new TeamMember { Id = 4, Name = "Diana", Role = "Drummer", Participant_Id = 2, Contact_Number = "555-9481" },
+            new TeamMember { Id = 5, Name = "Eve", Role = "Drummer", Participant_Id = 1, Contact_Number = "555-4144" }
+            );
+    }
+}
+```
 ## 4. Результати роботи
 Схема зв'язків зображена в DBeaver.
 ![Схема бази даних в DBeaver](ReadmeResources/EventOrganizerDB_DBeaver-scheme.png)

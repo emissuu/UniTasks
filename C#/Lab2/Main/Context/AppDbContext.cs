@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Main.Models;
+using Main.Extensions;
 
 namespace Main.Context
 {
@@ -24,6 +25,11 @@ namespace Main.Context
         {
             optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=EventOrganizerDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;Command Timeout=0");
             base.OnConfiguring(optionsBuilder);
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            DbInitializer.SeedTHEData(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
