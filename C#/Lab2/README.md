@@ -7,7 +7,7 @@
 
 <!-- The dialog: https://kleban.notion.site/2-2a6c0ae924ac8074b50aced556a4c72f?p=2a6c0ae924ac8157ab24c1cc5d9226d1&pm=s -->
 
-## 1. Мета роботи 
+## 2. Мета роботи 
 **Навчитися:**
 - аналізувати предметну область і будувати концептуальну модель;
 - створювати об’єктно-реляційну модель за допомогою **Entity Framework Core (Code First)**;
@@ -35,14 +35,55 @@
 
 - Tickets: *id, qr_code, type, buyer_name, contact_number, entrance_date, status.
 - Incidents: *id, zone_id, ticket_id, type, description, happened_at.
-- DailyReports: *id, date, summary, contents.  changes
-
-
+- DailyReports: *id, date, summary, contents.
 
 З цих сутностей було побудовано схему:  
 
-![Схема бази даних](EventOrganizerDB_scheme.png)
+![Схема бази даних в LucidApp](ReadmeResources/EventOrganizerDB_LucidApp-scheme.png)
 ### 3.2. Створення класів сутностей та контексту бази даних.
+Фінальний код AppDbContext:
+
+```csharp
+using Microsoft.EntityFrameworkCore;
+using Main.Models;
+
+namespace Main.Context
+{
+    public class AppDbContext : DbContext
+    {
+        public DbSet<Participant> Participants => Set<Participant>();
+        public DbSet<TeamMember> TeamMembers => Set<TeamMember>();
+        public DbSet<Accreditation> Accreditations => Set<Accreditation>();
+        public DbSet<Stage> Stages => Set<Stage>();
+        public DbSet<Performance> Performances => Set<Performance>();
+        public DbSet<TechnicalBreak> TechnicalBreaks => Set<TechnicalBreak>();
+        public DbSet<Volunteer> Volunteers => Set<Volunteer>();
+        public DbSet<Zone> Zones => Set<Zone>();
+        public DbSet<VolunteerShift> VolunteersShifts => Set<VolunteerShift>();
+        public DbSet<Partner> Partners => Set<Partner>();
+        public DbSet<ActivationZone> ActivationZones => Set<ActivationZone>();
+        public DbSet<LogisticItem> LogisticItems => Set<LogisticItem>();
+        public DbSet<Ticket> Tickets => Set<Ticket>();
+        public DbSet<Incident> Incidents => Set<Incident>();
+        public DbSet<DailyReport> DailyReports => Set<DailyReport>();
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=EventOrganizerDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;Command Timeout=0");
+            base.OnConfiguring(optionsBuilder);
+        }
+    }
+}
+```
+Таблиця міграцій зображена в DBeaver.  
+![Міграції показані в DBeaver](ReadmeResources/Migrations_in_DBeaver.png)
+
+
+
+Схема зв'язків зображена в DBeaver
+![Схема бази даних в DBeaver](ReadmeResources/EventOrganizerDB_DBeaver-scheme.png)
+
+
+
 ### 3.3. Послідовність створених міграцій (із коротким описом змін).
 ### 3.4. Ініціалізація даних та приклади запитів LINQ.
 
