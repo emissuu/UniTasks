@@ -17,25 +17,7 @@
 ## 3. Хід виконання
 ### 3.1. Аналіз предметної області (опис, таблиці, діаграма).
 Після аналізу діалогу студента з замовником було винесено 15 сутностей:  
-- Participants: *id, name, transport, arrives_at, hand_color, contact_number, notes.
-- TeamMembers: *id, participant_id, name, role, contact_number.
-- Accreditations: *id, team_member_id, valid_from, valid_to.
 
-- Stages: *id, name, location, capacity.
-- Performances: *id, participant_id, stage_id, starts_at, ends_at.
-- TechnicalBreaks: *id, stage_id, starts_at, ends_at, notes.
-
-- Volunteers: *id, name, contact_number, role.
-- VolunteerShifts: *id, volunteer_id, zone_id, starts_at, ends_at.
-  
-- Partners: *id, name, contact_number.
-- Zones: *id, name, type, location.
-- ActivationZones: *id, partner_id, zone_id, required_power, notes.
-- LogisticItems: *id, zone_id, name, quantity.
-
-- Tickets: *id, qr_code, type, buyer_name, contact_number, entrance_date, status.
-- Incidents: *id, zone_id, ticket_id, type, description, happened_at.
-- DailyReports: *id, date, summary, contents.
 
 З цих сутностей було побудовано схему:  
 
