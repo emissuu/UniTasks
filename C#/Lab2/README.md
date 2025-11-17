@@ -16,7 +16,7 @@
 
 ## 3. Хід виконання
 ### 3.1. Аналіз предметної області (опис, таблиці, діаграма).
-Після аналізу діалогу студента з закажчиком було винесено 15 сутностей:  
+Після аналізу діалогу студента з замовником було винесено 15 сутностей:  
 - Participants: *id, name, transport, arrives_at, hand_color, contact_number, notes.
 - TeamMembers: *id, participant_id, name, role, contact_number.
 - Accreditations: *id, team_member_id, valid_from, valid_to.
