@@ -16,12 +16,23 @@
 
 ## 3. Хід виконання
 ### 3.1. Аналіз предметної області (опис, таблиці, діаграма).
-Після аналізу діалогу студента з замовником було винесено 15 сутностей:  
-
+Після аналізу діалогу студента з замовником було винесено 12 сутностей:  
+- Event: *id, administrator_id, title, date, description.
+- EventBlock: *id, team_id, event_id, zone_activation_id, name, type, starts_at, ends_at.
+- Team: *id, name, contact_number, transport, arrives_at, hand_color, notes.
+- TeamMember: *id, team_id, ticket_id, role.  
+- Ticket: *id, event_id, qr_code, buyer_name, buyer_contact_number.  
+- Administrator: *id, name, contact_number.  
+- Partner: *id, name, contact_number, description.
+- Zone: *id, name, type, location.
+- ZoneActivation: *id, partner_id, zone_id, event_id, notes.
+- Worker: *id, name, contact_number, role, salary.
+- WorkerShift: *id, worker_id, zone_activation_id, starts_at, ends_at.
+- Incident: *id, ticket_id, zone_activation_id, type, description, happened_at, status.  
 
 З цих сутностей було побудовано схему:  
 
-![Схема бази даних в LucidApp](ReadmeResources/EventOrganizerDB_LucidApp-scheme.png)
+![Схема бази даних в LucidApp](ReadmeResources/EventOrganizerDB_LucidApp-scheme_v2.png)
 ### 3.2. Створення класів сутностей та контексту бази даних.
 Було створено клас C# для кожної сутності бази даних. Ось зразок одного з таких класів:
 
