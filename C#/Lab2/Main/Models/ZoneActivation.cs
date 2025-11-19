@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Main.Models
+{
+    public class ZoneActivation
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public string? Notes { get; set; }
+
+        [Required]
+        public int ZoneId { get; set; }
+        [ForeignKey(nameof(ZoneId))]
+        public Zone Zone { get; set; }
+        [Required]
+        public int EventId { get; set; }
+        [ForeignKey(nameof(EventId))]
+        public Event Event { get; set; }
+        public int? PartnerId { get; set; }
+        [ForeignKey(nameof(PartnerId))]
+        public Partner? Partner { get; set; }
+
+        public virtual ICollection<EventBlock> EventBlocks { get; set; } = new List<EventBlock>();
+        public virtual ICollection<WorkerShift> WorkerShifts { get; set; } = new List<WorkerShift>();
+    }
+}

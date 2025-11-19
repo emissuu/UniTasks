@@ -6,21 +6,18 @@ namespace Main.Context
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Participant> Participants => Set<Participant>();
-        public DbSet<TeamMember> TeamMembers => Set<TeamMember>();
-        public DbSet<Accreditation> Accreditations => Set<Accreditation>();
-        public DbSet<Stage> Stages => Set<Stage>();
-        public DbSet<Performance> Performances => Set<Performance>();
-        public DbSet<TechnicalBreak> TechnicalBreaks => Set<TechnicalBreak>();
-        public DbSet<Volunteer> Volunteers => Set<Volunteer>();
-        public DbSet<Zone> Zones => Set<Zone>();
-        public DbSet<VolunteerShift> VolunteersShifts => Set<VolunteerShift>();
-        public DbSet<Partner> Partners => Set<Partner>();
-        public DbSet<ActivationZone> ActivationZones => Set<ActivationZone>();
-        public DbSet<LogisticItem> LogisticItems => Set<LogisticItem>();
+        public DbSet<Administrator> Administrators => Set<Administrator>();
+        public DbSet<Event> Events => Set<Event>();
+        public DbSet<Team> Teams => Set<Team>();
         public DbSet<Ticket> Tickets => Set<Ticket>();
+        public DbSet<TeamMember> TeamMembers => Set<TeamMember>();
+        public DbSet<Partner> Partners => Set<Partner>();
+        public DbSet<Zone> Zones => Set<Zone>();
+        public DbSet<ZoneActivation> ZoneActivations => Set<ZoneActivation>();
+        public DbSet<EventBlock> EventBlocks => Set<EventBlock>();
+        public DbSet<Worker> Workers => Set<Worker>();
+        public DbSet<WorkerShift> WorkerShifts => Set<WorkerShift>();
         public DbSet<Incident> Incidents => Set<Incident>();
-        public DbSet<DailyReport> DailyReports => Set<DailyReport>();
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=EventOrganizerDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;Command Timeout=0");

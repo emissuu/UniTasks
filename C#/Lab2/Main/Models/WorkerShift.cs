@@ -8,20 +8,21 @@ using System.Threading.Tasks;
 
 namespace Main.Models
 {
-    public class TeamMember
+    public class WorkerShift
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string? Role { get; set; }
+        public DateTime? StartsAt { get; set; }
+        public DateTime? EndsAt { get; set; }
 
         [Required]
-        public int TeamId { get; set; }
-        [ForeignKey(nameof(TeamId))]
-        public Team Team { get; set; }
+        public int WorkerId { get; set; }
+        [ForeignKey(nameof(WorkerId))]
+        public Worker Worker { get; set; }
         [Required]
-        public int TicketId { get; set; }
-        [ForeignKey(nameof(TicketId))]
-        public Ticket Ticket { get; set; }
+        public int ZoneActivationId { get; set; }
+        [ForeignKey(nameof(ZoneActivationId))]
+        public ZoneActivation ZoneActivation { get; set; }
     }
 }

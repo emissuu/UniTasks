@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace Main.Models
 {
-    public class Zone
+    public class Worker
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public string? Type { get; set; }
-        public string? Location { get; set; }
+        public string? ContactNumber { get; set; }
+        public string? Role { get; set; }
+        public int? Salary { get; set; }
 
-        public virtual ICollection<ZoneActivation> ZoneActivations { get; set; } = new List<ZoneActivation>();
+        public virtual ICollection<WorkerShift> WorkerShifts { get; set; } = new List<WorkerShift>();
     }
 }

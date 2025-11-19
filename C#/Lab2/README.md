@@ -18,7 +18,7 @@
 ### 3.1. Аналіз предметної області (опис, таблиці, діаграма).
 Після аналізу діалогу студента з замовником було винесено 12 сутностей:  
 - Event: *id, administrator_id, title, date, description.
-- EventBlock: *id, team_id, event_id, zone_activation_id, name, type, starts_at, ends_at.
+- EventBlock: *id, team_id, zone_activation_id, name, type, starts_at, ends_at.
 - Team: *id, name, contact_number, transport, arrives_at, hand_color, notes.
 - TeamMember: *id, team_id, ticket_id, role.  
 - Ticket: *id, event_id, qr_code, buyer_name, buyer_contact_number.  
@@ -28,31 +28,33 @@
 - ZoneActivation: *id, partner_id, zone_id, event_id, notes.
 - Worker: *id, name, contact_number, role, salary.
 - WorkerShift: *id, worker_id, zone_activation_id, starts_at, ends_at.
-- Incident: *id, ticket_id, zone_activation_id, type, description, happened_at, status.  
+- Incident: *id, ticket_id, type, description, happened_at, is_resolved.  
 
 З цих сутностей було побудовано схему:  
 
-![Схема бази даних в LucidApp](ReadmeResources/EventOrganizerDB_LucidApp-scheme_v2.png)
+<img src="ReadmeResources/EventOrganizerDB_LucidApp-scheme_v2.png" alt="Схема бази даних в LucidApp" width="64%" height="auto">  
+
 ### 3.2. Створення класів сутностей та контексту бази даних.
 Було створено клас C# для кожної сутності бази даних. Ось зразок одного з таких класів:
 
 ```cs
-public class TeamMember
+public class Event
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     [Required]
     public string Name { get; set; }
-    public string? Role { get; set; }
-    public string? Contact_Number { get; set; }
+    public DateTime? Date { get; set; }
+    public string? Description { get; set; }
 
     [Required]
-    public int Participant_Id { get; set; }
-    [ForeignKey(nameof(Participant_Id))]
-    public Participant Participant { get; set; } = default!;
+    public int AdministratorId { get; set; }
+    [ForeignKey(nameof(AdministratorId))]
+    public Administrator Administrator { get; set; }
 
-    public ICollection<Accreditation> Accreditations { get; set; } = new List<Accreditation>();
+    public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+    public virtual ICollection<ZoneActivation> ZoneActivations { get; set; } = new List<ZoneActivation>();
 }
 ```
 
@@ -61,32 +63,34 @@ public class TeamMember
 ```cs
 public class AppDbContext : DbContext
 {
-    public DbSet<Participant> Participants => Set<Participant>();
-    public DbSet<TeamMember> TeamMembers => Set<TeamMember>();
-    public DbSet<Accreditation> Accreditations => Set<Accreditation>();
-    public DbSet<Stage> Stages => Set<Stage>();
-    public DbSet<Performance> Performances => Set<Performance>();
-    public DbSet<TechnicalBreak> TechnicalBreaks => Set<TechnicalBreak>();
-    public DbSet<Volunteer> Volunteers => Set<Volunteer>();
-    public DbSet<Zone> Zones => Set<Zone>();
-    public DbSet<VolunteerShift> VolunteersShifts => Set<VolunteerShift>();
-    public DbSet<Partner> Partners => Set<Partner>();
-    public DbSet<ActivationZone> ActivationZones => Set<ActivationZone>();
-    public DbSet<LogisticItem> LogisticItems => Set<LogisticItem>();
+    public DbSet<Administrator> Administrators => Set<Administrator>();
+    public DbSet<Event> Events => Set<Event>();
+    public DbSet<Team> Teams => Set<Team>();
     public DbSet<Ticket> Tickets => Set<Ticket>();
+    public DbSet<TeamMember> TeamMembers => Set<TeamMember>();
+    public DbSet<Partner> Partners => Set<Partner>();
+    public DbSet<Zone> Zones => Set<Zone>();
+    public DbSet<ZoneActivation> ZoneActivations => Set<ZoneActivation>();
+    public DbSet<EventBlock> EventBlocks => Set<EventBlock>();
+    public DbSet<Worker> Workers => Set<Worker>();
+    public DbSet<WorkerShift> WorkerShifts => Set<WorkerShift>();
     public DbSet<Incident> Incidents => Set<Incident>();
-    public DbSet<DailyReport> DailyReports => Set<DailyReport>();
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=EventOrganizerDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;Command Timeout=0");
         base.OnConfiguring(optionsBuilder);
+    }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        DbInitializer.SeedTHEData(modelBuilder);
+        base.OnModelCreating(modelBuilder);
     }
 }
 ```
 
 ### 3.3. Послідовність створених міграцій (із коротким описом змін).
 Я створював міграції відразу після написання сутностей і налаштування зв'язків між ними. Перші міграції також включали в себе виправлення помилок в минулих сутностях. Ось фінальна таблиця всіх міграцій зображена в DBeaver.  
-![Міграції показані в DBeaver](ReadmeResources/Migrations_DBeaver.png)
+![Міграції показані в DBeaver](ReadmeResources/Migrations_DBeaver_v2.png)
 
 ### 3.4. Ініціалізація даних та приклади запитів LINQ.
 Частина коду ініціалізації даних:
@@ -166,8 +170,9 @@ using (var context = new Main.Context.AppDbContext())
 LINQ запити є дуже потужним  та зручним інструментом для вибірки даних. Вони є невід'ємною частиною будь-якої програми, яка взаємодії з базами даних.
 
 ## 4. Результати роботи
-Схема зв'язків зображена в DBeaver.
-![Схема бази даних в DBeaver](ReadmeResources/EventOrganizerDB_DBeaver-scheme.png)
+Схема зв'язків зображена в DBeaver:  
+
+<img src="ReadmeResources/EventOrganizerDB_DBeaver-scheme_v2.png" alt="Схема бази даних в DBeaver" width="64%" height="auto"> 
 
 ## 5. Висновки 
 Під час виконання цієї лабораторної роботи я покращив свої навики планування бази даних та її реалізації в коді C#. Вивичив особливості створення міграцій та заповнення бази даних за допомогою екстеншн методу. Попрактикував витягування даних з БД за допомогою класу LINQ. Також, покращив навики створення схеми бази даних і роботи з програмами LucidApp і DBeaver.

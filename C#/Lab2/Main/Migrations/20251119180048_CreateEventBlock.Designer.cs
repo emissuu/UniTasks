@@ -4,6 +4,7 @@ using Main.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Main.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251119180048_CreateEventBlock")]
+    partial class CreateEventBlock
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +33,7 @@ namespace Main.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ContactNumber")
+                    b.Property<string>("Contact_Number")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -50,7 +53,7 @@ namespace Main.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AdministratorId")
+                    b.Property<int>("Administrator_Id")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("Date")
@@ -65,7 +68,7 @@ namespace Main.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdministratorId");
+                    b.HasIndex("Administrator_Id");
 
                     b.ToTable("Events");
                 });
@@ -78,63 +81,31 @@ namespace Main.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("EndsAt")
+                    b.Property<DateTime?>("Ends_At")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("StartsAt")
+                    b.Property<DateTime?>("Starts_At")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<int?>("Team_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ZoneActivationId")
+                    b.Property<int>("Zone_Activation_Id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeamId")
-                        .IsUnique()
-                        .HasFilter("[TeamId] IS NOT NULL");
+                    b.HasIndex("Team_Id");
 
-                    b.HasIndex("ZoneActivationId");
+                    b.HasIndex("Zone_Activation_Id");
 
                     b.ToTable("EventBlocks");
-                });
-
-            modelBuilder.Entity("Main.Models.Incident", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("HappenedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsResolved")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("TicketId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TicketId");
-
-                    b.ToTable("Incidents");
                 });
 
             modelBuilder.Entity("Main.Models.Partner", b =>
@@ -145,7 +116,7 @@ namespace Main.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ContactNumber")
+                    b.Property<string>("Contact_Number")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
@@ -168,13 +139,13 @@ namespace Main.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("ArrivesAt")
+                    b.Property<DateTime?>("Arrives_At")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ContactNumber")
+                    b.Property<string>("Contact_Number")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HandColor")
+                    b.Property<string>("Hand_Color")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -203,18 +174,17 @@ namespace Main.Migrations
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TeamId")
+                    b.Property<int>("Team_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("TicketId")
+                    b.Property<int>("Ticket_Id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("Team_Id");
 
-                    b.HasIndex("TicketId")
-                        .IsUnique();
+                    b.HasIndex("Ticket_Id");
 
                     b.ToTable("TeamMembers");
                 });
@@ -227,80 +197,25 @@ namespace Main.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("BuyerContactNumber")
+                    b.Property<string>("Buyer_Contact_Number")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BuyerName")
+                    b.Property<string>("Buyer_Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EventId")
+                    b.Property<int>("Event_Id")
                         .HasColumnType("int");
 
-                    b.Property<string>("QrCode")
+                    b.Property<string>("Qr_Code")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventId");
+                    b.HasIndex("Event_Id");
 
                     b.ToTable("Tickets");
-                });
-
-            modelBuilder.Entity("Main.Models.Worker", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ContactNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Salary")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Workers");
-                });
-
-            modelBuilder.Entity("Main.Models.WorkerShift", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("EndsAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("StartsAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("WorkerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ZoneActivationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WorkerId");
-
-                    b.HasIndex("ZoneActivationId");
-
-                    b.ToTable("WorkerShifts");
                 });
 
             modelBuilder.Entity("Main.Models.Zone", b =>
@@ -334,25 +249,25 @@ namespace Main.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("EventId")
+                    b.Property<int>("Event_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PartnerId")
+                    b.Property<int?>("Partner_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("ZoneId")
+                    b.Property<int>("Zone_Id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventId");
+                    b.HasIndex("Event_Id");
 
-                    b.HasIndex("PartnerId");
+                    b.HasIndex("Partner_Id");
 
-                    b.HasIndex("ZoneId");
+                    b.HasIndex("Zone_Id");
 
                     b.ToTable("ZoneActivations");
                 });
@@ -361,7 +276,7 @@ namespace Main.Migrations
                 {
                     b.HasOne("Main.Models.Administrator", "Administrator")
                         .WithMany("Events")
-                        .HasForeignKey("AdministratorId")
+                        .HasForeignKey("Administrator_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -371,12 +286,12 @@ namespace Main.Migrations
             modelBuilder.Entity("Main.Models.EventBlock", b =>
                 {
                     b.HasOne("Main.Models.Team", "Team")
-                        .WithOne("EventBlocks")
-                        .HasForeignKey("Main.Models.EventBlock", "TeamId");
+                        .WithMany()
+                        .HasForeignKey("Team_Id");
 
                     b.HasOne("Main.Models.ZoneActivation", "ZoneActivation")
-                        .WithMany("EventBlocks")
-                        .HasForeignKey("ZoneActivationId")
+                        .WithMany()
+                        .HasForeignKey("Zone_Activation_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -385,28 +300,17 @@ namespace Main.Migrations
                     b.Navigation("ZoneActivation");
                 });
 
-            modelBuilder.Entity("Main.Models.Incident", b =>
-                {
-                    b.HasOne("Main.Models.Ticket", "Ticket")
-                        .WithMany("Incidents")
-                        .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ticket");
-                });
-
             modelBuilder.Entity("Main.Models.TeamMember", b =>
                 {
                     b.HasOne("Main.Models.Team", "Team")
-                        .WithMany("TeamMembers")
-                        .HasForeignKey("TeamId")
+                        .WithMany()
+                        .HasForeignKey("Team_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Main.Models.Ticket", "Ticket")
-                        .WithOne("TeamMember")
-                        .HasForeignKey("Main.Models.TeamMember", "TicketId")
+                        .WithMany()
+                        .HasForeignKey("Ticket_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -418,48 +322,29 @@ namespace Main.Migrations
             modelBuilder.Entity("Main.Models.Ticket", b =>
                 {
                     b.HasOne("Main.Models.Event", "Event")
-                        .WithMany("Tickets")
-                        .HasForeignKey("EventId")
+                        .WithMany()
+                        .HasForeignKey("Event_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Event");
                 });
 
-            modelBuilder.Entity("Main.Models.WorkerShift", b =>
-                {
-                    b.HasOne("Main.Models.Worker", "Worker")
-                        .WithMany("WorkerShifts")
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Main.Models.ZoneActivation", "ZoneActivation")
-                        .WithMany("WorkerShifts")
-                        .HasForeignKey("ZoneActivationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Worker");
-
-                    b.Navigation("ZoneActivation");
-                });
-
             modelBuilder.Entity("Main.Models.ZoneActivation", b =>
                 {
                     b.HasOne("Main.Models.Event", "Event")
-                        .WithMany("ZoneActivations")
-                        .HasForeignKey("EventId")
+                        .WithMany()
+                        .HasForeignKey("Event_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Main.Models.Partner", "Partner")
-                        .WithMany("ZoneActivations")
-                        .HasForeignKey("PartnerId");
+                        .WithMany()
+                        .HasForeignKey("Partner_Id");
 
                     b.HasOne("Main.Models.Zone", "Zone")
-                        .WithMany("ZoneActivations")
-                        .HasForeignKey("ZoneId")
+                        .WithMany()
+                        .HasForeignKey("Zone_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -473,50 +358,6 @@ namespace Main.Migrations
             modelBuilder.Entity("Main.Models.Administrator", b =>
                 {
                     b.Navigation("Events");
-                });
-
-            modelBuilder.Entity("Main.Models.Event", b =>
-                {
-                    b.Navigation("Tickets");
-
-                    b.Navigation("ZoneActivations");
-                });
-
-            modelBuilder.Entity("Main.Models.Partner", b =>
-                {
-                    b.Navigation("ZoneActivations");
-                });
-
-            modelBuilder.Entity("Main.Models.Team", b =>
-                {
-                    b.Navigation("EventBlocks")
-                        .IsRequired();
-
-                    b.Navigation("TeamMembers");
-                });
-
-            modelBuilder.Entity("Main.Models.Ticket", b =>
-                {
-                    b.Navigation("Incidents");
-
-                    b.Navigation("TeamMember");
-                });
-
-            modelBuilder.Entity("Main.Models.Worker", b =>
-                {
-                    b.Navigation("WorkerShifts");
-                });
-
-            modelBuilder.Entity("Main.Models.Zone", b =>
-                {
-                    b.Navigation("ZoneActivations");
-                });
-
-            modelBuilder.Entity("Main.Models.ZoneActivation", b =>
-                {
-                    b.Navigation("EventBlocks");
-
-                    b.Navigation("WorkerShifts");
                 });
 #pragma warning restore 612, 618
         }
