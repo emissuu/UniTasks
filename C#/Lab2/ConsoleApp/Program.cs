@@ -48,7 +48,6 @@ class Program
 
             // ===== Average =====
             Console.WriteLine("\n5. Average");
-            // average performance duration counting from StartsAt to EndsAt in EventBlocks
             double? averageDuration = context.EventBlocks
                 .Where(e => e.Type == "Performance")
                 .Average(eb => EF.Functions.DateDiffMinute(eb.StartsAt, eb.EndsAt));
