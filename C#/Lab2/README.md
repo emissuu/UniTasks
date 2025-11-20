@@ -99,19 +99,17 @@ public static class DbInitializer
 {
     public static void SeedTHEData(this ModelBuilder modelBuilder)
     {
-        // ===== Participants =====
-        modelBuilder.Entity<Participant>().HasData(
-            new Participant { Id = 1, Name = "SuperCoolBand", Arrives_At = new DateTime(2024, 7, 10, 14, 0, 0), Contact_Number = "555-1234", Hand_Color = "Red", Notes = "Requires soundcheck at 3 PM" },
-            new Participant { Id = 2, Name = "JazzMasters", Arrives_At = new DateTime(2024, 7, 11, 10, 0, 0), Contact_Number = "555-5678", Hand_Color = "Blue", Notes = "Bringing their own equipment" }
+        // ===== Events =====
+        modelBuilder.Entity<Event>().HasData(
+            new Event { Id = 1, Name = "Summer Rock Festival", Date = new DateTime(2024, 8, 15), Description = "An electrifying rock music festival featuring top bands from around the world.", AdministratorId = 1 },
+            new Event { Id = 2, Name = "Winter Jazz Nights", Date = new DateTime(2024, 12, 5), Description = "A cozy jazz event to warm up your winter nights with smooth tunes.", AdministratorId = 1 }
             );
 
-        // ===== TeamMembers =====
-        modelBuilder.Entity<TeamMember>().HasData(
-            new TeamMember { Id = 1, Name = "Alice", Role = "Vocalist", Participant_Id = 1, Contact_Number = "555-4128"},
-            new TeamMember { Id = 2, Name = "Bob", Role = "Guitarist", Participant_Id = 1, Contact_Number = "555-4312" },
-            new TeamMember { Id = 3, Name = "Charlie", Role = "Saxophonist", Participant_Id = 2, Contact_Number = "555-9412" },
-            new TeamMember { Id = 4, Name = "Diana", Role = "Drummer", Participant_Id = 2, Contact_Number = "555-9481" },
-            new TeamMember { Id = 5, Name = "Eve", Role = "Drummer", Participant_Id = 1, Contact_Number = "555-4144" }
+        // ===== Teams =====
+        modelBuilder.Entity<Team>().HasData(
+            new Team { Id = 1, Name = "The Rockers", ContactNumber = "054-5441", Transport = "Bus", ArrivesAt = new DateTime(2024, 8, 14, 10, 0, 0), HandColor = "Red", Notes = "Requires backstage access." },
+            new Team { Id = 2, Name = "Jazz Masters", ContactNumber = "054-5499", Transport = "Van", ArrivesAt = new DateTime(2024, 12, 4, 15, 0, 0), HandColor = "Blue", Notes = "Needs special sound equipment." },
+            new Team { Id = 3, Name = "Fire Jazz", ContactNumber = "054-5490", Transport = "Car", ArrivesAt = new DateTime(2024, 12, 4, 12, 0, 0), HandColor = "Green", Notes = "Bringing their own instruments." }
             );
     }
 }
@@ -123,49 +121,54 @@ using (var context = new Main.Context.AppDbContext())
 {
     // ===== Where =====
     Console.WriteLine("1. Where");
-    List<Participant> participants = context.Participants
-        .Where(a => a.Id == 1)
+    List<Team> participants = context.Teams
+        .Where(a => a.Id == 1 || a.Id == 3)
         .ToList();
-    Console.WriteLine("Participants with Id = 1:");
-    foreach (var participant in participants)
-        Console.WriteLine($"Id {participant.Id}. Participant: {participant.Name}, Contact phone: {participant.Contact_Number}");
+    Console.WriteLine($"Teams with Id = 1 or Id = 3:");
+    foreach (var team in participants)
+        Console.WriteLine($"Id {team.Id}. Team: {team.Name}, Contact number: {team.ContactNumber}");
 
-    // ===== FindOrDefault =====
+    // ===== FirstOrDefault =====
     Console.WriteLine("\n2. FirstOrDefault");
-    TeamMember teamMember = context.TeamMembers
-        .FirstOrDefault(a => a.Id == 6);
-    if (teamMember != null) Console.WriteLine($"Team Member with Id = 6: {teamMember.Name}");
-    else Console.WriteLine("Team Member with Id = 6 not found.");
+    Team? team1 = context.Teams
+        .FirstOrDefault(a => a.Id == 2);
+    if (team1 != null) Console.WriteLine($"Team with Id = 2: {team1.Name}, Contact number: {team1.ContactNumber}");
+    else Console.WriteLine("Team with Id = 2 not found");
 
     // ===== Include =====
-    Console.WriteLine("\n\n3. Include");
-    List<TeamMember> teamMembers = context.TeamMembers
-        .Include(a => a.Participant)
+    Console.Write("\n3. Include");
+    List<Team> teamsWithMembers = context.Teams
+        .Include(t => t.TeamMembers)
+        .ThenInclude(tm => tm.Ticket)
         .ToList();
-    Console.WriteLine("Team Members with Participant included:");
-    foreach (var member in teamMembers)
-        Console.WriteLine($"Id {member.Id}. Team Member: {member.Name} is a member of {member.Participant.Name}");
+    foreach (var team in teamsWithMembers)
+    {
+        Console.WriteLine($"\nTeam: {team.Name}");
+        foreach (var member in team.TeamMembers)
+            Console.WriteLine($" - Member: {member.Ticket.BuyerName}, Role: {member.Role}, Contact number: {member.Ticket.BuyerContactNumber}");
+    }
 
     // ===== OrderBy =====
-    Console.WriteLine("\n\n4. OrderBy");
-    List<Accreditation> accreditations = context.Accreditations
-        .OrderBy(a => a.Valid_To)
-        .Include(a => a.Team_Member)
+    Console.WriteLine("\n4. OrderBy");
+    List<Team> teamsOrdered = context.Teams
+        .OrderBy(t => t.Name)
         .ToList();
-    Console.WriteLine("Accreditations sorted by valid_to:");
-    foreach (var accreditation in accreditations)
-        Console.WriteLine($"Id {accreditation.Id}. Team Member: {accreditation.Team_Member.Name}, Valid To: {accreditation.Valid_To}");
+    Console.WriteLine("Teams ordered by Name:");
+    foreach (var team in teamsOrdered)
+        Console.WriteLine($"Id {team.Id}. Team: {team.Name}, Contact number: {team.ContactNumber}");
 
     // ===== Average =====
-    Console.WriteLine("\n\n5. Average");
-    double? averagePerformances = context.Performances
-        .Average(a => EF.Functions.DateDiffMinute(a.Starts_At, a.Ends_At));
-    Console.WriteLine($"Average performance duration in minutes: {averagePerformances}");
+    Console.WriteLine("\n5. Average");
+    // average performance duration counting from StartsAt to EndsAt in EventBlocks
+    double? averageDuration = context.EventBlocks
+        .Where(e => e.Type == "Performance")
+        .Average(eb => EF.Functions.DateDiffMinute(eb.StartsAt, eb.EndsAt));
+    Console.WriteLine($"Average performance duration: {averageDuration} minutes");
 }
 ```
 
 Результати виконання LINQ запитів:  
-![Результати LINQ запитів](ReadmeResources/LINQ_results.png)
+![Результати LINQ запитів](ReadmeResources/LINQ_results_v2.png)
 
 LINQ запити є дуже потужним  та зручним інструментом для вибірки даних. Вони є невід'ємною частиною будь-якої програми, яка взаємодії з базами даних.
 

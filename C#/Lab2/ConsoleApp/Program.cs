@@ -10,44 +10,49 @@ class Program
         {
             // ===== Where =====
             Console.WriteLine("1. Where");
-            List<Participant> participants = context.Participants
-                .Where(a => a.Id == 1)
+            List<Team> participants = context.Teams
+                .Where(a => a.Id == 1 || a.Id == 3)
                 .ToList();
-            Console.WriteLine("Participants with Id = 1:");
-            foreach (var participant in participants)
-                Console.WriteLine($"Id {participant.Id}. Participant: {participant.Name}, Contact phone: {participant.Contact_Number}");
+            Console.WriteLine($"Teams with Id = 1 or Id = 3:");
+            foreach (var team in participants)
+                Console.WriteLine($"Id {team.Id}. Team: {team.Name}, Contact number: {team.ContactNumber}");
 
-            // ===== FindOrDefault =====
+            // ===== FirstOrDefault =====
             Console.WriteLine("\n2. FirstOrDefault");
-            TeamMember teamMember = context.TeamMembers
-                .FirstOrDefault(a => a.Id == 6);
-            if (teamMember != null) Console.WriteLine($"Team Member with Id = 6: {teamMember.Name}");
-            else Console.WriteLine("Team Member with Id = 6 not found.");
+            Team? team1 = context.Teams
+                .FirstOrDefault(a => a.Id == 2);
+            if (team1 != null) Console.WriteLine($"Team with Id = 2: {team1.Name}, Contact number: {team1.ContactNumber}");
+            else Console.WriteLine("Team with Id = 2 not found");
 
             // ===== Include =====
-            Console.WriteLine("\n3. Include");
-            List<TeamMember> teamMembers = context.TeamMembers
-                .Include(a => a.Participant)
+            Console.Write("\n3. Include");
+            List<Team> teamsWithMembers = context.Teams
+                .Include(t => t.TeamMembers)
+                .ThenInclude(tm => tm.Ticket)
                 .ToList();
-            Console.WriteLine("Team Members with Participant included:");
-            foreach (var member in teamMembers)
-                Console.WriteLine($"Id {member.Id}. Team Member: {member.Name} is a member of {member.Participant.Name}");
+            foreach (var team in teamsWithMembers)
+            {
+                Console.WriteLine($"\nTeam: {team.Name}");
+                foreach (var member in team.TeamMembers)
+                    Console.WriteLine($" - Member: {member.Ticket.BuyerName}, Role: {member.Role}, Contact number: {member.Ticket.BuyerContactNumber}");
+            }
 
             // ===== OrderBy =====
             Console.WriteLine("\n4. OrderBy");
-            List<Accreditation> accreditations = context.Accreditations
-                .OrderBy(a => a.Valid_To)
-                .Include(a => a.Team_Member)
+            List<Team> teamsOrdered = context.Teams
+                .OrderBy(t => t.Name)
                 .ToList();
-            Console.WriteLine("Accreditations sorted by valid_to:");
-            foreach (var accreditation in accreditations)
-                Console.WriteLine($"Id {accreditation.Id}. Team Member: {accreditation.Team_Member.Name}, Valid To: {accreditation.Valid_To}");
+            Console.WriteLine("Teams ordered by Name:");
+            foreach (var team in teamsOrdered)
+                Console.WriteLine($"Id {team.Id}. Team: {team.Name}, Contact number: {team.ContactNumber}");
 
             // ===== Average =====
             Console.WriteLine("\n5. Average");
-            double? averagePerformances = context.Performances
-                .Average(a => EF.Functions.DateDiffMinute(a.Starts_At, a.Ends_At));
-            Console.WriteLine($"Average performance duration in minutes: {averagePerformances}");
+            // average performance duration counting from StartsAt to EndsAt in EventBlocks
+            double? averageDuration = context.EventBlocks
+                .Where(e => e.Type == "Performance")
+                .Average(eb => EF.Functions.DateDiffMinute(eb.StartsAt, eb.EndsAt));
+            Console.WriteLine($"Average performance duration: {averageDuration} minutes");
         }
     }
 }

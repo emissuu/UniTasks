@@ -22,6 +22,6 @@ namespace Main.Models
         public string? Notes { get; set; }
 
         public virtual ICollection<TeamMember> TeamMembers { get; set; } = new List<TeamMember>();
-        public virtual EventBlock EventBlocks { get; set; }
+        public virtual ICollection<EventBlock> EventBlocks { get; set; } = new List<EventBlock>();
     }
 }
