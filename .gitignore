@@ -17,3 +17,14 @@
 /C#/Lab2/Main/bin
 /C#/Lab2/ConsoleApp/obj
 /C#/Lab2/ConsoleApp/bin
+
+# === C#/Lab3 ===
+/C#/Lab3/.vs
+/C#/Lab3/Data/obj
+/C#/Lab3/Data/bin
+/C#/Lab3/Repositories/obj
+/C#/Lab3/Repositories/bin
+/C#/Lab3/Services/obj
+/C#/Lab3/Services/bin
+/C#/Lab3/UI/obj
+/C#/Lab3/UI/bin
