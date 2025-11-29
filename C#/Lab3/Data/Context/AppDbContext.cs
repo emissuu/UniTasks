@@ -27,7 +27,7 @@ namespace Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TeamMemberEventBlock>()
-       .HasKey(te => new { te.TeamMemberId, te.EventBlockId });
+                .HasKey(te => new { te.TeamMemberId, te.EventBlockId });
 
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.Person)        

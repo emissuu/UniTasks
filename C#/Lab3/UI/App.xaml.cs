@@ -9,6 +9,11 @@ namespace UI
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            MainWindow = new MainWindow();
+            MainWindow.Show();
+        }
     }
 
 }
