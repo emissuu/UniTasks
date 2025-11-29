@@ -18,7 +18,7 @@ namespace Data.Context
         public DbSet<WorkerShift> WorkerShifts => Set<WorkerShift>();
         public DbSet<Incident> Incidents => Set<Incident>();
         public DbSet<Person> Persons => Set<Person>();
-        public DbSet<TeamMemberEventBlock> TeamMemberEventBlocks => Set<TeamMemberEventBlock>();
+        //public DbSet<TeamMemberEventBlock> TeamMemberEventBlocks => Set<TeamMemberEventBlock>();
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=EventOrganizerDBv2;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;Command Timeout=0");
@@ -26,8 +26,8 @@ namespace Data.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TeamMemberEventBlock>()
-                .HasKey(te => new { te.TeamMemberId, te.EventBlockId });
+            //modelBuilder.Entity<TeamMemberEventBlock>()
+            //    .HasKey(te => new { te.TeamMemberId, te.EventBlockId });
 
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.Person)        
@@ -37,7 +37,7 @@ namespace Data.Context
 
             modelBuilder.Entity<TeamMember>()
                 .HasOne(tm => tm.Person)
-                .WithOne() 
+                .WithOne(tm => tm.TeamMember) 
                 .HasForeignKey<TeamMember>(tm => tm.PersonId)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -47,17 +47,17 @@ namespace Data.Context
                 .HasForeignKey(ws => ws.WorkerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<TeamMemberEventBlock>()
-                .HasOne(te => te.TeamMember)
-                .WithMany(tm => tm.TeamMemberEventBlocks)
-                .HasForeignKey(te => te.TeamMemberId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<TeamMemberEventBlock>()
+            //    .HasOne(te => te.TeamMember)
+            //    .WithMany(tm => tm.TeamMemberEventBlocks)
+            //    .HasForeignKey(te => te.TeamMemberId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<TeamMemberEventBlock>()
-                .HasOne(te => te.EventBlock)
-                .WithMany(eb => eb.TeamMemberEventBlocks)
-                .HasForeignKey(te => te.EventBlockId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<TeamMemberEventBlock>()
+            //    .HasOne(te => te.EventBlock)
+            //    .WithMany(eb => eb.TeamMemberEventBlocks)
+            //    .HasForeignKey(te => te.EventBlockId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }

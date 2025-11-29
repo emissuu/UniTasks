@@ -4,6 +4,7 @@ using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251129231028_FixTeamMemberEventBlockDoubling")]
+    partial class FixTeamMemberEventBlockDoubling
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,6 +212,9 @@ namespace Data.Migrations
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PersonId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
@@ -219,6 +225,10 @@ namespace Data.Migrations
 
                     b.HasIndex("PersonId")
                         .IsUnique();
+
+                    b.HasIndex("PersonId1")
+                        .IsUnique()
+                        .HasFilter("[PersonId1] IS NOT NULL");
 
                     b.HasIndex("TeamId");
 
@@ -422,10 +432,14 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Models.TeamMember", b =>
                 {
                     b.HasOne("Data.Models.Person", "Person")
-                        .WithOne("TeamMember")
+                        .WithOne()
                         .HasForeignKey("Data.Models.TeamMember", "PersonId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Data.Models.Person", null)
+                        .WithOne("TeamMember")
+                        .HasForeignKey("Data.Models.TeamMember", "PersonId1");
 
                     b.HasOne("Data.Models.Team", "Team")
                         .WithMany("TeamMembers")
