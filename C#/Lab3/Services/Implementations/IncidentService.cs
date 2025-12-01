@@ -3,9 +3,9 @@ using Repositories.Implementations;
 
 namespace Services.Implementations
 {
-    public class Incident
+    public class IncidentService
     {
         private readonly IncidentRepository _repo;
-        public Incident(IncidentRepository repo) => _repo = repo;
+        public IncidentService(IncidentRepository repo) => _repo = repo;
     }
 }

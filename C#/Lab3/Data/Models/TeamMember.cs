@@ -20,6 +20,5 @@ namespace Data.Models
         public Team Team { get; set; } = null!;
 
         public virtual ICollection<EventBlock> EventBlocks { get; set; } = new List<EventBlock>();
-        //public virtual ICollection<TeamMemberEventBlock> TeamMemberEventBlocks { get; set; } = new List<TeamMemberEventBlock>();
     }
 }

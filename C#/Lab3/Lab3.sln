@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositorie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{CE69598E-DEFB-48CB-B4FB-E13D312043D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI2", "UI2\UI2.csproj", "{44423154-3BEE-4789-AD1F-7E725EC97462}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{CE69598E-DEFB-48CB-B4FB-E13D312043D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE69598E-DEFB-48CB-B4FB-E13D312043D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE69598E-DEFB-48CB-B4FB-E13D312043D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44423154-3BEE-4789-AD1F-7E725EC97462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44423154-3BEE-4789-AD1F-7E725EC97462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44423154-3BEE-4789-AD1F-7E725EC97462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44423154-3BEE-4789-AD1F-7E725EC97462}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

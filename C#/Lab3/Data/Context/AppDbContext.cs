@@ -26,9 +26,6 @@ namespace Data.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<TeamMemberEventBlock>()
-            //    .HasKey(te => new { te.TeamMemberId, te.EventBlockId });
-
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.Person)        
                 .WithMany(p => p.Tickets)
@@ -46,18 +43,6 @@ namespace Data.Context
                 .WithMany(w => w.WorkerShifts)
                 .HasForeignKey(ws => ws.WorkerId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            //modelBuilder.Entity<TeamMemberEventBlock>()
-            //    .HasOne(te => te.TeamMember)
-            //    .WithMany(tm => tm.TeamMemberEventBlocks)
-            //    .HasForeignKey(te => te.TeamMemberId)
-            //    .OnDelete(DeleteBehavior.Cascade);
-
-            //modelBuilder.Entity<TeamMemberEventBlock>()
-            //    .HasOne(te => te.EventBlock)
-            //    .WithMany(eb => eb.TeamMemberEventBlocks)
-            //    .HasForeignKey(te => te.EventBlockId)
-            //    .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -7,5 +7,24 @@ namespace Services.Implementations
     {
         private readonly TeamRepository _repo;
         public TeamService(TeamRepository repo) => _repo = repo;
+        public IEnumerable<Data.Models.Team> GetAll()
+        {
+            return _repo.GetAll().ToList();
+        }
+        public void Add(Data.Models.Team teamModel)
+        {
+            _repo.Add(teamModel);
+            _repo.Save();
+        }
+        public void Update(Data.Models.Team teamModel)
+        {
+            _repo.Update(teamModel);
+            _repo.Save();
+        }
+        public void Delete(int id)
+        {
+            _repo.Delete(id);
+            _repo.Save();
+        }
     }
 }

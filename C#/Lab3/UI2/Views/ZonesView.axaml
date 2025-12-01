@@ -1,0 +1,56 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="using:UI2.Views"
+             xmlns:models="using:Data.Models"
+             x:Class="UI2.Views.ZonesView"
+             x:DataType="views:ZonesView">
+  <StackPanel>
+        <TextBlock Text="Zones" Foreground="White" Margin="8" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+				<DataGrid ItemsSource="{Binding Zones}" SelectedItem="{Binding SelectedZone}" AutoGenerateColumns="False" IsReadOnly="True"
+              CanUserResizeColumns="True" CanUserSortColumns="True" SelectionChanged="DataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                        <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="*"/>
+                        <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Column="0" Background="#252525" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Margin="10">
+                    <TextBlock Text="Partner Details" FontSize="18" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                    <Label Content="Name:" Foreground="White"/>
+                    <TextBox Name="TextBoxName" Margin="0,0,0,10"/>
+                    <Label Content="Type:" Foreground="White"/>
+                    <TextBox Name="TextBoxType" Margin="0,0,0,10"/>
+                    <Label Content="Location:" Foreground="White"/>
+                    <TextBox Name="TextBoxLocation" Margin="0,0,0,10"/>
+                </StackPanel>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Save changes" Margin="4" Click="SaveZoneButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>	
+                    <Button Grid.Column="1" Content="Add zone" Margin="4" Click="AddZoneButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button Grid.Row="1" Grid.ColumnSpan="2" Content="Remove zone" Margin="4" Click="RemoveZoneButton_Click" Background="#F51414" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                </Grid>            
+            </Grid>
+        </Grid>
+     </StackPanel>
+</UserControl>

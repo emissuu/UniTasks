@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="using:UI2.Views"
+             xmlns:models="using:Data.Models"
+             x:Class="UI2.Views.EventsView"
+             x:DataType="views:EventsView">
+    <StackPanel>
+        <TextBlock Text="Events" Foreground="White" FontSize="36" Margin="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+		<DataGrid ItemsSource="{Binding Events}" SelectedItem="{Binding SelectedEvent}" AutoGenerateColumns="False" IsReadOnly="True" CanUserResizeColumns="True" CanUserSortColumns="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='{}{0:MMMM dd, yyyy}'}" Width="*"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+     </StackPanel>
+</UserControl>

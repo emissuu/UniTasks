@@ -1,0 +1,33 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:UI2.Views"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+        x:Class="UI2.Windows.MainWindow"
+        Title="Event Organizer!">
+    <Window.Resources>
+        <SolidColorBrush x:Key="AccentColor" Color="#28BAFC"/>
+        <SolidColorBrush x:Key="BackgroundColor" Color="#1E1E1E"/>
+        <SolidColorBrush x:Key="SidePanesBackgroundColor" Color="#252525"/>
+        <SolidColorBrush x:Key="ButtonColor" Color="#333333"/>
+    </Window.Resources>
+
+    <SplitView Name="SidePanel" DisplayMode="CompactOverlay" IsPaneOpen="False" CompactPaneLength="44" OpenPaneLength="220" >
+        <SplitView.Pane>
+            <StackPanel Background="{StaticResource SidePanesBackgroundColor}">
+                <StackPanel Orientation="Horizontal">
+					<Button Content=" = " Margin="5" Width="34" Click="ExpandSidePanel_Click" Background="{StaticResource ButtonColor}"/>
+                    <TextBlock Text="Menu" VerticalAlignment="Bottom" FontSize="22" Margin="5"/>
+                </StackPanel>
+                <Button Content="🏠 Home" HorizontalAlignment="Stretch" Margin="5" Click="Home_Click" Background="{StaticResource ButtonColor}"/>
+                <Button Content="📅 Events" HorizontalAlignment="Stretch" Margin="5" Click="Events_Click" Background="{StaticResource ButtonColor}"/>
+                <Button Content="👥 People" HorizontalAlignment="Stretch" Margin="5" Click="People_Click" Background="{StaticResource ButtonColor}"/>
+                <Button Content="🎤 Teams" HorizontalAlignment="Stretch" Margin="5" Click="Teams_Click" Background="{StaticResource ButtonColor}"/>
+                <Button Content="🌐 Zones" HorizontalAlignment="Stretch" Margin="5" Click="Zones_Click" Background="{StaticResource ButtonColor}"/>
+                <Button Content="🤝 Partners" HorizontalAlignment="Stretch" Margin="5" Click="Partners_Click" Background="{StaticResource ButtonColor}"/>
+            </StackPanel>
+        </SplitView.Pane>
+        <ContentControl Name="ContentArea" Background="{StaticResource BackgroundColor}"/>
+    </SplitView>
+</Window>

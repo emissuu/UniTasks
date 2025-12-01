@@ -7,5 +7,27 @@ namespace Services.Implementations
     {
         private readonly EventRepository _repo;
         public EventService(EventRepository repo) => _repo = repo;
+        public IEnumerable<Data.Models.Event> GetAll()
+        {
+            return _repo.GetAll().ToList();
+        }
+        public IEnumerable<Data.Models.Event> GetAllEventsInAWeek()
+        {
+            return _repo.GetAll().Where(e => e.Date >= DateTime.Now && e.Date <= DateTime.Now.AddDays(7)).ToList();
+        }
+        public Data.Models.Event GetById(int id)
+        {
+            return _repo.GetById(id);
+        }
+        public void Add(Data.Models.Event eventModel)
+        {
+            _repo.Add(eventModel);
+            _repo.Save();
+        }
+        public void Update(Data.Models.Event eventModel)
+        {
+            _repo.Update(eventModel);
+            _repo.Save();
+        }
     }
 }
