@@ -10,22 +10,34 @@ namespace UI2.Views;
 public partial class ZonesView : UserControl
 {
     private ServiceStorage _serviceStorage;
-    public ObservableCollection<Zone> Zones { get; }
+    public ObservableCollection<Zone> Zones { get; set; }
     private Zone? _selectedZone;
     public ZonesView(ref ServiceStorage serviceStorage)
     {
         _serviceStorage = serviceStorage;
-        DataContext = this;
-        Zones = new ObservableCollection<Zone>(_serviceStorage._zoneServ.GetAll());
         InitializeComponent();
+        Zones = new ObservableCollection<Zone>(_serviceStorage._zoneServ.GetAll());
+        DataContext = this;
     }
     public Zone? SelectedZone
     {
         get => _selectedZone;
         set => _selectedZone = value;
     }
-
-    private void SaveZoneButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void UpdateGrid()
+    {
+        Zones.Clear();
+        foreach (var zone in _serviceStorage._zoneServ.GetAll())
+            Zones.Add(zone);
+    }
+    private void ClearButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        _selectedZone = null;
+        TextBoxName.Text = string.Empty;
+        TextBoxType.Text = string.Empty;
+        TextBoxLocation.Text = string.Empty;
+    }
+    private void SaveButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         if (_selectedZone != null)
         {
@@ -37,9 +49,10 @@ public partial class ZonesView : UserControl
                 Location = TextBoxLocation.Text == "" ? null : TextBoxLocation.Text,
             });
         }
+        UpdateGrid();
     }
 
-    private void AddZoneButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void AddButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         _serviceStorage._zoneServ.Add(new Zone()
         {
@@ -47,13 +60,15 @@ public partial class ZonesView : UserControl
             Type = TextBoxType.Text == "" ? null : TextBoxType.Text,
             Location = TextBoxLocation.Text == "" ? null : TextBoxLocation.Text,
         });
+        UpdateGrid();
     }
-    private void RemoveZoneButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void RemoveButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         if (_selectedZone != null)
         {
             _serviceStorage._zoneServ.Delete(_selectedZone.Id);
         }
+        UpdateGrid();
     }
 
     private void DataGrid_SelectionChanged(object? sender, SelectionChangedEventArgs e)

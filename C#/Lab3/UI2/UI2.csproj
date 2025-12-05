@@ -30,5 +30,11 @@
     <Compile Update="Views\HomeView.axaml.cs">
       <DependentUpon>HomeView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\MainView.axaml.cs">
+      <DependentUpon>MainView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EventBlocksView.axaml.cs">
+      <DependentUpon>EventBlocksView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

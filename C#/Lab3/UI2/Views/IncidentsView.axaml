@@ -1,0 +1,6 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             x:Class="UI2.Views.IncidentsView">
+  <TextBlock Text="Incidents will be refered to here!" Foreground="White" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+</UserControl>

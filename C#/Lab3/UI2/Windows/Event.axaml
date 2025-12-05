@@ -5,5 +5,28 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="UI2.Windows.Event"
         Title="Event">
-  Welcome to Avalonia!
+  <Window.Resources>
+        <SolidColorBrush x:Key="AccentColor" Color="#28BAFC"/>
+        <SolidColorBrush x:Key="BackgroundColor" Color="#1E1E1E"/>
+        <SolidColorBrush x:Key="SidePanesBackgroundColor" Color="#252525"/>
+        <SolidColorBrush x:Key="ButtonColor" Color="#333333"/>
+    </Window.Resources>
+
+    <SplitView Name="SidePanel" DisplayMode="CompactOverlay" IsPaneOpen="False" CompactPaneLength="44" OpenPaneLength="220" >
+        <SplitView.Pane>
+            <StackPanel Background="{StaticResource SidePanesBackgroundColor}">
+                <StackPanel Orientation="Horizontal">
+					<Button Content=" = " Margin="5" Width="34" Click="ExpandSidePanel_Click" Background="{StaticResource ButtonColor}"/>
+                    <TextBlock Text="Menu" VerticalAlignment="Bottom" FontSize="22" Margin="5"/>
+                </StackPanel>
+                <Button Content="🏠 Main" HorizontalAlignment="Stretch" Margin="5" Click="Main_Click" Background="{StaticResource ButtonColor}"/>
+                <Button Content="🧱 Event Blocks" HorizontalAlignment="Stretch" Margin="5" Click="EventBlocks_Click" Background="{StaticResource ButtonColor}"/>
+                <Button Content=" 📍 Zone Activations" HorizontalAlignment="Stretch" Margin="5" Click="ZoneActivations_Click" Background="{StaticResource ButtonColor}"/>
+                <Button Content="👥 Visitors" HorizontalAlignment="Stretch" Margin="5" Click="Visitors_Click" Background="{StaticResource ButtonColor}"/>
+                <Button Content="👷 Worker Shifts" HorizontalAlignment="Stretch" Margin="5" Click="WorkerShifts_Click" Background="{StaticResource ButtonColor}"/>
+                <Button Content="🚨 Incidents" HorizontalAlignment="Stretch" Margin="5" Click="Incidents_Click" Background="{StaticResource ButtonColor}"/>
+            </StackPanel>
+        </SplitView.Pane>
+        <ContentControl Name="ContentArea" Background="{StaticResource BackgroundColor}"/>
+    </SplitView>
 </Window>

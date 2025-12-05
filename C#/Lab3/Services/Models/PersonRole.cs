@@ -26,5 +26,19 @@ namespace Services.Models
                     return null;
             }
         }
+        public int RoleNumber
+        {
+            get
+            {
+                if (Administrator != null)
+                    return 3;
+                else if (Worker != null)
+                    return 2;
+                else if (Guest != null)
+                    return 1;
+                else
+                    return 0;
+            }
+        }
     }
 }

@@ -5,9 +5,13 @@
              xmlns:models="using:Data.Models"
              x:Class="UI2.Views.PeopleView"
              x:DataType="views:PeopleView">
-  <StackPanel>
-        <TextBlock Text="People" Foreground="White" Margin="8" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="People" Foreground="White" Margin="8" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
@@ -24,9 +28,9 @@
             </Grid>
             <Grid Grid.Column="0" Background="#252525" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Margin="10">
                     <TextBlock Text="Partner Details" FontSize="18" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
@@ -34,6 +38,33 @@
                     <TextBox Name="TextBoxName" Margin="0,0,0,10"/>
                     <Label Content="Contact Number:" Foreground="White"/>
                     <TextBox Name="TextBoxNumber" Margin="0,0,0,10"/>
+                    <Label Content="Role:" Foreground="White"/>
+                    <ComboBox Name="ComboBoxRole" Margin="0,0,0,10" HorizontalAlignment="Stretch" SelectionChanged="ComboBoxRole_SelectionChanged">
+                        <ComboBoxItem Content="No role"/>
+                        <ComboBoxItem Content="Guest"/>
+                        <ComboBoxItem Content="Worker"/>
+                        <ComboBoxItem Content="Administrator"/>
+                    </ComboBox>
+                    <Separator Name="RoleSeparator" Margin="0,10" Foreground="Gray" IsVisible="False"/>
+                    <Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <!-- Administrator -->
+                    <Label Grid.Row="0" Name="LabelAdministratorSalary" Content="Salary:" Foreground="White" IsVisible="False"/>
+                    <TextBox Grid.Row="0" Name="TextBoxAdministratorSalary" Margin="0,0,0,10" IsVisible="False"/>
+                    <!-- Worker -->
+                    <Label Grid.Row="0" Name="LabelWorkerRole" Content="Role:" Foreground="White" IsVisible="False"/>
+                    <TextBox Grid.Row="0" Name="TextBoxWorkerRole" Margin="0,0,0,10" IsVisible="False"/>
+                    <Label Grid.Row="1" Name="LabelWorkerSalary" Content="Salary:" Foreground="White" IsVisible="False"/>
+                    <TextBox Grid.Row="1" Name="TextBoxWorkerSalary" Margin="0,0,0,10" IsVisible="False"/>
+                    <!-- Guest -->
+                    <Label Grid.Row="0" Name="LabelGuestRole" Content="Role:" Foreground="White" IsVisible="False"/>
+                    <TextBox Grid.Row="0" Name="TextBoxGuestRole" Margin="0,0,0,10" IsVisible="False"/>
+                    <Label Grid.Row="1" Name="LabelGuestTeam" Content="Team:" Foreground="White" IsVisible="False"/>
+                    <ComboBox Grid.Row="1" Name="TextBoxGuestTeam" HorizontalAlignment="Stretch" Margin="0,0,0,10" IsVisible="False"/>
                 </StackPanel>
                 <Grid Grid.Row="2">
                     <Grid.RowDefinitions>
@@ -43,12 +74,13 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="Save changes" Margin="4" Click="SavePersonButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>	
-                    <Button Grid.Column="1" Content="Add person" Margin="4" Click="AddPersonButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
-                    <Button Grid.Row="1" Grid.ColumnSpan="2" Content="Remove person" Margin="4" Click="RemovePersonButton_Click" Background="#F51414" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    </Grid.ColumnDefinitions>	
+                    <Button Grid.Row="0" Grid.Column="0" Content="Clear" Margin="4" Click="ClearButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button Grid.Row="0" Grid.Column="1" Content="Save changes" Margin="4" Click="SavePersonButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button Grid.Row="1" Grid.Column="0" Content="Remove person" Margin="4" Click="RemovePersonButton_Click" Background="#F51414" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button Grid.Row="1" Grid.Column="1" Content="Add person" Margin="4" Click="AddPersonButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                 </Grid>            
             </Grid>
         </Grid>
-     </StackPanel>
+     </Grid>
 </UserControl>

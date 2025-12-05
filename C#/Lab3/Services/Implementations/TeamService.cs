@@ -11,6 +11,10 @@ namespace Services.Implementations
         {
             return _repo.GetAll().ToList();
         }
+        public IEnumerable<string> GetAllNames()
+        {
+            return _repo.GetAll().Select(t => t.Name).ToList();
+        }
         public void Add(Data.Models.Team teamModel)
         {
             _repo.Add(teamModel);

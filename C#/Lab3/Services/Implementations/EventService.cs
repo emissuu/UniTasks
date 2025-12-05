@@ -13,7 +13,7 @@ namespace Services.Implementations
         }
         public IEnumerable<Data.Models.Event> GetAllEventsInAWeek()
         {
-            return _repo.GetAll().Where(e => e.Date >= DateTime.Now && e.Date <= DateTime.Now.AddDays(7)).ToList();
+            return _repo.GetAll().Where(e => e.Date >= DateTime.Now.AddDays(-1) && e.Date <= DateTime.Now.AddDays(6)).ToList();
         }
         public Data.Models.Event GetById(int id)
         {
