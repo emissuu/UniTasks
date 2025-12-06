@@ -9,7 +9,7 @@ public partial class IncidentsView : UserControl
 {
     private ServiceStorage _serviceStorage;
     private int _eventId;
-    public IncidentsView(ref ServiceStorage serviceStorage, int eventId)
+    public IncidentsView(ref ServiceStorage serviceStorage, int eventId, int? incidentId)
     {
         _serviceStorage = serviceStorage;
         _eventId = eventId;

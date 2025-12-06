@@ -14,5 +14,11 @@ namespace Repositories.Implementations
                 _context.Entry(existingPerson).CurrentValues.SetValues(entity);
             }
         }
+        public IEnumerable<EventBlock> GetAllZoneActivation()
+        {
+            return _dbSet.Include(eb => eb.ZoneActivation)
+                .ThenInclude(za => za.Zone)
+                .AsNoTracking().ToList();
+        }
     }
 }

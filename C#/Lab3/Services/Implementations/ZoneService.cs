@@ -11,6 +11,15 @@ namespace Services.Implementations
         {
             return _repo.GetAll().ToList();
         }
+        public IEnumerable<string> GetAllNames()
+        {
+            return _repo.GetAll().Select(z => z.Name).ToList();
+        }
+        public int GetIdByName(string name)
+        {
+            var admin = _repo.GetAll().FirstOrDefault(z => z.Name == name);
+            return admin != null ? admin.Id : -1;
+        }
         public void Add(Data.Models.Zone zoneModel)
         {
             _repo.Add(zoneModel);

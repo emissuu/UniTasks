@@ -33,7 +33,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Margin="10">
-                    <TextBlock Text="Partner Details" FontSize="18" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                    <TextBlock Text="People details" FontSize="18" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
                     <Label Content="Name:" Foreground="White"/>
                     <TextBox Name="TextBoxName" Margin="0,0,0,10"/>
                     <Label Content="Contact Number:" Foreground="White"/>

@@ -9,7 +9,7 @@ namespace UI2.Views;
 public partial class TeamsView : UserControl
 {
     private ServiceStorage _serviceStorage;
-    public ObservableCollection<Team> Teams { get; set;  }
+    public ObservableCollection<Team> Teams { get; set; }
     private Team? _selectedTeam;
     public TeamsView(ref ServiceStorage serviceStorage)
     {

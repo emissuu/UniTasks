@@ -15,11 +15,13 @@ namespace Data.Models
         [ForeignKey(nameof(ZoneId))]
         public Zone Zone { get; set; } = null!;
         [Required]
-        public int EventBlockId { get; set; }
-        [ForeignKey(nameof(EventBlockId))]
-        public EventBlock EventBlock { get; set; } = null!;
+        public int EventId { get; set; }
+        [ForeignKey(nameof(EventId))]
+        public Event Event { get; set; } = null!;
         public int? PartnerId { get; set; }
         [ForeignKey(nameof(PartnerId))]
         public Partner? Partner { get; set; } = null!;
+
+        public virtual ICollection<EventBlock> EventBlocks { get; set; } = new List<EventBlock>();
     }
 }

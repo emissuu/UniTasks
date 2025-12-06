@@ -11,6 +11,15 @@ namespace Services.Implementations
         {
             return _repo.GetAll().ToList();
         }
+        public IEnumerable<string> GetAllNames()
+        {
+            return _repo.GetAllPeople().Select(a => a.Person.Name).ToList();
+        }
+        public int GetIdByName(string name)
+        {
+            var admin = _repo.GetAllPeople().FirstOrDefault(a => a.Person.Name == name);
+            return admin != null ? admin.Id : -1;
+        }
         public void Add(Data.Models.Administrator administratorModel)
         {
             _repo.Add(administratorModel);

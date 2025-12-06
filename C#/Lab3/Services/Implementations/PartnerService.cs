@@ -11,6 +11,15 @@ namespace Services.Implementations
         {
             return _repo.GetAll().ToList();
         }
+        public IEnumerable<string> GetAllNames()
+        {
+            return _repo.GetAll().Select(p => p.Name).ToList();
+        }
+        public int GetIdByName(string name)
+        {
+            var partner = _repo.GetAll().FirstOrDefault(p => p.Name == name);
+            return partner != null ? partner.Id : -1;
+        }
         public Data.Models.Partner GetById(int id)
         {
             return _repo.GetById(id);

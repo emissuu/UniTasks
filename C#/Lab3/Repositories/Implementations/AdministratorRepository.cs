@@ -14,5 +14,9 @@ namespace Repositories.Implementations
                 _context.Entry(existingPerson).CurrentValues.SetValues(entity);
             }
         }
+        public IEnumerable<Administrator> GetAllPeople()
+        {
+            return _dbSet.Include(a => a.Person).AsNoTracking().ToList();
+        }
     }
 }

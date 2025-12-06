@@ -29,5 +29,10 @@ namespace Services.Implementations
             _repo.Update(eventModel);
             _repo.Save();
         }
+        public void Delete(int id)
+        {
+            _repo.Delete(id);
+            _repo.Save();
+        }
     }
 }

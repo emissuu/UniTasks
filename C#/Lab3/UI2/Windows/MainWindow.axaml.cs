@@ -6,9 +6,12 @@ namespace UI2.Windows
 {
     public partial class MainWindow : Window
     {
+        public static MainWindow Instance { get; private set; }
         ServiceStorage _serviceStorage;
+
         public MainWindow(ref ServiceStorage serviceStorage)
         {
+            Instance = this;
             InitializeComponent();
             _serviceStorage = serviceStorage;
             ContentArea.Content = new HomeView(ref _serviceStorage);

@@ -7,5 +7,9 @@ namespace Services.Implementations
     {
         private readonly IncidentRepository _repo;
         public IncidentService(IncidentRepository repo) => _repo = repo;
+        public IEnumerable<Data.Models.Incident> GetByEventId(int eventId)
+        {
+            return _repo.GetAll().Where(i => i.Ticket.EventId == eventId).ToList();
+        }
     }
 }

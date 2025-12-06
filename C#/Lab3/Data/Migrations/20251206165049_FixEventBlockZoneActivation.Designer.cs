@@ -4,6 +4,7 @@ using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251206165049_FixEventBlockZoneActivation")]
+    partial class FixEventBlockZoneActivation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,7 +89,7 @@ namespace Data.Migrations
                     b.Property<DateTime?>("EndsAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("EventId")
+                    b.Property<int>("EventId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -345,9 +348,6 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("EventId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
@@ -358,8 +358,6 @@ namespace Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EventId");
 
                     b.HasIndex("PartnerId");
 
@@ -407,15 +405,19 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Models.EventBlock", b =>
                 {
-                    b.HasOne("Data.Models.Event", null)
+                    b.HasOne("Data.Models.Event", "Event")
                         .WithMany("EventBlocks")
-                        .HasForeignKey("EventId");
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Data.Models.ZoneActivation", "ZoneActivation")
                         .WithMany("EventBlocks")
                         .HasForeignKey("ZoneActivationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Event");
 
                     b.Navigation("ZoneActivation");
                 });
@@ -501,12 +503,6 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Models.ZoneActivation", b =>
                 {
-                    b.HasOne("Data.Models.Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Data.Models.Partner", "Partner")
                         .WithMany("ZoneActivations")
                         .HasForeignKey("PartnerId");
@@ -516,8 +512,6 @@ namespace Data.Migrations
                         .HasForeignKey("ZoneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Event");
 
                     b.Navigation("Partner");
 

@@ -30,7 +30,7 @@ public partial class Event : Window
     private void EventBlocks_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         if (ContentArea.Content is EventBlocksView) return;
-        ContentArea.Content = new EventBlocksView(ref _serviceStorage, _eventId);
+        ContentArea.Content = new EventBlocksView(ref _serviceStorage, _eventId, null);
     }
     private void ZoneActivations_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
@@ -50,6 +50,6 @@ public partial class Event : Window
     private void Incidents_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         if (ContentArea.Content is IncidentsView) return;
-        ContentArea.Content = new IncidentsView(ref _serviceStorage, _eventId);
+        ContentArea.Content = new IncidentsView(ref _serviceStorage, _eventId, null);
     }
 }

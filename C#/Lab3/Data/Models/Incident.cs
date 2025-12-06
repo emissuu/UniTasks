@@ -23,5 +23,13 @@ namespace Data.Models
         public int TicketId { get; set; }
         [ForeignKey(nameof(TicketId))]
         public Ticket Ticket { get; set; }
+
+
+        [NotMapped]
+        public string Resolvation
+        {
+            get => IsResolved ? "Resolved" : "Unresolved";
+        }
+
     }
 }

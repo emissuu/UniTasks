@@ -5,14 +5,69 @@
              xmlns:models="using:Data.Models"
              x:Class="UI2.Views.EventsView"
              x:DataType="views:EventsView">
-    <StackPanel>
-        <TextBlock Text="Events" Foreground="White" FontSize="36" Margin="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-		<DataGrid ItemsSource="{Binding Events}" SelectedItem="{Binding SelectedEvent}" AutoGenerateColumns="False" IsReadOnly="True" CanUserResizeColumns="True" CanUserSortColumns="True">
+    <Grid>
+        <Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Events" Foreground="White" FontSize="36" Margin="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MaxWidth="367"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+				<DataGrid ItemsSource="{Binding Events}" SelectedItem="{Binding SelectedEvent}" AutoGenerateColumns="False" IsReadOnly="True" 
+              CanUserResizeColumns="True" CanUserSortColumns="True" SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Edit" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Edit" Click="EditButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='{}{0:MMMM dd, yyyy}'}" Width="*"/>
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="*"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="2*"/>
             </DataGrid.Columns>
         </DataGrid>
-     </StackPanel>
+            </Grid>
+            <Grid Grid.Column="0" Background="#252525" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Margin="10">
+                    <TextBlock Text="Event details" FontSize="18" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                    <Label Content="Name:" Foreground="White"/>
+                    <TextBox Name="TextBoxName" Margin="0,0,0,10"/>
+                    <Label Content="Admin:" Foreground="White"/>
+                    <ComboBox Name="ComboBoxAdmin" Margin="0,0,0,10" HorizontalAlignment="Stretch"/>
+                    <Label Content="Date:" Foreground="White"/>
+                    <DatePicker Name="DatePickerDate" Margin="0,0,0,10" HorizontalAlignment="Stretch" DayFormat="ddd dd"/>
+                    <Label Content="Location:" Foreground="White"/>
+                    <TextBox Name="TextBoxLocation" Margin="0,0,0,10"/>
+                    <Label Content="Description:" Foreground="White"/>
+                    <TextBox Name="TextBoxDescription" Margin="0,0,0,10" Height="80" TextWrapping="Wrap"/>
+                </StackPanel>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0" Content="Clear" Margin="4" Click="ClearButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button Grid.Row="0" Grid.Column="1" Content="Save changes" Margin="4" Click="SaveButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button Grid.Row="1" Grid.Column="0" Content="Remove event" Margin="4" Click="RemoveButton_Click" Background="#F51414" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button Grid.Row="1" Grid.Column="1" Content="Add event" Margin="4" Click="AddButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                </Grid>            
+            </Grid>
+        </Grid>
+    </Grid>
 </UserControl>
