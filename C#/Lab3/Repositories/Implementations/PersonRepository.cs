@@ -22,5 +22,9 @@ namespace Repositories.Implementations
                 .Include(p => p.TeamMember)
                 .ToList();
         }
+        public IEnumerable<Person> GetAllTicket()
+        {
+            return _context.Set<Person>().Include(p => p.Tickets).ToList();
+        }
     }
 }

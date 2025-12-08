@@ -14,5 +14,9 @@ namespace Repositories.Implementations
                 _context.Entry(existingPerson).CurrentValues.SetValues(entity);
             }
         }
+        public IEnumerable<Worker> GetAllPeople()
+        {
+            return _dbSet.Include(w => w.Person).ToList();
+        }
     }
 }

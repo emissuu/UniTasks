@@ -1,6 +1,60 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             x:Class="UI2.Views.WorkerShiftsView">
-  <TextBlock Text="Worker Shifts are displayed there!" Foreground="White" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+             xmlns:views="using:UI2.Views"
+             xmlns:models="using:Data.Models"
+             x:Class="UI2.Views.WorkerShiftsView"
+             x:DataType="views:WorkerShiftsView">
+    <Grid>
+		<Grid.RowDefinitions>
+		    <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Worker shifts" Foreground="White" Margin="8" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+				<DataGrid ItemsSource="{Binding WorkerShifts}" SelectedItem="{Binding SelectedWorkerShift}" AutoGenerateColumns="False" IsReadOnly="True"
+              CanUserResizeColumns="True" CanUserSortColumns="True" SelectionChanged="DataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Worker.Person.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Event block" Binding="{Binding EventBlock.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Starting" Binding="{Binding StartsAt, StringFormat={}{0:HH:mm}}" Width="*"/>
+                        <DataGridTextColumn Header="Ending" Binding="{Binding EndsAt, StringFormat={}{0:HH:mm}}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Column="0" Background="#252525" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Margin="10">
+                    <TextBlock Text="Worker shift details" FontSize="18" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                    <Label Content="Worker:" Foreground="White"/>
+                    <ComboBox Name="ComboBoxWorker" Margin="0,0,0,10" HorizontalAlignment="Stretch"/>
+                    <Label Content="Event Block:" Foreground="White"/>
+                    <ComboBox Name="ComboBoxEventBlock" Margin="0,0,0,10" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0" Content="Clear" Margin="4" Click="ClearButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button Grid.Row="0" Grid.Column="1" Content="Save changes" Margin="4" Click="SaveButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button Grid.Row="1" Grid.Column="0" Content="Remove shift" Margin="4" Click="RemoveButton_Click" Background="#F51414" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button Grid.Row="1" Grid.Column="1" Content="Add shift" Margin="4" Click="AddButton_Click" Background="#28BAFC" Foreground="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                </Grid>            
+            </Grid>
+        </Grid>
+    </Grid>
 </UserControl>

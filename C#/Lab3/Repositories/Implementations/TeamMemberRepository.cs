@@ -14,5 +14,13 @@ namespace Repositories.Implementations
                 _context.Entry(existingPerson).CurrentValues.SetValues(entity);
             }
         }
+        public IEnumerable<TeamMember> GetAllEventBlocks()
+        {
+            return _dbSet.Include(tm => tm.EventBlocks).ToList();
+        }
+        public IEnumerable<TeamMember> GetAllPeople()
+        {
+            return _dbSet.Include(tm => tm.Person).ToList();
+        }
     }
 }

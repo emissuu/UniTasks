@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Data.Models;
 using Services.Storages;
 using UI2.Windows;
+using EventWindow = UI2.Windows.Event;
 
 namespace UI2.Views;
 
@@ -39,14 +40,14 @@ public partial class MainView : UserControl
     {
         if (_selectedEventBlock != null)
         {
-            MainWindow.Instance.ContentArea.Content = new EventBlocksView(ref _serviceStorage, _eventId, _selectedEventBlock.Id);
+            EventWindow.Instance.ContentArea.Content = new EventBlocksView(ref _serviceStorage, _eventId, _selectedEventBlock.Id);
         }
     } 
     private void ListBoxIncidents_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (_selectedIncident != null)
         {
-            MainWindow.Instance.ContentArea.Content = new IncidentsView(ref _serviceStorage, _eventId, _selectedIncident.Id);
+            EventWindow.Instance.ContentArea.Content = new IncidentsView(ref _serviceStorage, _eventId, _selectedIncident.Id);
         }
     }
 }

@@ -17,7 +17,22 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0" Background="#333" CornerRadius="10" Margin="10" Padding="10">
-                
+                <StackPanel>
+					<TextBlock Text="Workers" FontSize="18" Foreground="White" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                    <ListBox Name="WorkersListBox" ItemsSource="{Binding Workers}" SelectedItem="{Binding SelectedWorker}" SelectionChanged="WorkersListBox_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="models:Worker">
+                                <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                                    <TextBlock Text="{Binding Person.Name}" FontSize="16" Foreground="White"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,-12">
+                                        <TextBlock Text="Role: " FontSize="14" Foreground="LightGray"/>
+                                        <TextBlock Text="{Binding Role}" FontSize="14" Foreground="LightGray"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
             </Border>
             <Border Grid.Column="1" Background="#333" CornerRadius="10" Margin="10" Padding="10">
                 <StackPanel>

@@ -11,6 +11,19 @@ namespace Services.Implementations
         {
             return _repo.GetAll().ToList();
         }
+        public IEnumerable<Data.Models.Worker> GetAllPeople()
+        {
+            return _repo.GetAllPeople();
+        }
+        public IEnumerable<string> GetAllWorkerNames()
+        {
+            return _repo.GetAllPeople().Select(w => w.Person.Name).ToList();
+        }
+        public int GetIdByName(string name)
+        {
+            var worker = _repo.GetAllPeople().FirstOrDefault(w => w.Person.Name == name);
+            return worker != null ? worker.Id : -1;
+        }
         public void Add(Data.Models.Worker workerModel)
         {
             _repo.Add(workerModel);

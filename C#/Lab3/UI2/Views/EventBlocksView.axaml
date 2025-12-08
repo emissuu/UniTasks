@@ -40,6 +40,17 @@
                     <TextBox Name="TextBoxName" Margin="0,0,0,10"/>
                     <Label Content="Type:" Foreground="White"/>
                     <TextBox Name="TextBoxType" Margin="0,0,0,10"/>
+                    <Label Content="Participants:" Foreground="White"/>
+                    <ToggleButton Name="Jonny" Content="Participant" Click="ButtonClick" HorizontalAlignment="Stretch"/>
+                    <Popup Name="PopupParticipants" Width="200" PlacementTarget="{Binding #Jonny}" Placement="BottomEdgeAlignedLeft" >
+						<ListBox HorizontalAlignment="Stretch" SelectionMode="Multiple, Toggle" ItemsSource="{Binding Participants}" SelectedItems="{Binding SelectedParticipants}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Person.Name}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Popup>
                     <Label Content="Zone Activation:" Foreground="White"/>
                     <ComboBox Name="ComboBoxZoneActivation" Margin="0,0,0,10" HorizontalAlignment="Stretch"/>
                     <Label Content="Starts at:" Foreground="White"/>

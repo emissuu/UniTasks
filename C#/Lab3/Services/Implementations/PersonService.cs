@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repositories.Implementations;
+using Services.Models;
 
 namespace Services.Implementations
 {
@@ -48,7 +49,24 @@ namespace Services.Implementations
                 personRoles.Add(personRole);
             }
             return personRoles;
-
+        }
+        public IEnumerable<PersonTicket> GetAllPersonTicketByEventId(int eventId)
+        {
+            var tickets = _repo.GetAllTicket().ToList();
+            List<PersonTicket> personTickets = new();
+            foreach (var ticket in tickets)
+            {
+                PersonTicket personTicket = new()
+                {
+                    Id = ticket.Tickets?.FirstOrDefault(t => t.EventId == eventId)?.Id ?? null,
+                    PersonId = ticket.Id,
+                    Name = ticket.Name,
+                    ContactNumber = ticket.ContactNumber,
+                    QrCode = ticket.Tickets?.FirstOrDefault(t => t.EventId == eventId)?.QrCode ?? null
+                };
+                personTickets.Add(personTicket);
+            }
+            return personTickets;
         }
     }
 }

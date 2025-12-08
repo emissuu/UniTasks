@@ -11,6 +11,14 @@ namespace Services.Implementations
         {
             return _repo.GetAll().ToList();
         }
+        public IEnumerable<Data.Models.TeamMember> GetAllPeople()
+        {
+            return _repo.GetAllPeople();
+        }
+        public IEnumerable<Data.Models.TeamMember> GetByEventBlock(int eventBlockId)
+        {
+            return _repo.GetAllEventBlocks().Where(tm => tm.EventBlocks.Any(eb => eb.Id == eventBlockId)).ToList();
+        }
         public void Add(Data.Models.TeamMember teamMemberModel)
         {
             _repo.Add(teamMemberModel);

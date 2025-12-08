@@ -8,6 +8,7 @@ namespace UI2.Windows;
 
 public partial class Event : Window
 {
+    public static Event Instance { get; private set; }
     private ServiceStorage _serviceStorage;
     private int _eventId;
     public Event(ref ServiceStorage serviceStorage, int eventId)
@@ -17,6 +18,7 @@ public partial class Event : Window
         InitializeComponent();
         Title = _serviceStorage._eventServ.GetById(_eventId).Name;
         ContentArea.Content = new MainView(ref _serviceStorage, _eventId);
+        Instance = this;
     }
     private void ExpandSidePanel_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {

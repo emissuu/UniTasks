@@ -11,6 +11,23 @@ namespace Services.Implementations
         {
             return _repo.GetAllZoneActivation().Where(eb => eb.ZoneActivation.EventId == eventId).ToList();
         }
+        public IEnumerable<string> GetAllEventBlockNamesByEventId(int eventId)
+        {
+            return _repo.GetAllZoneActivation()
+                        .Where(eb => eb.ZoneActivation.EventId == eventId)
+                        .Select(eb => eb.Name)
+                        .ToList();
+        }
+        public int GetIdByNameAndEventId(string name, int eventId)
+        {
+            var eventBlock = _repo.GetAllZoneActivation()
+                                  .FirstOrDefault(eb => eb.Name == name && eb.ZoneActivation.EventId == eventId);
+            return eventBlock != null ? eventBlock.Id : -1;
+        }
+        public Data.Models.EventBlock? GetById(int id)
+        {
+            return _repo.GetById(id);
+        }
         public void Add(Data.Models.EventBlock eventBlock)
         {
             _repo.Add(eventBlock);

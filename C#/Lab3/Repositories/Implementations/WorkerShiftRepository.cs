@@ -14,5 +14,14 @@ namespace Repositories.Implementations
                 _context.Entry(existingPerson).CurrentValues.SetValues(entity);
             }
         }
+        public IEnumerable<WorkerShift> GetAllWorkerEventBlock()
+        {
+            return _dbSet
+                .Include(ws => ws.Worker)
+                .ThenInclude(w => w.Person)
+                .Include(ws => ws.EventBlock)
+                .ThenInclude(eb => eb.ZoneActivation)
+                .ToList();
+        }
     }
 }
