@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="1">
-				<DataGrid ItemsSource="{Binding Visitors}" SelectedItem="{Binding SelectedVisitor}" AutoGenerateColumns="False" IsReadOnly="True"
+				<DataGrid Name="DataGridVisitors" ItemsSource="{Binding Visitors}" SelectedItem="{Binding SelectedVisitor}" AutoGenerateColumns="False" IsReadOnly="True"
               CanUserResizeColumns="True" CanUserSortColumns="True" SelectionChanged="DataGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>

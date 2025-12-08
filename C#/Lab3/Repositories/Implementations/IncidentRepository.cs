@@ -14,5 +14,9 @@ namespace Repositories.Implementations
                 _context.Entry(existingPerson).CurrentValues.SetValues(entity);
             }
         }
+        public IEnumerable<Incident> GetAllTickets()
+        {
+            return _context.Set<Incident>().Include(i => i.Ticket).AsNoTracking().ToList();
+        }
     }
 }

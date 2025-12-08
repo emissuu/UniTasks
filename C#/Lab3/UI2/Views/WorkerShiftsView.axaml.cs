@@ -34,19 +34,19 @@ public partial class WorkerShiftsView : UserControl
         get => _selectedWorkerShift;
         set => _selectedWorkerShift = value;
     }
-    public void UpdateGrid()
+    private void UpdateGrid()
     {
         WorkerShifts.Clear();
         foreach (var ws in _serviceStorage._workerShiftServ.GetByEventId(_eventId))
             WorkerShifts.Add(ws);
     }
-    public void ClearButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void ClearButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         SelectedWorkerShift = null;
         ComboBoxWorker.SelectedIndex = 0;
         ComboBoxEventBlock.SelectedIndex = 0;
     }
-    public void SaveButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void SaveButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         if (SelectedWorkerShift != null)
         {
@@ -64,7 +64,7 @@ public partial class WorkerShiftsView : UserControl
             UpdateGrid();
         }
     }
-    public void AddButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void AddButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         int workerId = _serviceStorage._workerServ.GetIdByName((string)ComboBoxWorker.SelectedItem!);
         int eventBlockId = _serviceStorage._eventBlockServ.GetIdByNameAndEventId((string)ComboBoxEventBlock.SelectedItem!, _eventId);
@@ -78,7 +78,7 @@ public partial class WorkerShiftsView : UserControl
         });
         UpdateGrid();
     }
-    public void RemoveButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void RemoveButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         if (SelectedWorkerShift != null)
         {

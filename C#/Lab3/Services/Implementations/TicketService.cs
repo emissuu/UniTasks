@@ -11,6 +11,15 @@ namespace Services.Implementations
         {
             return _repo.GetAll().ToList();
         }
+        public IEnumerable<string> GetAllNamesByEventId(int eventId)
+        {
+            return _repo.GetAll().Where(t => t.EventId == eventId).Select(tt => tt.QrCode).ToList();
+        }
+        public int GetIdByQrCode(string qrCode)
+        {
+            var ticket = _repo.GetAll().FirstOrDefault(t => t.QrCode == qrCode);
+            return ticket != null ? ticket.Id : -1;
+        }
         public void Add(Data.Models.Ticket ticket)
         {
             _repo.Add(ticket);
