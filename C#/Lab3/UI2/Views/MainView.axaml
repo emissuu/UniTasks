@@ -50,7 +50,7 @@
                                         <TextBlock Text="{Binding Type}" FontSize="16" Foreground="White"/>
                                         <TextBlock Text="{Binding Resolvation}" FontSize="16" Foreground="LightGray" Margin="8,0,0,0"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,-12">
                                         <TextBlock Text="{Binding HappenedAt, StringFormat='{}{0:HH:mm}'}" Margin="0,0,4,0" FontSize="14" Foreground="LightGray"/>
 									    <TextBlock Text="{Binding Description}" FontSize="14" Foreground="LightGray" MaxLines="1"/>	
                                     </StackPanel>
