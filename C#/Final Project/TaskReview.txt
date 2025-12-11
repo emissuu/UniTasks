@@ -1,3 +1,34 @@
+Tasktivity - your productivity
+
+MainWindow
+    - Rounded corners, theme share
+    Title bar shares theme color
+    Left: Sidepanel with views
+
+    HomeView
+        Above: left - today's date, right - level info
+        
+    TaskView
+        A lot of filters and sorting controls
+
+    PreferencesView
+        Scroll: user name, theme setting
+
+    EditTaskView
+        All the editing things
+
+
+Tasks
+Small - 3 exp
+Medium - 10 exp
+Big - 30 exp
+Huge - 50 exp
+
+Level curve: exp = 11 + 4 * sqrt(level)
+
+
+
+
 Програма для управління дедлайнами
 
 Проблема:

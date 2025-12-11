@@ -31,3 +31,13 @@
 /C#/Lab3/UI/bin
 /C#/Lab3/UI2/obj
 /C#/Lab3/UI2/bin
+
+# === C#/Final Project ===
+/C#/Final Project/Tasktivity/.vs
+/C#/Final Project/Tasktivity/Tasktivity.Data/obj
+/C#/Final Project/Tasktivity/Data/bin
+/C#/Final Project/Tasktivity/Data/obj
+/C#/Final Project/Tasktivity/Repositories/bin
+/C#/Final Project/Tasktivity/Repositories/obj
+/C#/Final Project/Tasktivity/Services/bin
+/C#/Final Project/Tasktivity/Services/obj
