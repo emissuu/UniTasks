@@ -22,6 +22,8 @@ namespace Data.Models
         public string Background { get; set; }
         [Required]
         public string SubBackground { get; set; }
+        [Required]
+        public string SubSubBackground { get; set; }
 
         public virtual User? User { get; set; }
     }

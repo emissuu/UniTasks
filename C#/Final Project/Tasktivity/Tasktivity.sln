@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositorie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{DFD6F257-42DD-498E-A223-88C687E58EF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{61B23F90-2A65-46F6-AE6B-B47085A26866}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{DFD6F257-42DD-498E-A223-88C687E58EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFD6F257-42DD-498E-A223-88C687E58EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFD6F257-42DD-498E-A223-88C687E58EF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61B23F90-2A65-46F6-AE6B-B47085A26866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61B23F90-2A65-46F6-AE6B-B47085A26866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61B23F90-2A65-46F6-AE6B-B47085A26866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61B23F90-2A65-46F6-AE6B-B47085A26866}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

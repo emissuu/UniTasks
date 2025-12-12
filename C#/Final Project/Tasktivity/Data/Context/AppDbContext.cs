@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Data.Models;
+using Data.Extensions;
 
 namespace Data.Context
 {
@@ -24,7 +25,7 @@ namespace Data.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            DbInitializer.BasicInitialization(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
     }

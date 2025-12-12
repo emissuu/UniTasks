@@ -19,11 +19,11 @@ namespace Data.Extensions
             modelBuilder.Entity<Theme>().HasData(
                 new Theme() { Id = 1, Name = "Light Green", 
                     Accent = "#30AD11", Foreground = "#181818", SubForeground = "#616161",
-                    Background = "#FFFFFF", SubBackground = "#D1E0D2"
+                    Background = "#FFFFFF", SubBackground = "#D1E0D2", SubSubBackground = "#9EBDA0"
                 }
                 );
             modelBuilder.Entity<User>().HasData(
-                new User() { UserName = null, TotalExperience = 0, TasksCompleted = 0, CreatedAt = DateTime.Now, ActiveThemeId = 1}
+                new User() { Id = 1, UserName = null, TotalExperience = 0, TasksCompleted = 0, CreatedAt = DateTime.Today, ActiveThemeId = 1}
                 );
         }
     }
