@@ -46,4 +46,27 @@ public partial class MainWindow : Window
             window?.BeginMoveDrag(e);
         }
     }
+
+    private void ChangeViewButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        string tabButtonName;
+        if(sender is Button TabButton)
+        {
+            switch(TabButton.Name)
+            {
+                case "HomeTab":
+                    if (ContentArea.Content is HomeView) return;
+                    ContentArea.Content = new HomeView(ref _service, ref theme);
+                    return;
+                case "TasksTab":
+                    if (ContentArea.Content is TasksView) return;
+                    ContentArea.Content = new TasksView(ref _service, ref theme);
+                    return;
+                case "SettingsTab":
+                    if (ContentArea.Content is SettingsView) return;
+                    ContentArea.Content = new SettingsView(ref _service, ref theme);
+                    return;
+            }
+        }   
+    }
 }
