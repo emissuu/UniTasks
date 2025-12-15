@@ -2,9 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             x:Class="UI.TasksView"
+             x:Class="UI.Views.TasksView"
              xmlns:models="using:Data.Models"
-             xmlns:local="using:UI"
-             x:DataType="local:TasksView">
-    <TextBlock Text="Tasks. There are no yet, but you still have stuff to do. Right???" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding ActiveTheme.Accent}" TextWrapping="Wrap" Width="600"/>
+             xmlns:local="using:UI.Views"
+             x:DataType="local:TasksView"
+             Background="{Binding ActiveTheme.SubBackground}">
+    <Border Background="{Binding ActiveTheme.Background}" CornerRadius="12">
+        <TextBlock Text="Tasks. There are no yet, but you still have stuff to do. Right???" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding ActiveTheme.Accent}" TextWrapping="Wrap" Width="600"/>
+    </Border>
 </UserControl>

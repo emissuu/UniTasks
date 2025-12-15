@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 using Services.Implementations;
 using Services.Models;
 
-namespace UI;
+namespace UI.Views;
 
 public partial class TasksView : UserControl
 {

@@ -1,10 +1,91 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             x:Class="UI.HomeView"
+             x:Class="UI.Views.HomeView"
              xmlns:models="using:Data.Models"
-             xmlns:local="using:UI"
-             x:DataType="local:HomeView">
-  <TextBlock Text="Home, sweet home." FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding ActiveTheme.Accent}"/>
+             xmlns:local="using:UI.Views"
+             xmlns:service="using:Services.Models"
+             x:DataType="local:HomeView"
+             Background="{Binding ActiveTheme.SubBackground}">
+    <UserControl.Styles>
+		<Style Selector="Button:pointerover /template/ ContentPresenter">
+			<Setter Property="Background" Value="{Binding ActiveTheme.SubSubForeground}"/>
+			<Setter Property="Foreground" Value="{Binding ActiveTheme.Background}"/>
+        </Style>
+        <Style Selector="TextBlock.DeadlinesForeground">
+			<Setter Property="Foreground" Value="{Binding ActiveTheme.Foreground}"/>
+        </Style>
+    </UserControl.Styles>
+    <Border Background="{Binding ActiveTheme.Background}" CornerRadius="12">
+        <Grid RowDefinitions="80,*">
+		    <Grid Grid.Row="0" ColumnDefinitions="3*,*">
+			    <Border Grid.Column="0" VerticalAlignment="Stretch">
+				    <TextBlock Name="WelcomeTextBlock" Text="Welcome back!" FontSize="32" FontWeight="DemiBold" VerticalAlignment="Bottom" Margin="10" Foreground="{Binding ActiveTheme.Foreground}"/>
+                </Border>
+                <Grid Grid.Column="1" RowDefinitions="*,auto">
+                    <StackPanel Grid.Row="1" Margin="8,8,8,20">
+                        <Grid ColumnDefinitions="auto,*,auto">
+					        <TextBlock Grid.Column="0" VerticalAlignment="Bottom" Name="TextBlockLvl" Text="Lvl 0" FontWeight="DemiBold" Foreground="{Binding ActiveTheme.Foreground}"/>
+                            <TextBlock Grid.Column="2" VerticalAlignment="Bottom" Name="TextBlockExp" Text="12 / 20" FontWeight="DemiBold" Foreground="{Binding ActiveTheme.Foreground}"/>
+                        </Grid>
+                        <ProgressBar Foreground="{Binding ActiveTheme.Accent}" Value="60" Height="10"
+                                     BorderBrush="{Binding ActiveTheme.Foreground}" BorderThickness="2"/>
+                    </StackPanel> 
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" ColumnDefinitions="2*,3*">
+			    <Border Grid.Column="0" Margin="24" CornerRadius="12" Background="{Binding ActiveTheme.Background}" BorderBrush="{Binding ActiveTheme.SubBackground}" BorderThickness="3">
+					<StackPanel HorizontalAlignment="Stretch">
+						<TextBlock Text="Statistics" FontSize="28" FontWeight="DemiBold" HorizontalAlignment="Center" 
+                            Foreground="{Binding ActiveTheme.Foreground}" Margin="8"/>
+
+                        <TextBlock Text="Last week:" FontSize="22" FontWeight="DemiBold" 
+                            Foreground="{Binding ActiveTheme.Foreground}" Margin="8,8,8,0"/>
+                        <TextBlock Name="TextBlockStatsTasksWeek" Text=" - Tasks completed: 0" FontSize="16" FontWeight="DemiBold" 
+                            Foreground="{Binding ActiveTheme.Foreground}" Margin="8,4,8,0"/>
+                        <TextBlock Name="TextBlockStatsExpWeek" Text=" - Experience got: 0" FontSize="16" FontWeight="DemiBold" 
+                            Foreground="{Binding ActiveTheme.Foreground}" Margin="8,4,8,0"/>
+
+                        <TextBlock Text="All time:" FontSize="22" FontWeight="DemiBold" 
+                            Foreground="{Binding ActiveTheme.Foreground}" Margin="8,24,8,0"/>
+                        <TextBlock Name="TextBlockStatsTasksTotal" Text=" - Tasks completed: 0" FontSize="16" FontWeight="DemiBold" 
+                            Foreground="{Binding ActiveTheme.Foreground}" Margin="8,4,8,0"/>
+                        <TextBlock Name="TextBlockStatsExpTotal" Text=" - Experience got: 0" FontSize="16" FontWeight="DemiBold" 
+                            Foreground="{Binding ActiveTheme.Foreground}" Margin="8,4,8,0"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Margin="0,24,24,24" CornerRadius="12" Background="{Binding ActiveTheme.Background}" BorderBrush="{Binding ActiveTheme.SubBackground}" BorderThickness="3">
+					<Grid>
+						<StackPanel HorizontalAlignment="Stretch">
+                            <TextBlock Text="Deadlines soon" FontSize="28" FontWeight="DemiBold" HorizontalAlignment="Center" 
+                                Foreground="{Binding ActiveTheme.Foreground}" Margin="8"/>
+                            <ListBox Name="ListBoxDeadlinesSoon" Background="{Binding ActiveTheme.Background}">
+								<ListBox.ItemTemplate>
+									<DataTemplate DataType="{x:Type service:TaskPriority}">
+                                        <Border Height="60">
+											<Grid ColumnDefinitions="16,*,20">
+												<Border Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{Binding CategoryColor}" CornerRadius="8,0,0,8"/>
+                                                <Grid Grid.Column="1">
+													<TextBlock Text="{Binding Name}" Margin="5" FontSize="20" Classes="DeadlinesForeground" FontWeight="DemiBold"/>
+                                                    <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Bottom">
+														<TextBlock Text="{Binding TaskSizeName}" Width="200" Classes="DeadlinesForeground" FontWeight="DemiBold"/>
+                                                        <TextBlock Text="{Binding TimeLeft}" Classes="DeadlinesForeground" FontWeight="DemiBold"/>
+                                                    </StackPanel>
+                                                </Grid>
+													
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                        <Button Width="72" Height="72" Margin="8" CornerRadius="36" Background="{Binding ActiveTheme.Accent}" Foreground="{Binding ActiveTheme.Background}"
+                                VerticalAlignment="Bottom" HorizontalAlignment="Right">
+							<Label Content="+" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
 </UserControl>

@@ -1,6 +1,7 @@
 ﻿using System;
 using Avalonia;
 
+
 namespace UI
 {
     internal sealed class Program

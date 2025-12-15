@@ -167,6 +167,10 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("SubSubForeground")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Themes");
@@ -175,13 +179,14 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            Accent = "#30AD11",
-                            Background = "#FFFFFF",
-                            Foreground = "#181818",
+                            Accent = "#41BA4E",
+                            Background = "#ECF8ED",
+                            Foreground = "#071308",
                             Name = "Light Green",
-                            SubBackground = "#D1E0D2",
-                            SubForeground = "#616161",
-                            SubSubBackground = "#9EBDA0"
+                            SubBackground = "#CAECCE",
+                            SubForeground = "#1E5724",
+                            SubSubBackground = "#86D58E",
+                            SubSubForeground = "#2A7932"
                         });
                 });
 
@@ -218,7 +223,7 @@ namespace Data.Migrations
                         {
                             Id = 1,
                             ActiveThemeId = 1,
-                            CreatedAt = new DateTimeOffset(new DateTime(2025, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 2, 0, 0, 0)),
                             TasksCompleted = 0,
                             TotalExperience = 0
                         });

@@ -26,7 +26,7 @@ namespace UI
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow(ref _serviceStorage);
+                desktop.MainWindow = new Windows.MainWindow(ref _serviceStorage);
             }
             base.OnFrameworkInitializationCompleted();
         }

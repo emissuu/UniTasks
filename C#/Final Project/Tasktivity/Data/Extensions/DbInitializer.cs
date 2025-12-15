@@ -17,9 +17,9 @@ namespace Data.Extensions
                 new Category() { Id = 1, Name = "Uncategorized", Color = "#808080" }
                 );
             modelBuilder.Entity<Theme>().HasData(
-                new Theme() { Id = 1, Name = "Light Green", 
-                    Accent = "#30AD11", Foreground = "#181818", SubForeground = "#616161",
-                    Background = "#FFFFFF", SubBackground = "#D1E0D2", SubSubBackground = "#9EBDA0"
+                new Theme() { Id = 1, Name = "Light Green", Accent = "#41BA4E", 
+                    Foreground = "#071308", SubForeground = "#1E5724", SubSubForeground = "#2A7932",
+                    Background = "#ECF8ED", SubBackground = "#CAECCE", SubSubBackground = "#86D58E"
                 }
                 );
             modelBuilder.Entity<User>().HasData(

@@ -19,6 +19,8 @@ namespace Data.Models
         [Required]
         public string SubForeground { get; set; }
         [Required]
+        public string SubSubForeground { get; set; }
+        [Required]
         public string Background { get; set; }
         [Required]
         public string SubBackground { get; set; }

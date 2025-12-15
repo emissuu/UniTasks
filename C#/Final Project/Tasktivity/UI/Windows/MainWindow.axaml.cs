@@ -6,8 +6,9 @@ using Avalonia.Media;
 using Avalonia.VisualTree;
 using Services.Implementations;
 using Services.Models;
+using UI.Views;
 
-namespace UI;
+namespace UI.Windows;
 
 public partial class MainWindow : Window
 {
@@ -50,23 +51,45 @@ public partial class MainWindow : Window
     private void ChangeViewButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         string tabButtonName;
-        if(sender is Button TabButton)
+        if (sender is Button TabButton)
         {
-            switch(TabButton.Name)
+            switch (TabButton.Name)
             {
                 case "HomeTab":
                     if (ContentArea.Content is HomeView) return;
                     ContentArea.Content = new HomeView(ref _service, ref theme);
+                    HomeTab.Classes.Clear();
+                    HomeTab.Classes.Add("SideBarChosen");
+                    TasksTab.Classes.Clear();
+                    TasksTab.Classes.Add("SideBar");
+                    SettingsTab.Classes.Clear();
+                    SettingsTab.Classes.Add("SideBar");
                     return;
                 case "TasksTab":
                     if (ContentArea.Content is TasksView) return;
                     ContentArea.Content = new TasksView(ref _service, ref theme);
+                    TasksTab.Classes.Clear();
+                    TasksTab.Classes.Add("SideBarChosen");
+                    HomeTab.Classes.Clear();
+                    HomeTab.Classes.Add("SideBar");
+                    SettingsTab.Classes.Clear();
+                    SettingsTab.Classes.Add("SideBar");
                     return;
                 case "SettingsTab":
                     if (ContentArea.Content is SettingsView) return;
                     ContentArea.Content = new SettingsView(ref _service, ref theme);
+                    SettingsTab.Classes.Clear();
+                    SettingsTab.Classes.Add("SideBarChosen");
+                    HomeTab.Classes.Clear();
+                    HomeTab.Classes.Add("SideBar");
+                    TasksTab.Classes.Clear();
+                    TasksTab.Classes.Add("SideBar");
                     return;
             }
-        }   
+        }
+    }
+
+    private void MinimizeButton_ActualThemeVariantChanged(object? sender, System.EventArgs e)
+    {
     }
 }
