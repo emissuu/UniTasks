@@ -14,5 +14,20 @@ namespace Repositories.Implementations
                 _context.Entry(existingEntity).CurrentValues.SetValues(entity);
             }
         }
+        public IEnumerable<Data.Models.Task> GetAllSizes()
+        {
+            return _dbSet
+                .AsNoTracking()
+                .Include(x => x.Size)
+                .ToList();
+        }
+        public IEnumerable<Data.Models.Task> GetAllSizesCategories()
+        {
+            return _dbSet
+                .AsNoTracking()
+                .Include(t => t.Size)
+                .Include(t => t.Category)
+                .ToList();
+        }
     }
 }

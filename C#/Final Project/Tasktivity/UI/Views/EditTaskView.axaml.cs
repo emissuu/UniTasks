@@ -2,16 +2,17 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Services.Implementations;
-using Services.Models;
 
 namespace UI.Views;
 
-public partial class SettingsView : UserControl
+public partial class EditTaskView : UserControl
 {
     private ServiceStorage _service;
-    public SettingsView(ref ServiceStorage serviceStorage)
+    private int _taskId;
+    public EditTaskView(ref ServiceStorage service, int taskId)
     {
-        _service = serviceStorage;
+        _service = service;
+        _taskId = taskId;
         InitializeComponent();
         DataContext = this;
     }

@@ -8,7 +8,10 @@ namespace Repositories.Implementations
         public UserRepository(DbContext context) : base(context) { }
         public User Get()
         {
-            return _dbSet.Include(u => u.ActiveTheme).ToList()[0];
+            return _dbSet
+                .AsNoTracking()
+                .Include(u => u.ActiveTheme)
+                .ToList()[0];
         }
         public override void Update(User entity)
         {

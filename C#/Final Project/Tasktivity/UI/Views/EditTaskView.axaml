@@ -1,13 +1,12 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             x:Class="UI.Views.SettingsView"
+              x:Class="UI.Views.EditTaskView"
              xmlns:models="using:Data.Models"
              xmlns:local="using:UI.Views"
-             x:DataType="local:SettingsView"
+             x:DataType="local:EditTaskView"
              Background="{DynamicResource ThemeSubBackground}">
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="12">
-        <TextBlock Text="Do all the setting stuff here. No where else, okay????" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeAccent}"/>
+        <TextBlock Text="Edit tasks, go on EDIT THEM!!!!" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeAccent}"/>
     </Border>
 </UserControl>

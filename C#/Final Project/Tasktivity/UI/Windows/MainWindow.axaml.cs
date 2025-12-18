@@ -1,11 +1,12 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Data;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.Threading;
 using Avalonia.VisualTree;
 using Services.Implementations;
 using Services.Models;
+using System;
 using UI.Views;
 
 namespace UI.Windows;
@@ -14,16 +15,45 @@ public partial class MainWindow : Window
 {
     internal static MainWindow Instance { get; private set; }
     private ServiceStorage _service;
-    private ThemeColors theme;
-    public ThemeColors ActiveTheme { get { return theme; } set { theme = value; } }
+    private ThemeColors _theme;
+    private DispatcherTimer _timer;
+    private string _currentDate;
     public MainWindow(ref ServiceStorage serviceStorage)
     {
         Instance = this;
         _service = serviceStorage;
-        ActiveTheme = _service._userServ.GetCurrentTheme();
+        {
+            _timer = new DispatcherTimer() { Interval = TimeSpan.FromMinutes(2) };
+            _timer.Tick += (sender, e) => { UpdateDate(); };
+            _timer.Start();
+        }
         InitializeComponent();
         DataContext = this;
-        ContentArea.Content = new HomeView(ref _service, ref theme);
+        ContentArea.Content = new HomeView(ref _service);
+        UpdateDate();
+        UpdateTheme();
+    }
+    private void UpdateDate() => CurrentDate = $"- {DateTime.Now:dddd, MMMM d, yyyy} -";
+    public void UpdateTheme()
+    {
+        _theme = _service._userServ.GetCurrentTheme();
+        Application.Current.Resources["ThemeAccent"] = _theme.Accent.Color;
+        Application.Current.Resources["ThemeForeground"] = _theme.Foreground.Color;
+        Application.Current.Resources["ThemeSubForeground"] = _theme.SubForeground.Color;
+        Application.Current.Resources["ThemeSubSubForeground"] = _theme.SubSubForeground.Color;
+        Application.Current.Resources["ThemeBackground"] = _theme.Background.Color;
+        Application.Current.Resources["ThemeSubBackground"] = _theme.SubBackground.Color;
+        Application.Current.Resources["ThemeSubSubBackground"] = _theme.SubSubBackground.Color;
+    }
+    public string CurrentDate
+    {
+        get => _currentDate;
+        set
+        {
+            if (value != _currentDate)
+                _currentDate = value;
+            TitleBarDate.Text = CurrentDate;
+        }
     }
 
     private void MinimizeButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -57,7 +87,7 @@ public partial class MainWindow : Window
             {
                 case "HomeTab":
                     if (ContentArea.Content is HomeView) return;
-                    ContentArea.Content = new HomeView(ref _service, ref theme);
+                    ContentArea.Content = new HomeView(ref _service);
                     HomeTab.Classes.Clear();
                     HomeTab.Classes.Add("SideBarChosen");
                     TasksTab.Classes.Clear();
@@ -67,7 +97,7 @@ public partial class MainWindow : Window
                     return;
                 case "TasksTab":
                     if (ContentArea.Content is TasksView) return;
-                    ContentArea.Content = new TasksView(ref _service, ref theme);
+                    ContentArea.Content = new TasksView(ref _service);
                     TasksTab.Classes.Clear();
                     TasksTab.Classes.Add("SideBarChosen");
                     HomeTab.Classes.Clear();
@@ -77,7 +107,7 @@ public partial class MainWindow : Window
                     return;
                 case "SettingsTab":
                     if (ContentArea.Content is SettingsView) return;
-                    ContentArea.Content = new SettingsView(ref _service, ref theme);
+                    ContentArea.Content = new SettingsView(ref _service);
                     SettingsTab.Classes.Clear();
                     SettingsTab.Classes.Add("SideBarChosen");
                     HomeTab.Classes.Clear();

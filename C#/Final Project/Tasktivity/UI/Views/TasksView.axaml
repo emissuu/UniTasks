@@ -6,8 +6,175 @@
              xmlns:models="using:Data.Models"
              xmlns:local="using:UI.Views"
              x:DataType="local:TasksView"
-             Background="{Binding ActiveTheme.SubBackground}">
-    <Border Background="{Binding ActiveTheme.Background}" CornerRadius="12">
-        <TextBlock Text="Tasks. There are no yet, but you still have stuff to do. Right???" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{Binding ActiveTheme.Accent}" TextWrapping="Wrap" Width="600"/>
+             xmlns:service="using:Services.Models"
+             Background="{DynamicResource ThemeSubBackground}">
+    <UserControl.Styles>
+		<Style Selector="Button:pointerover /template/ ContentPresenter">
+			<Setter Property="Background" Value="{DynamicResource ThemeSubSubForeground}"/>
+			<Setter Property="Foreground" Value="{DynamicResource ThemeBackground}"/>
+        </Style>
+        <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="CheckBox">
+            <Style Selector="^:unchecked /template/ Border#NormalRectangle">
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeBackground}"/>
+                <Setter Property="BorderThickness" Value="2"/>    
+                <Setter Property="Background" Value="{DynamicResource ThemeBackground}"/>
+            </Style>
+            <Style Selector="^:checked">
+                <Style Selector="^ /template/ Border#NormalRectangle">
+                    <Setter Property="Background" Value="Transparent"/>	
+                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeForeground}"/>
+                    <Setter Property="BorderThickness" Value="0"/>    
+                </Style>
+                <Style Selector="^ /template/ Path#CheckGlyph">
+                    <Setter Property="Height" Value="20"/>
+                    <Setter Property="Width" Value="20"/>
+                </Style>
+            </Style>
+        </Style>
+        <Style Selector="Expander">
+			<Style Selector="^ /template/ ToggleButton#ExpanderHeader">
+                <Setter Property="Padding" Value="-1"/>
+				<Setter Property="Background" Value="Transparent"/>
+                <Style Selector="^:pointerover">
+                    <Style Selector="^ /template/ Border">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                </Style>
+                <Style Selector="^ /template/ Path#ExpandCollapseChevron">
+                    <Setter Property="Fill" Value="{DynamicResource ThemeForeground}"/>
+                </Style>
+            </Style>
+            <Style Selector="^ /template/ Border#ExpanderContent">
+				<Setter Property="Background" Value="Blue"/>
+            </Style>
+        </Style>
+        <Style Selector="TextBox">
+			<Setter Property="Background" Value="{DynamicResource ThemeBackground}"/>
+			<Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
+			<Setter Property="BorderBrush" Value="{DynamicResource ThemeSubSubBackground}"/>
+			<Setter Property="BorderThickness" Value="2"/>
+			<Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="CaretBrush" Value="{DynamicResource ThemeForeground}"/>
+            <Setter Property="SelectionBrush" Value="{DynamicResource ThemeAccent}"/>
+            <Style Selector="^:pointerover">
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
+                <Style Selector="^ /template/ Border#PART_BorderElement">
+                    <Setter Property="Background" Value="{DynamicResource ThemeBackground}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeSubSubBackground}"/>
+                </Style>
+                <Style Selector="^ /template/ TextBlock#PART_Watermark">
+                    <Setter Property="Foreground" Value="{DynamicResource ThemeSubSubBackground}"/>
+                </Style>
+            </Style>
+            <Style Selector="^:focus">
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
+                <Style Selector="^ /template/ Border#PART_BorderElement">
+                    <Setter Property="Background" Value="{DynamicResource ThemeBackground}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeSubSubBackground}"/>
+                </Style>
+                <Style Selector="^ /template/ TextBlock#PART_Watermark">
+                    <Setter Property="Foreground" Value="{DynamicResource ThemeSubSubBackground}"/>
+                </Style>
+            </Style>
+            <Style Selector="^ /template/ TextBlock#PART_Watermark">
+                <Setter Property="Foreground" Value="{DynamicResource ThemeSubSubBackground}"/>
+            </Style>
+        </Style>
+        <Style Selector="ComboBox">
+			<Setter Property="Background" Value="{DynamicResource ThemeBackground}"/>
+			<Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
+			<Setter Property="BorderBrush" Value="{DynamicResource ThemeSubSubBackground}"/>
+			<Setter Property="BorderThickness" Value="2"/>
+			<Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Style Selector="^:pointerover">
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
+                <Style Selector="^ /template/ Border#Background">
+                    <Setter Property="Background" Value="{DynamicResource ThemeBackground}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeSubSubBackground}"/>
+                </Style>
+                <Style Selector="^ /template/ PathIcon#DropDownGlyph">
+                    <Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
+                </Style>
+            </Style>
+            <Style Selector="^:dropdownopen">
+                <Style Selector="^ /template/ Border#Background">
+                    <Setter Property="Background" Value="{DynamicResource ThemeBackground}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeSubSubBackground}"/>
+                </Style>
+                <Style Selector="^ /template/ PathIcon#DropDownGlyph">
+                    <Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
+                </Style>
+            </Style>
+            <Style Selector="^:not(:empty) /template/ PathIcon#DropDownGlyph">
+				<Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
+            </Style>
+        </Style>
+        <Style Selector="ComboBoxItem">
+			
+        </Style>
+    </UserControl.Styles>
+    <Border Background="{DynamicResource ThemeBackground}" CornerRadius="12">
+        <Grid RowDefinitions="44,*">
+			<Border Grid.Row="0" BorderBrush="{DynamicResource ThemeSubBackground}" BorderThickness="0,0,0,3">
+                <Grid ColumnDefinitions="auto,*,auto">
+                    <TextBlock Grid.Column="0" Text="Tasks" Margin="4,6,4,4" VerticalAlignment="Center"
+                                   FontSize="24" FontWeight="DemiBold" Foreground="{DynamicResource ThemeForeground}"/> 
+					<StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <TextBlock Text="Sort by" Margin="4,4,4,0" VerticalAlignment="Center" FontWeight="DemiBold" Foreground="{DynamicResource ThemeForeground}"/>
+                        <ComboBox Name="ComboBoxSortingProperty" Width="128" Margin="4,4,4,0" SelectedIndex="0">
+							<ComboBoxItem Content="When to"/>
+                            <ComboBoxItem Content="Task size"/>
+                            <ComboBoxItem Content="Name"/>
+                            <ComboBoxItem Content="Completion"/>
+                        </ComboBox>
+                        <ComboBox Name="ComboBoxSortingOrder" Width="128" Margin="4,4,4,0" SelectedIndex="0">
+							<ComboBoxItem Content="Descending"/>
+                            <ComboBoxItem Content="Ascending"/>
+                        </ComboBox>
+                        <ComboBox Name="ComboBoxCategory" Width="168" Margin="4,4,4,0"/>
+					    <TextBox Name="TextBoxSearch" Width="280" Margin="4" Watermark="Search"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Grid Grid.Row="1" ColumnDefinitions="*,3*,*">
+				<Border Grid.Column="1" BorderBrush="{DynamicResource ThemeSubBackground}" BorderThickness="3,0,3,0">
+				    <ListBox Name="ListBoxTasks" Background="{DynamicResource ThemeBackground}">
+                        <ListBox.ItemTemplate>
+							<DataTemplate DataType="{x:Type service:TaskPriority}">
+                                <Border CornerRadius="12" BorderBrush="{Binding CategoryColor}" BorderThickness="2" Margin="-8">
+                                    <Expander ExpandDirection="Down" Background="{DynamicResource ThemeBackground}" HorizontalAlignment="Stretch">
+                                        <Expander.Header>
+											<Grid ColumnDefinitions="42,*" Height="60">
+										        <Border Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{Binding CategoryColor}" CornerRadius="8,0,0,8">
+											        <CheckBox IsChecked="{Binding IsCompleted}" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                                <Grid Grid.Column="1">
+											        <TextBlock Text="{Binding Name}" Margin="5" FontSize="20" Foreground="{DynamicResource ThemeForeground}" FontWeight="DemiBold"/>
+                                                    <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Bottom">
+												        <TextBlock Text="{Binding Size.Name}" Width="200" Foreground="{DynamicResource ThemeForeground}" FontWeight="DemiBold"/>
+                                                        <TextBlock Text="{Binding TimeLeft}" Foreground="{DynamicResource ThemeForeground}" FontWeight="DemiBold"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Grid>
+                                        </Expander.Header>
+                                        <TextBox Height="180" BorderBrush="{DynamicResource ThemeSubSubForeground}" CornerRadius="8" BorderThickness="2" Margin="-16,-12,-16,-16" Background="Transparent"/>
+                                    </Expander>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
+                <Button Grid.Column="2" Width="72" Height="72" Margin="8" CornerRadius="36" Background="{DynamicResource ThemeAccent}" Foreground="Transparent"
+                                VerticalAlignment="Bottom" HorizontalAlignment="Right">
+					<Label Content="+" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+            </Grid>
+        </Grid>
     </Border>
 </UserControl>

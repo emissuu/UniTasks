@@ -13,5 +13,27 @@ namespace Services.Implementations
         {
             return new ThemeColors(_repo.Get().ActiveTheme);
         }
+        public User GetUser() => _repo.Get();
+        public int[] GetExperience()
+        {
+            int exp = _repo.Get().TotalExperience;
+            Func<int, double> formula = lvl => 11 + 4 * Math.Sqrt(lvl);
+            int lvl = 0, total = 0;
+            while (true)
+            {
+                int expLoss = (int)Math.Floor(formula(lvl + 1));
+                if (exp - expLoss >= 0)
+                {
+                    exp -= expLoss;
+                    lvl++;
+                }
+                else
+                {
+                    total = expLoss;
+                    break;
+                }
+            }
+            return [lvl, exp, total];
+        }
     }
 }

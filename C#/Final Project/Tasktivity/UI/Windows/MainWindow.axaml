@@ -7,26 +7,23 @@
         xmlns:models="using:Data.Models"
         xmlns:local="using:UI.Windows"
         x:DataType="local:MainWindow"
+        Title="Tasktivity"
         Icon="/Assets/Logo.png">
-    <Window.Resources>
-		<SolidColorBrush x:Key="ButtonHoverBackground" Color="{Binding ActiveTheme.SubSubBackground}"/>
-		<SolidColorBrush x:Key="ButtonHoverForeground" Color="{Binding ActiveTheme.Foreground}"/>
-    </Window.Resources>
     <Window.Styles>
 		<Style Selector="Button.TitleBar:pointerover /template/ ContentPresenter">
-			<Setter Property="Background" Value="{Binding ActiveTheme.SubSubBackground}"/>
-            <Setter Property="Foreground" Value="{Binding ActiveTheme.Foreground}"/>
+			<Setter Property="Background" Value="{DynamicResource ThemeSubSubBackground}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
         </Style>
         <Style Selector="Button.SideBar:pointerover /template/ ContentPresenter">
-			<Setter Property="Background" Value="{Binding ActiveTheme.Background}"/>
+			<Setter Property="Background" Value="{DynamicResource ThemeBackground}"/>
         </Style>
         <Style Selector="Button.SideBarChosen /template/ ContentPresenter">
-	        <Setter Property="Background" Value="{Binding ActiveTheme.Background}"/>
+	        <Setter Property="Background" Value="{DynamicResource ThemeBackground}"/>
         </Style>
     </Window.Styles>
-    <Border CornerRadius="16" Background="{Binding ActiveTheme.SubBackground}">
+    <Border CornerRadius="16" Background="{DynamicResource ThemeSubBackground}">
         <DockPanel>
-            <Border Height="32" CornerRadius="16,0" Background="{Binding ActiveTheme.SubBackground}" DockPanel.Dock="Top">
+            <Border Height="32" CornerRadius="16,0" Background="{DynamicResource ThemeSubBackground}" DockPanel.Dock="Top">
 				<Grid ColumnDefinitions="Auto,*,Auto">
                     <StackPanel Orientation="Horizontal" Grid.Column="0">
                         
@@ -36,28 +33,28 @@
 			            c1.2,1.1,2,1.8,2.7,2.6l6.8-7.2c-3.8-3.6-5.3-9.2-3.3-14.4c2.6-6.8,10.3-10.2,17.2-7.6c5.2,2,8.4,6.8,8.5,12L59.9,41.7z
 
                         M48.4,79 57,84.9 62.8,76.4 90.4,35.9 81.9,30.1 54.3,70.7 32.7,55.9 26.9,64.4 51.5,81.1"
-                        Foreground="{Binding ActiveTheme.Foreground}" Margin="4,3,2,5"/>
-                        <TextBlock Text="Tasktivity" FontSize="16" FontWeight="Bold" Foreground="{Binding ActiveTheme.Foreground}" VerticalAlignment="Center"/>
+                        Foreground="{DynamicResource ThemeForeground}" Margin="4,3,2,5"/>
+                        <TextBlock Text="Tasktivity" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ThemeForeground}" VerticalAlignment="Center"/>
                     </StackPanel>
                     <Border Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" PointerPressed="Border_PointerPressed">
 						<TextBlock Name="TitleBarDate" Text="- Monday, December 1 2025 -" FontSize="14" FontWeight="DemiBold" 
-                        VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding ActiveTheme.SubSubForeground}"/>
+                        VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeSubSubForeground}"/>
                     </Border>
                     <StackPanel Orientation="Horizontal" Grid.Column="2">
                         <Button Name="MinimizeButton" Classes="TitleBar" FontSize="16" Width="36" Margin="0,-1,0,0" Padding="0,1,0,0" CornerRadius="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                        Click="MinimizeButton_Click" Background="{Binding ActiveTheme.SubBackground}" Foreground="{Binding ActiveTheme.Foreground}">
+                        Click="MinimizeButton_Click" Background="{DynamicResource ThemeSubBackground}" Foreground="{DynamicResource ThemeForeground}">
                             <Button.Content>
 								<TextBlock Text="–" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Button.Content>
                         </Button>
                         <Button Name="MaximizeButton" Classes="TitleBar" FontSize="16" Width="36" Margin="0,-1,0,0" Padding="0,2,0,0" CornerRadius="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                        Click="MaximizeButton_Click" Background="{Binding ActiveTheme.SubBackground}" Foreground="{Binding ActiveTheme.Foreground}">
+                        Click="MaximizeButton_Click" Background="{DynamicResource ThemeSubBackground}" Foreground="{DynamicResource ThemeForeground}">
                             <Button.Content>
 								<TextBlock Text="▢" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Button.Content>
                         </Button>
 						<Button Name="CloseButton" Content="✕" FontWeight="Bold" FontSize="16" Width="36" Margin="0,-1,-1,0" CornerRadius="0,16,0,0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                        Click="CloseButton_Click" Background="{Binding ActiveTheme.SubBackground}" Foreground="{Binding ActiveTheme.Foreground}">
+                        Click="CloseButton_Click" Background="{DynamicResource ThemeSubBackground}" Foreground="{DynamicResource ThemeForeground}">
                             <Button.Styles>
                                 <Style Selector="Button#CloseButton:pointerover /template/ ContentPresenter">
                                     <Setter Property="Background" Value="#CF1919"/>
@@ -68,30 +65,30 @@
                     </StackPanel>
                 </Grid>
             </Border>
-            <Border Margin="4,0,4,4" Background="{Binding ActiveTheme.Background}" CornerRadius="6,12">
+            <Border Margin="4,0,4,4" Background="{DynamicResource ThemeBackground}" CornerRadius="6,12">
 			    <Grid ColumnDefinitions="64,*">
-                    <Border Grid.Column="0" Background="{Binding ActiveTheme.SubBackground}">
+                    <Border Grid.Column="0" Background="{DynamicResource ThemeSubBackground}">
 						<Grid RowDefinitions="2*,auto,3*">
                             <Border Grid.Row="1">
 								<StackPanel>
-                                    <Button Name="HomeTab" Classes="SideBarChosen" CornerRadius="12,0,0,12" Margin="0,0,-1,0" HorizontalAlignment="Stretch" Background="{Binding ActiveTheme.SubBackground}" Click="ChangeViewButton_Click">
+                                    <Button Name="HomeTab" Classes="SideBarChosen" CornerRadius="12,0,0,12" Margin="0,0,-1,0" HorizontalAlignment="Stretch" Background="{DynamicResource ThemeSubBackground}" Click="ChangeViewButton_Click">
                                         <StackPanel>
                                             <PathIcon Data="M23.8,46.5h-11c-0.4,0-0.6-0.5-0.3-0.7l36.3-29.1c0.7-0.6,1.7-0.6,2.4,0l36.3,29.1c0.3,0.2,0.1,0.7-0.3,0.7h-11c-0.6,0-1.1,0.5-1.1,1.1v34.7c0,0.8-0.7,1.5-1.5,1.5H26.4c-0.8,0-1.5-0.7-1.5-1.5V47.5C24.9,46.9,24.4,46.5,23.8,46.5z M57.7,51.1H42.3c-0.8,0-1.5,0.7-1.5,1.5v31.1h18.4V52.6C59.2,51.8,58.5,51.1,57.7,51.1z" 
-                                            Width="44" Height="44" Margin="0,4,0,0" Foreground="{Binding ActiveTheme.SubSubForeground}"/>
-                                            <TextBlock Text="Home" HorizontalAlignment="Center" FontSize="12" Foreground="{Binding ActiveTheme.SubSubForeground}" Margin="0,0,0,4"/>
+                                            Width="44" Height="44" Margin="0,4,0,0" Foreground="{DynamicResource ThemeSubSubForeground}"/>
+                                            <TextBlock Text="Home" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource ThemeSubSubForeground}" Margin="0,0,0,4"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button Name="TasksTab" Classes="SideBar" CornerRadius="12,0,0,12" Margin="0,0,-1,0" HorizontalAlignment="Stretch" Background="{Binding ActiveTheme.SubBackground}" Click="ChangeViewButton_Click">
+                                    <Button Name="TasksTab" Classes="SideBar" CornerRadius="12,0,0,12" Margin="0,0,-1,0" HorizontalAlignment="Stretch" Background="{DynamicResource ThemeSubBackground}" Click="ChangeViewButton_Click">
                                         <StackPanel>
                                             <PathIcon Data="M70.3,82.8H29.7c-6.9,0-12.5-5.6-12.5-12.5V29.7c0-6.9,5.6-12.5,12.5-12.5h40.5c6.9,0,12.5,5.6,12.5,12.5v40.5C82.8,77.2,77.2,82.8,70.3,82.8z
                                             M61.1,33.9c-4.7,8.8-9.4,17.7-14.1,26.5c-0.7,1.2-1.3,2.5-2,3.7c1.1-0.1,2.2-0.3,3.3-0.4
                                             c-3.2-3.1-6.5-6.1-9.7-9.2c-1.9-1.8-4.9,1.1-2.9,2.9c3.2,3.1,6.5,6.1,9.7,9.2c0.9,0.9,2.6,0.8,3.3-0.4
                                             c4.7-8.8,9.4-17.7,14.1-26.5c0.7-1.2,1.3-2.5,2-3.7C65.9,33.6,62.4,31.5,61.1,33.9L61.1,33.9z"    
-                                            Width="36" Height="36" Margin="0,4,0,2" Foreground="{Binding ActiveTheme.SubSubForeground}"/>
-                                            <TextBlock Text="Tasks" HorizontalAlignment="Center" FontSize="12" Foreground="{Binding ActiveTheme.SubSubForeground}" Margin="0,0,0,0"/>
+                                            Width="36" Height="36" Margin="0,4,0,2" Foreground="{DynamicResource ThemeSubSubForeground}"/>
+                                            <TextBlock Text="Tasks" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource ThemeSubSubForeground}" Margin="0,0,0,0"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button Name="SettingsTab" Classes="SideBar" CornerRadius="12,0,0,12" Margin="0,0,-1,0" HorizontalAlignment="Stretch" Background="{Binding ActiveTheme.SubBackground}" Click="ChangeViewButton_Click">
+                                    <Button Name="SettingsTab" Classes="SideBar" CornerRadius="12,0,0,12" Margin="0,0,-1,0" HorizontalAlignment="Stretch" Background="{DynamicResource ThemeSubBackground}" Click="ChangeViewButton_Click">
                                         <StackPanel>
                                             <PathIcon Data="M50,30.8c10.6,0,19.2,8.6,19.2,19.2c-1,25.5-37.4,25.5-38.4,0C30.8,39.4,39.4,30.8,50,30.8z
                                             M42.9,86.2l-0.4-3c-0.1-0.8-0.6-1.5-1.4-1.8l-6.8-2.8c-0.8-0.3-1.6-0.2-2.2,0.3l-2.4,1.9
@@ -103,8 +100,8 @@
 			                                c0.3,0.7,1,1.3,1.8,1.3l3,0.3c1.1,0.1,2,1.1,2,2.2l0.1,10.2c0,1.1-0.8,2.1-1.9,2.2l-3,0.4c-0.8,0.1-1.5,0.6-1.8,1.4l-2.8,6.8
 			                                c-0.3,0.8-0.2,1.6,0.3,2.2l1.9,2.3c0.7,0.9,0.6,2.2-0.2,2.9l-7.2,7.2c-0.8,0.8-2.1,0.9-2.9,0.2l-2.4-1.8c-0.6-0.5-1.5-0.6-2.2-0.3
 			                                l-6.8,2.8c-0.7,0.3-1.3,1-1.3,1.8l-0.3,3c-0.1,1.1-1.1,2-2.2,2l-10.2,0.1C44,88.2,43.1,87.3,42.9,86.2z" 
-                                            Width="40" Height="40" Margin="0,4,0,2" Foreground="{Binding ActiveTheme.SubSubForeground}"/>
-                                            <TextBlock Text="Settings" HorizontalAlignment="Center" FontSize="12" Foreground="{Binding ActiveTheme.SubSubForeground}" Margin="0,0,0,4"/>
+                                            Width="40" Height="40" Margin="0,4,0,2" Foreground="{DynamicResource ThemeSubSubForeground}"/>
+                                            <TextBlock Text="Settings" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource ThemeSubSubForeground}" Margin="0,0,0,4"/>
                                         </StackPanel>
                                     </Button>
                                 </StackPanel>
