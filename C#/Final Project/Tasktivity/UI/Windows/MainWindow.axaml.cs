@@ -33,6 +33,7 @@ public partial class MainWindow : Window
         UpdateDate();
         UpdateTheme();
     }
+    public ThemeColors Theme { get => _theme; }
     private void UpdateDate() => CurrentDate = $"- {DateTime.Now:dddd, MMMM d, yyyy} -";
     public void UpdateTheme()
     {

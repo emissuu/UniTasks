@@ -29,7 +29,7 @@ namespace Services.Models
         }
         public int HoursLeft
         {
-            get { return WhenTo.Hour - DateTimeOffset.Now.Hour; }
+            get { return (int)Math.Floor((WhenTo - DateTimeOffset.UtcNow).TotalHours); }
         }
         public string TimeLeft
         {
