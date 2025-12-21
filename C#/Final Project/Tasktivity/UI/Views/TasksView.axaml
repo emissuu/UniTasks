@@ -9,9 +9,17 @@
              xmlns:service="using:Services.Models"
              Background="{DynamicResource ThemeSubBackground}">
     <UserControl.Styles>
-		<Style Selector="Button:pointerover /template/ ContentPresenter">
-			<Setter Property="Background" Value="{DynamicResource ThemeSubSubForeground}"/>
-			<Setter Property="Foreground" Value="{DynamicResource ThemeBackground}"/>
+		<Style Selector="Button">
+            <Style Selector="^:pointerover /template/ ContentPresenter">
+			    <Setter Property="Background" Value="{DynamicResource ThemeSubSubForeground}"/>
+			    <Setter Property="Foreground" Value="{DynamicResource ThemeBackground}"/>
+            </Style>
+            <Style Selector="^.Edit">
+				<Style Selector="^:pointerover /template/ ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource ThemeSubSubBackground}"/>
+			        <Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
+                </Style>
+            </Style>
         </Style>
         <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
 			<Setter Property="Background" Value="Transparent"/>
@@ -102,15 +110,6 @@
                     <Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
                 </Style>
             </Style>
-            <!--<Style Selector="^:dropdownopen">
-                <Style Selector="^ /template/ Border#Background">
-                    <Setter Property="Background" Value="{DynamicResource ThemeBackground}"/>
-                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeSubSubBackground}"/>
-                </Style>
-                <Style Selector="^ /template/ PathIcon#DropDownGlyph">
-                    <Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
-                </Style>
-            </Style>-->
             <Style Selector="^:not(:empty) /template/ PathIcon#DropDownGlyph">
 				<Setter Property="Foreground" Value="{DynamicResource ThemeForeground}"/>
             </Style>
@@ -144,7 +143,7 @@
             </Style>
         </Style>
     </UserControl.Styles>
-    <Border Background="{DynamicResource ThemeBackground}" CornerRadius="12">
+    <Border Background="{DynamicResource ThemeBackground}" CornerRadius="12" Name="MainBorder">
         <Grid RowDefinitions="44,*">
 			<Border Grid.Row="0" BorderBrush="{DynamicResource ThemeSubBackground}" BorderThickness="0,0,0,3">
                 <Grid ColumnDefinitions="auto,*,auto">
@@ -186,7 +185,7 @@
                                         <Expander.Header>
 											<Grid ColumnDefinitions="42,*" Height="60">
 										        <Border Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{Binding CategoryColor}" CornerRadius="8,0,0,8">
-											        <CheckBox IsChecked="{Binding IsCompleted}" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+											        <CheckBox IsChecked="{Binding IsCompleted}" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CheckBoxComplete_IsCheckedChanged"/>
                                                 </Border>
                                                 <Grid Grid.Column="1">
 											        <TextBlock Text="{Binding Name}" Margin="5" FontSize="20" Foreground="{DynamicResource ThemeForeground}" FontWeight="DemiBold"/>
@@ -194,11 +193,13 @@
 												        <TextBlock Text="{Binding Size.Name}" Width="200" Foreground="{DynamicResource ThemeForeground}" FontWeight="DemiBold"/>
                                                         <TextBlock Text="{Binding TimeLeft}" Foreground="{DynamicResource ThemeForeground}" FontWeight="DemiBold"/>
                                                     </StackPanel>
+                                                    <Button VerticalAlignment="Center" Margin="0" Content="Edit" HorizontalAlignment="Right" Background="{DynamicResource ThemeBackground}" Classes="Edit"
+                                                            BorderBrush="{DynamicResource ThemeSubBackground}" BorderThickness="3" Foreground="{DynamicResource ThemeForeground}" Click="ButtonEditTask_Click"/>
                                                 </Grid>
                                             </Grid>
                                         </Expander.Header>
                                         <TextBox Height="180" Text="{Binding Notes}" BorderBrush="{DynamicResource ThemeSubSubForeground}" CornerRadius="8" BorderThickness="2" Margin="-16,-12,-16,-16" Background="Transparent" 
-                                                 AcceptsReturn="True" AcceptsTab="True" IsUndoEnabled="True" TextWrapping="Wrap"/>
+                                                 AcceptsReturn="True" AcceptsTab="True" IsUndoEnabled="True" TextWrapping="Wrap" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown"/>
                                     </Expander>
                                 </Border>
                             </DataTemplate>
@@ -206,10 +207,11 @@
                     </ListBox>
                 </Border>
                 <Button Grid.Column="2" Width="72" Height="72" Margin="8" CornerRadius="36" Background="{DynamicResource ThemeAccent}" Foreground="{DynamicResource ThemeBackground}"
-                                VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                                VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="ButtonNewTask_Click">
 					<Label Content="+" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
             </Grid>
+            <Popup Grid.RowSpan="2" Name="EditPopup" Height="520" Width="640" PlacementTarget="{Binding #MainBorder}" Placement="Center" Closed="EditPopup_Closed"/>
         </Grid>
     </Border>
 </UserControl>

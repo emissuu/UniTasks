@@ -4,6 +4,7 @@ using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Data.Models;
 using Services.Implementations;
 using Services.Models;
@@ -24,7 +25,6 @@ public partial class HomeView : UserControl
     }
     private void Update()
     {
-        UpdateListBoxDeadlines();
         UpdateWelcomeMessage();
         UpdateLvl();
         UpdateStats();
@@ -70,18 +70,37 @@ public partial class HomeView : UserControl
             t.Size.Id == 3 && (t.WhenTo - DateTime.Now).TotalDays <= 7 ||
             t.Size.Id == 4 && (t.WhenTo - DateTime.Now).TotalDays <= 11
             )).OrderByDescending(t => t.WhenTo).ToList();
+        ListBoxDeadlinesSoon.Items.Clear();
         foreach (TaskPriority task in tasks)
         {
             ListBoxDeadlinesSoon.Items.Add(task);
         }
     }
 
-    private void UpdateListBoxDeadlines()
+    private void CheckBoxComplete_IsCheckedChanged(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        ListBoxDeadlinesSoon.Items.Clear();
-        foreach (var task in Tasks)
+        if (ListBoxDeadlinesSoon.Items.Count == 0) return;
+        TaskPriority task = (sender as CheckBox)?.DataContext as TaskPriority;
+        task.IsCompleted = (bool)(sender as CheckBox)?.IsChecked;
+        Task origTask = _service._taskServ.GetById(task.Id);
+        origTask.CompletedAt = task.CompletedAt;
+        if (!origTask.IsExpAcquired)
         {
-            ListBoxDeadlinesSoon.Items.Add(task);
+            _service._userServ.AddExp(task.Size.Experience);
+            origTask.IsExpAcquired = true;
         }
+        _service._taskServ.Update(origTask);
+        Update();
+    }
+
+    private void ButtonNewTask_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        EditPopup.Child = new EditTaskView(ref _service, ref EditPopup, null);
+        EditPopup.IsOpen = true;
+    }
+
+    private void EditPopup_Closed(object? sender, EventArgs e)
+    {
+        UpdateTaskList();
     }
 }

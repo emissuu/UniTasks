@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Implementations;
 
 namespace Services.Implementations
@@ -7,5 +8,6 @@ namespace Services.Implementations
     {
         private readonly TaskSizeRepository _repo;
         public TaskSizeService(TaskSizeRepository repo) => _repo = repo;
+        public IEnumerable<TaskSize> GetAll() => _repo.GetAll();
     }
 }

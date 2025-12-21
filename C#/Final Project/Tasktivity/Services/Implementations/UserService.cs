@@ -35,5 +35,12 @@ namespace Services.Implementations
             }
             return [lvl, exp, total];
         }
+        public void AddExp(int exp)
+        {
+            User user = _repo.Get();
+            user.TotalExperience += exp;
+            user.TasksCompleted++;
+            _repo.Update(user);
+        }
     }
 }

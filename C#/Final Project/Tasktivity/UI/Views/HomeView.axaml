@@ -37,7 +37,7 @@
             </Style>
         </Style>
     </UserControl.Styles>
-    <Border Background="{DynamicResource ThemeBackground}" CornerRadius="12">
+    <Border Background="{DynamicResource ThemeBackground}" CornerRadius="12" Name="MainBorder">
         <Grid RowDefinitions="80,*">
 		    <Grid Grid.Row="0" ColumnDefinitions="2*,*">
 			    <Border Grid.Column="0" VerticalAlignment="Stretch">
@@ -86,7 +86,7 @@
                                         <Border Height="60" CornerRadius="12" BorderBrush="{Binding CategoryColor}" BorderThickness="2" Margin="-8">
 											<Grid ColumnDefinitions="42,*">
 												<Border Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{Binding CategoryColor}" CornerRadius="8,0,0,8">
-													<CheckBox IsChecked="{Binding IsCompleted}" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+													<CheckBox IsChecked="{Binding IsCompleted}" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CheckBoxComplete_IsCheckedChanged"/>
                                                 </Border>
                                                 <Grid Grid.Column="1">
 													<TextBlock Text="{Binding Name}" Margin="5" FontSize="20" Classes="DeadlinesForeground" FontWeight="DemiBold"/>
@@ -102,11 +102,12 @@
                             </ListBox>
                         </StackPanel>
                         <Button Width="72" Height="72" Margin="8" CornerRadius="36" Background="{DynamicResource ThemeAccent}" Foreground="{DynamicResource ThemeBackground}"
-                                VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                                VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="ButtonNewTask_Click">
 							<Label Content="+" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Button>
                     </Grid>
                 </Border>
+                <Popup Grid.RowSpan="2" Name="EditPopup" Height="520" Width="640" PlacementTarget="{Binding #MainBorder}" Placement="Center" Closed="EditPopup_Closed"/>
             </Grid>
         </Grid>
     </Border>

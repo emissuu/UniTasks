@@ -8,6 +8,10 @@ namespace Services.Implementations
     {
         private readonly TaskRepository _repo;
         public TaskService(TaskRepository repo) => _repo = repo;
+        public Data.Models.Task GetById(int id)
+        {
+            return _repo.GetById(id);
+        }
         public IEnumerable<Data.Models.Task> GetAllSizes()
         {
             return _repo.GetAllSizes().ToList();
@@ -32,6 +36,21 @@ namespace Services.Implementations
                 taskPriorities.Add(priority);
             }
             return taskPriorities;
+        }
+        public void Add(Data.Models.Task task)
+        {
+            _repo.Add(task);
+            _repo.Save();
+        }
+        public void Update(Data.Models.Task task)
+        {
+            _repo.Update(task);
+            _repo.Save();
+        }
+        public void Delete(int id)
+        {
+            _repo.Delete(id);
+            _repo.Save();
         }
     }
 }
