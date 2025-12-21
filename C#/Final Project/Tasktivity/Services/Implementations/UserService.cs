@@ -42,5 +42,10 @@ namespace Services.Implementations
             user.TasksCompleted++;
             _repo.Update(user);
         }
+        public void Update(User user)
+        {
+            _repo.Update(user);
+            _repo.Save();
+        }
     }
 }
