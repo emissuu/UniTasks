@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Data.Models;
 using Services.Implementations;
@@ -42,5 +43,15 @@ public partial class SettingsView : UserControl
         user.ActiveThemeId = (ComboBoxThemes.SelectedItem as ThemeColors).Id;
         _service._userServ.Update(user);
         MainWindow.Instance.UpdateTheme();
+    }
+
+    private void ButtonResetStaticData_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        TextBoxUserName.Text = "Hi! I reset your ass!";
+    }
+
+    private void ButtonShowAdvanced_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        ButtonResetStatic.IsVisible = true;
     }
 }

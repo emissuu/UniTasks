@@ -31,6 +31,11 @@ namespace Repositories.Implementations
             if (entity != null) _dbSet.Remove(entity);
         }
 
+        public void DeleteAll()
+        {
+            _dbSet.ExecuteDelete();
+        }
+
         public void Save()
         {
             if (_context.ChangeTracker.HasChanges())

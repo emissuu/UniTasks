@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Data.Models;
 using Data.Extensions;
+using System.Runtime.InteropServices;
 
 namespace Data.Context
 {
@@ -14,10 +15,22 @@ namespace Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string path = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "Tasktivity");
-            Directory.CreateDirectory(path);
+            string? path = null;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                path = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "Tasktivity");
+                Directory.CreateDirectory(path);
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                path = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                    ".local/share/Tasktivity");
+                Directory.CreateDirectory(path);
+            }
+            if (path == null) return;
             path = Path.Combine(path, "tasktivity.db");
 
             optionsBuilder.UseSqlite($"Data Source={path}");

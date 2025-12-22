@@ -16,6 +16,9 @@
     <PackageReference Include="Avalonia.Desktop" Version="11.3.9" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.9" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.9" />
+    <PackageReference Include="Xaml.Behaviors.Avalonia" Version="11.3.9" />
+    <PackageReference Include="Xaml.Behaviors.Interactions.Custom" Version="11.3.9" />
+    <PackageReference Include="Xaml.Behaviors.Interactivity" Version="11.3.9" />
   </ItemGroup>
 
   <ItemGroup>
