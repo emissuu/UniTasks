@@ -1,5 +1,15 @@
 Tasktivity - your productivity
 
+
+Action needed:
+    - Deadlines soon sorting is wrong
+    - Deadlines soon listbox going beyond bottom border
+    - Statistics from global
+    - Move all styles to app.xaml
+
+
+
+
 MainWindow
     - Rounded corners, theme share
     Title bar shares theme color

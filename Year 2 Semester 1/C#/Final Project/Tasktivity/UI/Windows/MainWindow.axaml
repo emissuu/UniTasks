@@ -8,7 +8,7 @@
         xmlns:local="using:UI.Windows"
         x:DataType="local:MainWindow"
         Title="Tasktivity"
-        Icon="/Assets/Logo.png">
+        Icon="/Assets/Logo.ico">
     <Window.Styles>
 		<Style Selector="Button.TitleBar:pointerover /template/ ContentPresenter">
 			<Setter Property="Background" Value="{DynamicResource ThemeSubSubBackground}"/>

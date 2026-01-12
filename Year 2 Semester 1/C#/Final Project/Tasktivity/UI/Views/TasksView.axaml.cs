@@ -71,6 +71,11 @@ public partial class TasksView : UserControl
         task.IsCompleted = (bool)(sender as CheckBox)?.IsChecked;
         Task origTask = _service._taskServ.GetById(task.Id);
         origTask.CompletedAt = task.CompletedAt;
+        if (!origTask.IsExpAcquired)
+        {
+            _service._userServ.AddExp(task.Size.Experience);
+            origTask.IsExpAcquired = true;
+        }
         _service._taskServ.Update(origTask);
         UpdateTasks();
     }

@@ -1,45 +1,9 @@
-﻿/.vs
+﻿# General =====
+.vs
+bin
+obj
 
-# === C#/Lab1 ===
-/C#/Lab1/.vs
-/C#/Lab1/FileCompressor/bin
-/C#/Lab1/FileCompressor/obj
-/C#/Lab1/AllOther
-/C#/Lab1/DataProcessing2/bin
-/C#/Lab1/DataProcessing2/obj
-/C#/Lab1/UILevel/bin
-/C#/Lab1/UILevel/obj
-/C#/Lab1/ForTests
-
-# === C#/Lab2 ===
-/C#/Lab2/.vs
-/C#/Lab2/Main/obj
-/C#/Lab2/Main/bin
-/C#/Lab2/ConsoleApp/obj
-/C#/Lab2/ConsoleApp/bin
-
-# === C#/Lab3 ===
-/C#/Lab3/.vs
-/C#/Lab3/Progress.txt
-/C#/Lab3/Data/obj
-/C#/Lab3/Data/bin
-/C#/Lab3/Repositories/obj
-/C#/Lab3/Repositories/bin
-/C#/Lab3/Services/obj
-/C#/Lab3/Services/bin
-/C#/Lab3/UI/obj
-/C#/Lab3/UI/bin
-/C#/Lab3/UI2/obj
-/C#/Lab3/UI2/bin
-
-# === C#/Final Project ===
-/C#/Final Project/Tasktivity/.vs
-/C#/Final Project/Tasktivity/Tasktivity.Data/obj
-/C#/Final Project/Tasktivity/Data/bin
-/C#/Final Project/Tasktivity/Data/obj
-/C#/Final Project/Tasktivity/Repositories/bin
-/C#/Final Project/Tasktivity/Repositories/obj
-/C#/Final Project/Tasktivity/Services/bin
-/C#/Final Project/Tasktivity/Services/obj
-/C#/Final Project/Tasktivity/UI/bin
-/C#/Final Project/Tasktivity/UI/obj
+# === Year 2 Semester 1 ===
+/Year 2 Semester 1/C#/Lab1/AllOther
+/Year 2 Semester 1/C#/Lab1/ForTests
+/Year 2 Semester 1/C#/Lab3/Progress.txt
