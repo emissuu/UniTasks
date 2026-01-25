@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Models
 {
-    public class Role
+    public class Status
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -13,6 +13,7 @@ namespace Data.Models
         [StringLength(32)]
         public string Name { get; set; }
 
-        public virtual ICollection<User> Users { get; set; } = new List<User>();
+        public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
+        public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
     }
 }
