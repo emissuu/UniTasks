@@ -1,4 +1,5 @@
-﻿using Data.Models;
+﻿using Data.Extensions;
+using Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Context
@@ -21,8 +22,6 @@ namespace Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            // placeholder for extension function
 
             modelBuilder.Entity<Team>()
                 .HasOne(t => t.CreatedBy)
@@ -54,6 +53,8 @@ namespace Data.Context
                 .WithMany(t => t.AssignedTasks)
                 .HasForeignKey(t => t.AssignedToId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            Initializer.Initialize(modelBuilder);
         }
     }
 }
