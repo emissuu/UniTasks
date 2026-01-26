@@ -30,7 +30,7 @@ namespace Data.Models
         public string PasswordHash { get; set; }
 
         [Required]
-        public DateTimeOffset CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
         
         public virtual ICollection<Team> Teams { get; set; } = new List<Team>();
 
@@ -41,5 +41,7 @@ namespace Data.Models
         public virtual ICollection<Task> CreatedTasks { get; set; } = new List<Task>();
 
         public virtual ICollection<Task> AssignedTasks { get; set; } = new List<Task>();
+
+        public virtual ICollection<AuditLog> AuditLogs { get; set; } = new List<AuditLog>();
     }
 }

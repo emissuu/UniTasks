@@ -13,6 +13,7 @@ namespace Data.Context
         public DbSet<TeamUser> TeamUsers => Set<TeamUser>();
         public DbSet<Project> Projects => Set<Project>();
         public DbSet<Models.Task> Tasks => Set<Models.Task>();
+        public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string connectionString = File.ReadAllText("dbconnection.txt");

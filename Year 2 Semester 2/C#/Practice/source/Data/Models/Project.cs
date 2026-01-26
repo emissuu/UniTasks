@@ -31,7 +31,7 @@ namespace Data.Models
         public string? Details { get; set; }
 
         [Required]
-        public DateTimeOffset CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         [Required]
         public string Color { get; set; }

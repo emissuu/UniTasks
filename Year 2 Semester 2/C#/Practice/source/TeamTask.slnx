@@ -1,3 +1,6 @@
 <Solution>
   <Project Path="Data/Data.csproj" Id="1bd47613-ebcf-40e3-bfbf-8adb021a5c24" />
+  <Project Path="Repositories/Repositories.csproj" Id="4e12f029-c857-45f0-aa2d-f67b633fa8f7" />
+  <Project Path="Services/Services.csproj" Id="35b4b646-26cc-4881-9694-95b10321e6a8" />
+  <Project Path="UI/UI.csproj" Id="b07da2ce-67c6-4767-952e-5eda5460cbee" />
 </Solution>
