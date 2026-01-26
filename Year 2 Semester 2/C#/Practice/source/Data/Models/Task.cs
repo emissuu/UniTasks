@@ -31,10 +31,10 @@ namespace Data.Models
 
         [Required]
         [StringLength(32)]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [StringLength(1024)]
-        public string Details { get; set; }
+        public string Details { get; set; } = null!;
 
         [Required]
         public DateTime CreatedAt { get; set; }

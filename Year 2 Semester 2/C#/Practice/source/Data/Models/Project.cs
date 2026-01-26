@@ -25,7 +25,7 @@ namespace Data.Models
 
         [Required]
         [StringLength(32)]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [StringLength(1024)]
         public string? Details { get; set; }
@@ -34,7 +34,7 @@ namespace Data.Models
         public DateTime CreatedAt { get; set; }
 
         [Required]
-        public string Color { get; set; }
+        public string Color { get; set; } = null!;
 
         public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
     }

@@ -16,7 +16,7 @@ namespace Data.Models
 
         [Required]
         [StringLength(32, MinimumLength = 3)]
-        public string UserName { get; set; }
+        public string UserName { get; set; } = null!;
 
         [StringLength(12)]
         public string? PhoneNumber{ get; set; }
@@ -27,7 +27,7 @@ namespace Data.Models
 
         [Required]
         [StringLength(64)]
-        public string PasswordHash { get; set; }
+        public string PasswordHash { get; set; } = null!;
 
         [Required]
         public DateTime CreatedAt { get; set; }

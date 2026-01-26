@@ -16,14 +16,14 @@ namespace Data.Models
 
         [Required]
         [StringLength(128)]
-        public string EntityType { get; set; }
+        public string EntityType { get; set; } = null!;
 
         [Required]
         public int EntityId { get; set; }
 
         [Required]
         [StringLength(16)]
-        public string Action{ get; set; }
+        public string Action{ get; set; } = null!;
 
         [Required]
         public DateTime CreatedAt { get; set; }
