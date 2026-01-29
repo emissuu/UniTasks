@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI.Windows"
         mc:Ignorable="d"
-        Title="TeamTask" Height="720" Width="1280">
+        Title="TeamTask" Height="675" Width="1080" Icon="/Assets/Logos/TeamTaskLogo.png">
     <Grid>
-        <TextBlock Text="Yo, I'm alive and I'm working!" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" FontWeight="DemiBold"/>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Yo, I'm alive and I'm working!" Style="{StaticResource TextBlock.h1}"/>
+            <TextBlock Name="UserName" Text="User!" Style="{StaticResource TextBlock.h2}" HorizontalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Window>

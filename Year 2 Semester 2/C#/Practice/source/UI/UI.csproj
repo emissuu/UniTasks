@@ -9,7 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\" />
+    <None Remove="Assets\Images\Office_Login_Background.jpg" />
+    <None Remove="Assets\Logos\TeamTaskLogo.ico" />
+    <None Remove="Assets\Logos\TeamTaskLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Views\" />
   </ItemGroup>
 
@@ -17,6 +22,21 @@
     <ProjectReference Include="..\Data\Data.csproj" />
     <ProjectReference Include="..\Repositories\Repositories.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Images\Office_Login_Background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Logos\TeamTaskLogo.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Logos\TeamTaskLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

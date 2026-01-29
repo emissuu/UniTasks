@@ -26,7 +26,6 @@ namespace Data.Models
         public string? Email { get; set; }
 
         [Required]
-        [StringLength(64)]
         public string PasswordHash { get; set; } = null!;
 
         [Required]
