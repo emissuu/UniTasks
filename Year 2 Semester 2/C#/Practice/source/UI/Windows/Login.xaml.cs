@@ -247,5 +247,23 @@ namespace UI.Windows
         {
             RegisterUser();
         }
+
+        private void TextBoxLogin_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter)
+                return;
+
+            e.Handled = true;
+            LoginUser();
+        }
+
+        private void TextBoxRegister_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter)
+                return;
+
+            e.Handled = true;
+            RegisterUser();
+        }
     }
 }

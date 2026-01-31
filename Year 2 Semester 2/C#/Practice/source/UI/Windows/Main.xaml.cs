@@ -1,6 +1,7 @@
 ﻿using Data.Models;
-using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using System.Windows.Controls;
+using UI.Views;
 
 namespace UI.Windows
 {
@@ -16,7 +17,115 @@ namespace UI.Windows
             _activeUser = user;
             _services = services;
             InitializeComponent();
-            UserName.Text = "Shout out to " + user.UserName + '!';
+            TextBlockUserName.Text = user.UserName;
+            TextBlockUserRole.Text = user.Role.Name;
+            ViewPresenter.Content = new HomeView(_activeUser, _services);
+        }
+
+        private void ButtonChangeView_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button tabButton)
+            {
+                string previousView = ViewPresenter.Content.GetType().Name;
+                switch (tabButton.Name)
+                {
+                    case "ButtonHome":
+                        if (ViewPresenter.Content is HomeView)
+                            return;
+                        ViewPresenter.Content = new HomeView(_activeUser, _services);
+                        ButtonHome.Style = (Style)FindResource("Button.sidetab.chosen");
+                        if (previousView == "InboxView")
+                            ButtonInbox.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ToDoView")
+                            ButtonMyTodo.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ProjectsView")
+                            ButtonMyProjects.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "TeamsView")
+                            ButtonMyTeams.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ProfileView")
+                            ButtonMyProfile.Style = (Style)FindResource("Button.sidetab");
+                        break;
+                    case "ButtonInbox":
+                        if (ViewPresenter.Content is InboxView)
+                            return;
+                        ViewPresenter.Content = new InboxView(_activeUser, _services);
+                        ButtonInbox.Style = (Style)FindResource("Button.sidetab.chosen");
+                        if (previousView == "HomeView")
+                            ButtonHome.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ToDoView")
+                            ButtonMyTodo.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ProjectsView")
+                            ButtonMyProjects.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "TeamsView")
+                            ButtonMyTeams.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ProfileView")
+                            ButtonMyProfile.Style = (Style)FindResource("Button.sidetab");
+                        break;
+                    case "ButtonMyTodo":
+                        if (ViewPresenter.Content is ToDoView)
+                            return;
+                        ViewPresenter.Content = new ToDoView(_activeUser, _services);
+                        ButtonMyTodo.Style = (Style)FindResource("Button.sidetab.chosen");
+                        if (previousView == "HomeView")
+                            ButtonHome.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "InboxView")
+                            ButtonInbox.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ProjectsView")
+                            ButtonMyProjects.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "TeamsView")
+                            ButtonMyTeams.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ProfileView")
+                            ButtonMyProfile.Style = (Style)FindResource("Button.sidetab");
+                        break;
+                    case "ButtonMyProjects":
+                        if (ViewPresenter.Content is ProjectsView)
+                            return;
+                        ViewPresenter.Content = new ProjectsView(_activeUser, _services);
+                        ButtonMyProjects.Style = (Style)FindResource("Button.sidetab.chosen");
+                        if (previousView == "HomeView")
+                            ButtonHome.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "InboxView")
+                            ButtonInbox.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ToDoView")
+                            ButtonMyTodo.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "TeamsView")
+                            ButtonMyTeams.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ProfileView")
+                            ButtonMyProfile.Style = (Style)FindResource("Button.sidetab");
+                        break;
+                    case "ButtonMyTeams":
+                        if (ViewPresenter.Content is TeamsView)
+                            return;
+                        ViewPresenter.Content = new TeamsView(_activeUser, _services);
+                        if (previousView == "HomeView")
+                            ButtonHome.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "InboxView")
+                            ButtonInbox.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ToDoView")
+                            ButtonMyTodo.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ProjectsView")
+                            ButtonMyProjects.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ProfileView")
+                            ButtonMyProfile.Style = (Style)FindResource("Button.sidetab");
+                        break;
+                    case "ButtonMyProfile":
+                        if (ViewPresenter.Content is ProfileView)
+                            return;
+                        ViewPresenter.Content = new ProfileView(_activeUser, _services);
+                        ButtonMyProfile.Style = (Style)FindResource("Button.sidetab.chosen");
+                        if (previousView == "HomeView")
+                            ButtonHome.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "InboxView")
+                            ButtonInbox.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ToDoView")
+                            ButtonMyTodo.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ProjectsView")
+                            ButtonMyProjects.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "TeamsView")
+                            ButtonMyTeams.Style = (Style)FindResource("Button.sidetab");
+                        break;
+                }
+            }
         }
     }
 }

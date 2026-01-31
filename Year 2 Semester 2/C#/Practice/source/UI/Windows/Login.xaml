@@ -15,16 +15,16 @@
                         <TextBlock Text="Welcome back!"  Style="{StaticResource TextBlock.h2}" 
                HorizontalAlignment="Center" Margin="0,0,0,12"/>
                         <TextBlock Text="Login" Style="{StaticResource TextBlock.basic}" Margin="16,0"/>
-                        <TextBox Name="TextBoxLogin" Margin="16,2,16,0" Height="24" VerticalContentAlignment="Center"/>
-                        <TextBlock Name="TextBlockWrongLogin" Text="Login cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,2" Visibility="Hidden" Foreground="{StaticResource Error}"/>
+                        <TextBox Name="TextBoxLogin" Margin="16,2,16,0" Height="24" VerticalContentAlignment="Center" KeyUp="TextBoxLogin_KeyUp" MaxLength="32"/>
+                        <TextBlock Name="TextBlockWrongLogin" Text="Login cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,2" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
                         <TextBlock Text="Password" Style="{StaticResource TextBlock.basic}" Margin="16,0"/>
                         <Grid Height="24" Margin="16,2,16,0">
-                            <TextBox Name="TextBoxPassword" Margin="0" Height="24" VerticalContentAlignment="Center" TextWrapping="NoWrap" Visibility="Hidden"/>
-                            <PasswordBox Name="PasswordBoxPassword" Margin="0" Height="24" VerticalContentAlignment="Center"/>
+                            <TextBox Name="TextBoxPassword" Margin="0" Height="24" VerticalContentAlignment="Center" TextWrapping="NoWrap" Visibility="Hidden" KeyUp="TextBoxLogin_KeyUp" MaxLength="64"/>
+                            <PasswordBox Name="PasswordBoxPassword" Margin="0" Height="24" VerticalContentAlignment="Center" KeyUp="TextBoxLogin_KeyUp" MaxLength="64"/>
                             <TextBlock Name="PasswordVisible" Text="/" FontSize="18" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,4"/>
                             <TextBlock Text="👁" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,4,0" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp" Cursor="Hand" Tag="0"/>
                         </Grid>
-                        <TextBlock Name="TextBlockWrongPassword" Text="Password cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,4" Visibility="Hidden" Foreground="{StaticResource Error}"/>
+                        <TextBlock Name="TextBlockWrongPassword" Text="Password cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,4" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
                         <Button Content="Log in" Margin="16,0,16,8"  HorizontalAlignment="Stretch" Height="28" Style="{StaticResource Button.round14}" Click="LoginButton_Click"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                             <TextBlock Style="{StaticResource TextBlock.basic}">
@@ -41,32 +41,32 @@
                         <TextBlock Text="Hello there!"  Style="{StaticResource TextBlock.h2}"
                             HorizontalAlignment="Center" Margin="0,0,0,12"/>
                         <TextBlock Text="Login" Style="{StaticResource TextBlock.basic}" Margin="16,0"/>
-                        <TextBox Name="TextBoxRegLogin" Margin="16,2,16,0" Height="24" VerticalContentAlignment="Center"/>
-                        <TextBlock Name="TextBlockWrongRegLogin" Text="Login cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,2" Visibility="Hidden" Foreground="{StaticResource Error}"/>
+                        <TextBox Name="TextBoxRegLogin" Margin="16,2,16,0" Height="24" VerticalContentAlignment="Center" KeyUp="TextBoxRegister_KeyUp" MaxLength="32"/>
+                        <TextBlock Name="TextBlockWrongRegLogin" Text="Login cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,2" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
                         <TextBlock Text="Email" Style="{StaticResource TextBlock.basic}" Margin="16,0"/>
-                        <TextBox Name="TextBoxRegEmail" Margin="16,2,16,0" Height="24" VerticalContentAlignment="Center"/>
-                        <TextBlock Name="TextBlockWrongRegEmail" Text="Email cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,2" Visibility="Hidden" Foreground="{StaticResource Error}"/>
+                        <TextBox Name="TextBoxRegEmail" Margin="16,2,16,0" Height="24" VerticalContentAlignment="Center" KeyUp="TextBoxRegister_KeyUp" MaxLength="64"/>
+                        <TextBlock Name="TextBlockWrongRegEmail" Text="Email cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,2" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
                         <TextBlock Text="Password" Style="{StaticResource TextBlock.basic}" Margin="16,0"/>
                         <Grid Height="24" Margin="16,2,16,0">
-                            <TextBox Name="TextBoxRegPassword" Margin="0" Height="24" VerticalContentAlignment="Center" TextWrapping="NoWrap" Visibility="Hidden"/>
-                            <PasswordBox Name="PasswordBoxRegPassword" Margin="0" Height="24" VerticalContentAlignment="Center"/>
+                            <TextBox Name="TextBoxRegPassword" Margin="0" Height="24" VerticalContentAlignment="Center" TextWrapping="NoWrap" Visibility="Hidden" KeyUp="TextBoxRegister_KeyUp" MaxLength="64"/>
+                            <PasswordBox Name="PasswordBoxRegPassword" Margin="0" Height="24" VerticalContentAlignment="Center" KeyUp="TextBoxRegister_KeyUp" MaxLength="64"/>
                             <TextBlock Name="PasswordRegVisible" Text="/" FontSize="18" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,4"/>
                             <TextBlock Text="👁" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,4,0" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp" Cursor="Hand" Tag="1"/>
                         </Grid>
-                        <TextBlock Name="TextBlockWrongRegPassword" Text="Password cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,2" Visibility="Hidden" Foreground="{StaticResource Error}"/>
+                        <TextBlock Name="TextBlockWrongRegPassword" Text="Password cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,2" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
                         <TextBlock Text="Confirm Password" Style="{StaticResource TextBlock.basic}" Margin="16,0"/>
                         <Grid Height="24" Margin="16,2,16,0">
-                            <TextBox Name="TextBoxRegPasswordConfirm" Margin="0" Height="24" VerticalContentAlignment="Center" TextWrapping="NoWrap" Visibility="Hidden"/>
-                            <PasswordBox Name="PasswordBoxRegPasswordConfirm" Margin="0" Height="24" VerticalContentAlignment="Center"/>
+                            <TextBox Name="TextBoxRegPasswordConfirm" Margin="0" Height="24" VerticalContentAlignment="Center" TextWrapping="NoWrap" Visibility="Hidden" KeyUp="TextBoxRegister_KeyUp" MaxLength="64"/>
+                            <PasswordBox Name="PasswordBoxRegPasswordConfirm" Margin="0" Height="24" VerticalContentAlignment="Center" KeyUp="TextBoxRegister_KeyUp" MaxLength="64"/>
                             <TextBlock Name="PasswordRegVisibleConfirm" Text="/" FontSize="18" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,4"/>
                             <TextBlock Text="👁" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,4,0" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp" Cursor="Hand" Tag="2"/>
                         </Grid>
-                        <TextBlock Name="TextBlockWrongRegPasswordConfirm" Text="Password cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,4" Visibility="Hidden" Foreground="{StaticResource Error}"/>
+                        <TextBlock Name="TextBlockWrongRegPasswordConfirm" Text="Password cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,4" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
                         <Button Content="Register as administrator" Margin="16,0,16,8"  HorizontalAlignment="Stretch" Height="28" Style="{StaticResource Button.round14}" Click="RegisterButton_Click"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                             <TextBlock Style="{StaticResource TextBlock.basic}">
                                  Already have an account?
-                                 <Hyperlink Click="Hyperlink_Click" Foreground="#2AA63E" Cursor="Hand">
+                                 <Hyperlink Click="Hyperlink_Click" Foreground="{StaticResource Green600}" Cursor="Hand">
                                      Back to login.
                                  </Hyperlink>       
                             </TextBlock>

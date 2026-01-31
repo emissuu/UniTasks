@@ -11,12 +11,16 @@ namespace Repositories.Implementations
 
         public User? GetByLogin(string login)
         {
-            return _dbSet.FirstOrDefault(u => u.UserName == login);
+            return _dbSet
+                .Include(u => u.Role)
+                .FirstOrDefault(u => u.UserName == login);
         }
 
         public User? GetByEmail(string email)
         {
-            return _dbSet.FirstOrDefault(u => u.Email == email);
+            return _dbSet
+                .Include(u => u.Role)
+                .FirstOrDefault(u => u.Email == email);
         }
     }
 }
