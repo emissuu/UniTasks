@@ -13,29 +13,29 @@ namespace Repositories.Implementations
             _dbSet = _context.Set<T>();
         }
 
-        public IEnumerable<T> GetAll() => _dbSet.AsNoTracking().ToList();
+        public virtual IEnumerable<T> GetAll() => _dbSet.AsNoTracking().ToList();
 
-        public T? GetById(int id) => _dbSet.Find(id);
+        public virtual T? GetById(int id) => _dbSet.Find(id);
 
-        public void Add(T entity) => _dbSet.Add(entity);
+        public virtual void Add(T entity) => _dbSet.Add(entity);
 
         public virtual void Update(T entity)
         {
             _dbSet.Update(entity);
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             var entity = GetById(id);
             if (entity != null) _dbSet.Remove(entity);
         }
 
-        public void DeleteAll()
+        public virtual void DeleteAll()
         {
             _dbSet.ExecuteDelete();
         }
 
-        public void Save()
+        public virtual void Save()
         {
             if (_context.ChangeTracker.HasChanges())
                 _context.SaveChanges();

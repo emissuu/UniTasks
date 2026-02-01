@@ -9,6 +9,8 @@
     <SolidColorBrush x:Key="Green600" Color="#229954"/>
     <SolidColorBrush x:Key="Green500" Color="#27AE60"/>
     <SolidColorBrush x:Key="Green400" Color="#52BE80"/>
+    <SolidColorBrush x:Key="Green300" Color="#7DCEA0"/>
+    <SolidColorBrush x:Key="Green200" Color="#A9DFBF"/>
     <SolidColorBrush x:Key="Green100" Color="#D4EFDF"/>
     <SolidColorBrush x:Key="Green50" Color="#E9F7EF"/>
     <SolidColorBrush x:Key="Neutral900" Color="#212121"/>

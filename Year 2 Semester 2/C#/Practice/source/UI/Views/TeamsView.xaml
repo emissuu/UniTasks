@@ -6,7 +6,10 @@
              xmlns:local="clr-namespace:UI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="675" d:DesignWidth="840" Background="{StaticResource Neutral100}">
-    <Grid>
-        <TextBlock Text="Heyyy! Teams are there!" Style="{StaticResource TextBlock.h1}" TextWrapping="Wrap"/>
+    <Grid ColumnDefinitions="*,*">
+        <Grid Grid.Column="0" Grid.ColumnSpan="2">
+            
+        </Grid>
+        <ContentPresenter Grid.Column="1" Name="ContentPresenterSide" Visibility="Collapsed"/>
     </Grid>
 </UserControl>

@@ -1,6 +1,7 @@
 ﻿using Data.Models;
 using Repositories.Interfaces;
 using Services.Interfaces;
+using Services.Models;
 
 namespace Services.Implementations
 {
@@ -45,6 +46,18 @@ namespace Services.Implementations
             {
                 return ("idk", null);
             }
+        }
+        public IEnumerable<UserDetails> GetAllUserDetails()
+        {
+            return _userRepository.GetAll()
+                .Select(u => new UserDetails(
+                    u.Id,
+                    u.UserName,
+                    u.Email,
+                    u.PhoneNumber,
+                    u.Role,
+                    u.CreatedAt
+                ));
         }
     }
 }

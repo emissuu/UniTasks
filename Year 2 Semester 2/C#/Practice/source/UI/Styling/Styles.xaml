@@ -17,6 +17,7 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="4"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -85,6 +86,84 @@
         </Style.Triggers>
     </Style>
 
+    <!-- Button.tabbar -->
+    <Style TargetType="Button" x:Key="Button.tabbar"
+       BasedOn="{StaticResource Button.basic}">
+        <Setter Property="Background" Value="{StaticResource Green800}"/>
+        <Setter Property="Foreground" Value="{StaticResource Neutral100}"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Padding" Value="4"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource Green700}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource Green600}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Button.listbox -->
+    <Style TargetType="Button" x:Key="Button.listbox"
+   BasedOn="{StaticResource Button.basic}">
+        <Setter Property="Background" Value="{StaticResource Green300}"/>
+        <Setter Property="Foreground" Value="{StaticResource Neutral900}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="6"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource Green400}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource Green500}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Button.confirm-->
+    <Style TargetType="Button" x:Key="Button.confirm"
+BasedOn="{StaticResource Button.basic}">
+        <Setter Property="Background" Value="{StaticResource Green600}"/>
+        <Setter Property="Foreground" Value="{StaticResource Neutral100}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="6"/>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="6"/>
+            </Style>
+        </Style.Resources>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource Green800}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource Green900}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Button.cancel-->
+    <Style TargetType="Button" x:Key="Button.cancel"
+BasedOn="{StaticResource Button.basic}">
+        <Setter Property="Background" Value="{StaticResource Neutral100}"/>
+        <Setter Property="Foreground" Value="{StaticResource Green800}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="6"/>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="6"/>
+            </Style>
+        </Style.Resources>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource Green100}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource Green200}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!-- ========== TextBlock ========== -->
     
     <!-- TextBlock.basic -->
@@ -100,7 +179,6 @@
         <Setter Property="FontSize" Value="36"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
     
     <!-- TextBlock.h2-->
@@ -128,6 +206,16 @@
 BasedOn="{StaticResource TextBlock.h3}">
         <Setter Property="Foreground" Value="{StaticResource Neutral100}"/>
     </Style>
+    
+    <!-- TextBlock.h3.rotated -->
+    <Style TargetType="TextBlock" x:Key="TextBlock.h3.rotated"
+           BasedOn="{StaticResource TextBlock.h3}">
+        <Setter Property="LayoutTransform">
+            <Setter.Value>
+                <RotateTransform Angle="45"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!-- TextBlock.subtext -->
     <Style TargetType="TextBlock" x:Key="TextBlock.subtext"
@@ -136,18 +224,68 @@ BasedOn="{StaticResource TextBlock.h3}">
         <Setter Property="FontWeight" Value="DemiBold"/>
     </Style>
 
-    <!-- ========== Separator ========== -->
+    <!-- ========== Rectangle ========== -->
 
-    <!-- Separator.basic -->
-    <Style TargetType="Separator" x:Key="Separator.basic">
-        <Setter Property="Background" Value="{StaticResource Neutral700}"/>
-        <Setter Property="Margin" Value="0"/>
+    <!-- Rectangle.separator -->
+    <Style TargetType="Rectangle" x:Key="Rectangle.separator">
+        <Setter Property="Fill" Value="{StaticResource Green900}"/>
+        <Setter Property="Height" Value="2"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
     </Style>
     
-    <!-- Separator.sidebar -->
-    <Style TargetType="Separator" x:Key="Separator.sidebar"
-           BasedOn="{StaticResource Separator.basic}">
-        <Setter Property="Background" Value="{StaticResource Green900}"/>
+    <!-- Rectangle.separator.vertical-->
+    <Style TargetType="Rectangle" x:Key="Rectangle.separator.vertical"
+           BasedOn="{StaticResource Rectangle.separator}">
+        <Setter Property="Width" Value="2"/>
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
+
+    <!-- ========== ItemsControl ========== -->
+
+    <!-- ItemsControl.basic-->
+    <Style TargetType="ItemsControl" x:Key="ItemsControl.basic">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+
+    <!-- ========== CheckBox ========== -->
+
+    <!-- CheckBox.basic-->
+    <Style TargetType="CheckBox" x:Key="CheckBox.basic">
+        <Setter Property="Margin" Value="4,0,8,0"/>
+        <Setter Property="Height" Value="22"/>
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Background" Value="{StaticResource Neutral100}"/>
+        <Setter Property="Foreground" Value="{StaticResource Green800}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Green400}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                        <Path x:Name="CheckMark" Data="M 4 10 L 8 14 L 16 6" 
+                              Stroke="{TemplateBinding Foreground}" StrokeThickness="2"
+                              Visibility="Collapsed" Margin="-1,-1,0,0"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
 </ResourceDictionary>

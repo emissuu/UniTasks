@@ -12,13 +12,14 @@
             <StackPanel >
                 <TextBlock Name="TextBlockUserName" Text="UserName" Style="{StaticResource TextBlock.h2}" Foreground="White" Margin="6,6,6,0"/>
                 <TextBlock Name="TextBlockUserRole" Text="UserRole" Style="{StaticResource TextBlock.basic}" Foreground="White" Margin="6,-2,6,4"/>
-                <Separator Style="{StaticResource Separator.sidebar}"/>
-                <Button Name="ButtonHome" Content="Home" Style="{StaticResource Button.sidetab.chosen}" Margin="6,6,6,2" Click="ButtonChangeView_Click"/>
+                <Rectangle Style="{StaticResource Rectangle.separator}"/>
+                <Button Name="ButtonHome" Content="Dashboard" Style="{StaticResource Button.sidetab.chosen}" Margin="6,6,6,2" Click="ButtonChangeView_Click"/>
                 <Button Name="ButtonInbox" Content="Inbox" Style="{StaticResource Button.sidetab}" Margin="6,2" Click="ButtonChangeView_Click"/>
                 <Button Name="ButtonMyTodo" Content="My To-Do" Style="{StaticResource Button.sidetab}" Margin="6,2" Click="ButtonChangeView_Click" Visibility="Collapsed"/>
                 <Button Name="ButtonMyProjects" Content="My Projects" Style="{StaticResource Button.sidetab}" Margin="6,2" Click="ButtonChangeView_Click"/>
                 <Button Name="ButtonMyTeams" Content="My Teams" Style="{StaticResource Button.sidetab}" Margin="6,2" Click="ButtonChangeView_Click"/>
                 <Button Name="ButtonMyProfile" Content="My Profile" Style="{StaticResource Button.sidetab}" Margin="6,2" Click="ButtonChangeView_Click"/>
+                <Button Name="ButtonUsers" Content="Users" Style="{StaticResource Button.sidetab}" Margin="6,2" Click="ButtonChangeView_Click" Visibility="Collapsed"/>
             </StackPanel>
         </Border>
         <Border Grid.Column="1" Background="{StaticResource Neutral100}">

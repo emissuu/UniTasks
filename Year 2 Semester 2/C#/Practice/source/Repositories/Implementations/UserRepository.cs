@@ -22,5 +22,11 @@ namespace Repositories.Implementations
                 .Include(u => u.Role)
                 .FirstOrDefault(u => u.Email == email);
         }
+        public override IEnumerable<User> GetAll()
+        {
+            return _dbSet
+                .Include(u => u.Role)
+                .ToList();
+        }
     }
 }
