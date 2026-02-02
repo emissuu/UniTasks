@@ -31,6 +31,7 @@ namespace UI.Views
             {
                 DisplayProfilePreview.Visibility = Visibility.Collapsed;
                 TitleBar.Visibility = Visibility.Collapsed;
+                this.BorderThickness = new Thickness(3, 0, 0, 0);
                 Update(_user);
             }
             else if (_isEditedByAdmin == null)
@@ -43,7 +44,7 @@ namespace UI.Views
                 ButtonCancelChanges.Visibility = Visibility.Hidden;
                 ButtonRegister.Visibility = Visibility.Visible;
                 this.BorderThickness = new Thickness(3, 0, 0, 0);
-                foreach (var role in (string[])["Administrator", "Manager", "Programmer"])
+                foreach (var role in (string[])["Manager", "Programmer"])
                     ComboBoxRoles.Items.Add(role);
                 ComboBoxRoles.SelectedIndex = 0;
             }
@@ -135,7 +136,7 @@ namespace UI.Views
         public void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
             var userName = TextBoxUserName.Text;
-            var roleId = ComboBoxRoles.SelectedIndex + 1;
+            var roleId = ComboBoxRoles.SelectedIndex + 2;
             var email = TextBoxEmail.Text;
             if (email == String.Empty)
                 email = null;

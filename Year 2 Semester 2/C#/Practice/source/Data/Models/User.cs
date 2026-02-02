@@ -18,7 +18,7 @@ namespace Data.Models
         [StringLength(32, MinimumLength = 3)]
         public string UserName { get; set; } = null!;
 
-        [StringLength(12)]
+        [StringLength(14)]
         public string? PhoneNumber{ get; set; }
 
         [StringLength(255)]

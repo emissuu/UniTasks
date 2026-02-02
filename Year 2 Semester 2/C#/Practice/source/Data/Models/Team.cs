@@ -18,9 +18,6 @@ namespace Data.Models
         [StringLength(32)]
         public string Name { get; set; } = null!;
 
-        [StringLength(1024)]
-        public string Details{ get; set; } = null!;
-
         public virtual ICollection<TeamUser> TeamUsers { get; set; } = new List<TeamUser>();
 
         public virtual ICollection<Project> Projects { get; set; } = new List<Project>();

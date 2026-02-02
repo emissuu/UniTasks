@@ -35,12 +35,12 @@ namespace Data.Context
 
             modelBuilder.Entity<TeamUser>()
                 .HasOne(tu => tu.Team)
-                .WithMany()
+                .WithMany(t => t.TeamUsers)
                 .HasForeignKey(tu => tu.TeamId);
 
             modelBuilder.Entity<TeamUser>()
                 .HasOne(tu => tu.User)
-                .WithMany()
+                .WithMany(u => u.TeamUsers)
                 .HasForeignKey(tu => tu.UserId);
 
             modelBuilder.Entity<Models.Task>()

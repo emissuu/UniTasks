@@ -250,6 +250,7 @@ BasedOn="{StaticResource TextBlock.h3}">
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
     </Style>
 
     <!-- ========== CheckBox ========== -->
@@ -285,6 +286,16 @@ BasedOn="{StaticResource TextBlock.h3}">
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    
+    <!-- ========== Expander ========== -->
+    
+    <!-- Expander.basic -->
+    <Style TargetType="Expander" x:Key="Expander.basic">
+        <Setter Property="ExpandDirection" Value="Down"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="FlowDirection" Value="RightToLeft"/>
     </Style>
 
 

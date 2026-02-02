@@ -4,12 +4,135 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UI.Views"
+             xmlns:models="clr-namespace:Data.Models;assembly=Data"
+             xmlns:cmodels="clr-namespace:Services.Models;assembly=Services"
              mc:Ignorable="d" 
              d:DesignHeight="675" d:DesignWidth="840" Background="{StaticResource Neutral100}">
     <Grid ColumnDefinitions="*,*">
         <Grid Grid.Column="0" Grid.ColumnSpan="2">
-            
+            <Grid RowDefinitions="40,*">
+                <Border Grid.Row="0" Background="{StaticResource Green900}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Teams" Style="{StaticResource TextBlock.h2}" Foreground="{StaticResource Neutral100}" VerticalAlignment="Center" Margin="12,0"/>
+                        <Rectangle Style="{StaticResource Rectangle.separator.vertical}" Fill="{StaticResource Green800}"/>
+                        <Button Name="ButtonCreateTeam" Content="Create Team" Style="{StaticResource Button.tabbar}" Margin="8,6" Click="ButtonAddTeam_Click"/>
+                        <Button Name="ButtonRemoveTeam" Content="Remove Selected" Style="{StaticResource Button.tabbar}" Margin="0,6,8,6" Click="ButtonRemoveSelected_Click"/>
+                    </StackPanel>
+                </Border>
+                <ItemsControl Name="ItemsControlTeams" Grid.Row="1" Style="{StaticResource ItemsControl.basic}" Margin="6">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type cmodels:TeamDetails}">
+                            <Border Background="{StaticResource Green100}" 
+                                CornerRadius="6" 
+                                Margin="0,2" Padding="4">
+                                <Expander Name="MainExpander" Style="{StaticResource Expander.basic}">
+                                    <Expander.Header>
+                                        <Grid ColumnDefinitions="28,auto,2*,1*,auto,auto" FlowDirection="LeftToRight"
+                                              Height="40" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Expander}}, Path=ActualWidth}">
+                                            <CheckBox Grid.Column="1" Style="{StaticResource CheckBox.basic}" IsChecked="{Binding IsChecked}"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding Name}" Style="{StaticResource TextBlock.h3}" VerticalAlignment="Center"/>
+                                            <StackPanel Grid.Column="3" Orientation="Horizontal">
+                                                <TextBlock Text="Created by: " Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding CreatedBy.UserName}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="4" Orientation="Horizontal" Name="StackPanelEditTeams">
+                                                <Button Name="ButtonEditTeamDetails" Style="{StaticResource Button.listbox}" Content="Edit Details" Margin="6,0" Click="ButtonEditTeamDetails_Click"/>
+                                                <Button Name="ButtonEditTeamParticipants" Style="{StaticResource Button.listbox}" Content="Edit Participants" Margin="0,0,6,0" Click="ButtonEditTeamParticipants_Click"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Expander.Header>
+                                    <Expander.Content>
+                                        <ItemsControl Name="ItemsControlTeams" Style="{StaticResource ItemsControl.basic}" ItemsSource="{Binding TeamUsers}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate DataType="{x:Type models:TeamUser}">
+                                                    <Border BorderBrush="{StaticResource Green700}" BorderThickness="0,2,0,0">
+                                                        <Grid ColumnDefinitions="2*,2*,3*" Margin="16,2">
+                                                            <TextBlock Grid.Column="0" Text="{Binding User.UserName}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center"/>
+                                                            <TextBlock Grid.Column="1" Text="{Binding User.Role.Name}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center"/>
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Expander.Content>
+                                </Expander>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
         </Grid>
-        <ContentPresenter Grid.Column="1" Name="ContentPresenterSide" Visibility="Collapsed"/>
+        <Grid Grid.Column="1">
+            <!-- Edit team details side -->
+            <Grid Name="SideEditTeamDetails" 
+                  Height="176" Width="auto" Margin="0,48,0,0"
+                  VerticalAlignment="Top" Visibility="Hidden">
+                <Border Margin="0,48,0,0"
+                        Width="24" Height="48"
+                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                        CornerRadius="6" Background="{StaticResource Neutral300}"
+                        MouseLeftButtonUp="TeamDetailsSidePanel_MouseLeftButtonUp">
+                    <TextBlock Text="›" Style="{StaticResource TextBlock.h2}"
+                            Margin="4,0,0,6"
+                            VerticalAlignment="Center" HorizontalAlignment="Left"
+                            Foreground="{StaticResource Neutral700}"/>
+                </Border>
+                <Border Margin="16,0,0,0" Padding="4"
+                        Background="{StaticResource Neutral100}" CornerRadius="16"
+                        BorderBrush="{StaticResource Neutral300}" BorderThickness="3">
+                    <StackPanel Margin="6,0">
+                        <TextBlock Text="Team Details" Style="{StaticResource TextBlock.h1}" Margin="0,0,0,12"/>
+                        <TextBlock Text="Team Name" Style="{StaticResource TextBlock.h3}"/>
+                        <TextBox Name="TextBoxTeamName" 
+                                 Margin="0,2,0,0" 
+                                 Height="24" Width="320" 
+                                 HorizontalAlignment="Left"
+                                 VerticalContentAlignment="Center" 
+                                 MaxLength="32"/>
+                        <TextBlock Name="TextBlockWrongUserName" Text="Name cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="0,-1,16,-2" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
+                        <Button Name="ButtonSaveChanges" Content="Save changes" Style="{StaticResource Button.confirm}"
+                                Margin="0,12,20,0" Padding="12,4" Width="112" HorizontalAlignment="Left"
+                                Click="ButtonSaveChanges_Click"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <!-- Edit team participants side -->
+            <Grid Name="SideEditTeamParticipants" Visibility="Hidden">
+                <Border Margin="0,56,0,0"
+                        Width="24" Height="48"
+                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                        CornerRadius="6" Background="{StaticResource Neutral300}"
+                        MouseLeftButtonUp="TeamParticipantsSidePanel_MouseLeftButtonUp">
+                    <TextBlock Text="›" Style="{StaticResource TextBlock.h2}"
+                            Margin="4,0,0,6"
+                            VerticalAlignment="Center" HorizontalAlignment="Left"
+                            Foreground="{StaticResource Neutral700}"/>
+                </Border>
+                <Border Margin="16,0,0,0"
+                        BorderBrush="{StaticResource Neutral300}" BorderThickness="3,0,0,0"
+                        Background="{StaticResource Neutral100}">
+                    <Grid RowDefinitions="auto,*,40" Margin="6">
+                        <TextBlock Text="Team Participants" Style="{StaticResource TextBlock.h1}" Margin="0,0,0,12"/>
+                        <ItemsControl Name="ItemsControlParticipants" Style="{StaticResource ItemsControl.basic}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type cmodels:UserDetails}">
+                                    <Border 
+                                            Background="{StaticResource Green100}" 
+                                            CornerRadius="6" 
+                                            Margin="0,2" Padding="4">
+                                        <Grid ColumnDefinitions="auto,2*,3*" Margin="2">
+                                            <CheckBox Grid.Column="0" Style="{StaticResource CheckBox.basic}" IsChecked="{Binding IsChecked}"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding UserName}" Style="{StaticResource TextBlock.h3}" VerticalAlignment="Center"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding Role.Name}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Button Grid.Row="2" Content="Save Changes" Style="{StaticResource Button.tabbar}" Margin="8,6" Click="ButtonSaveParticipants_Click"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

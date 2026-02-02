@@ -56,12 +56,14 @@ namespace UI.Views
             var result = MessageBox.Show($"Are you sure you want to remove {users.Count()} users?", "TeamTask", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
                 _services.GetService<IUserService>().Remove(users.Select(ud => ud.Id).ToArray());
+            UpdateUsersList();
         }
 
         private void BorderSidePanel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             ContentPresenterSide.Content = null;
             SidePanel.Visibility = Visibility.Hidden;
+            UpdateUsersList();
         }
 
         private void ButtonEditUser_Click(object sender, RoutedEventArgs e)
