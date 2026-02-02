@@ -12,15 +12,59 @@ namespace Services.Implementations
         {
             _userRepository = userRepository;
         }
+
+        public User? GetById(int id)
+        {
+            return _userRepository.GetById(id);
+        }
+
+        public void Update(User user)
+        {
+            _userRepository.Update(user);
+        }
+
+        public void Remove(int[] ids)
+        {
+            foreach (int id in ids)
+            {
+                _userRepository.Delete(id);
+            }
+            _userRepository.Save();
+        }
+
         public User? LoginUser(string login, string password)
         {
             var userByLogin = _userRepository.GetByLogin(login);
             if (userByLogin == null)
                 userByLogin = _userRepository.GetByEmail(login);
-            if (userByLogin == null || !BCrypt.Net.BCrypt.Verify(password, userByLogin.PasswordHash))
+            if (!BCrypt.Net.BCrypt.Verify(password, userByLogin.PasswordHash))
                 return null;
             else
                 return userByLogin;
+        }
+
+        public bool RegisterUser(User user)
+        {
+            if (_userRepository.GetByLogin(user.UserName) != null)
+                return false;
+            try
+            {
+                _userRepository.Add(new User()
+                {
+                    RoleId = user.RoleId,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash),
+                    CreatedAt = DateTime.UtcNow
+                });
+                _userRepository.Save();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public (string?, User?) RegisterUser(string login, string email, string password)
@@ -47,6 +91,18 @@ namespace Services.Implementations
                 return ("idk", null);
             }
         }
+
+        public bool ResetPassword(string login, string passwordOld, string passwordNew)
+        {
+            var userByLogin = _userRepository.GetByLogin(login);
+            if (!BCrypt.Net.BCrypt.Verify(passwordOld, userByLogin.PasswordHash))
+                return false;
+            userByLogin.PasswordHash = BCrypt.Net.BCrypt.HashPassword(passwordNew);
+            _userRepository.Update(userByLogin);
+            _userRepository.Save();
+            return true;
+        }
+
         public IEnumerable<UserDetails> GetAllUserDetails()
         {
             return _userRepository.GetAll()

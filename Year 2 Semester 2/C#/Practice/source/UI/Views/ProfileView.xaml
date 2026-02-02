@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UI.Views"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" BorderBrush="{StaticResource Neutral300}"
              d:DesignHeight="675" d:DesignWidth="840" Background="{StaticResource Neutral100}">
     <Grid>
         <Grid RowDefinitions="auto,*">
-            <Border Grid.Row="0" Height="40" Background="{StaticResource Green900}">
+            <Border Name="TitleBar" Grid.Row="0" Height="40" Background="{StaticResource Green900}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="My Profile" Style="{StaticResource TextBlock.h2}" Foreground="{StaticResource Neutral100}" VerticalAlignment="Center" Margin="12,0"/>
                     <Rectangle Style="{StaticResource Rectangle.separator.vertical}" Fill="{StaticResource Green800}"/>
@@ -26,7 +26,7 @@
                             Height="96" Width="96">
                                 <TextBlock Text="No picture" Style="{StaticResource TextBlock.h3.rotated}" Foreground="{StaticResource Green950}"/>
                             </Border>
-                            <StackPanel Margin="12,0" VerticalAlignment="Center">
+                            <StackPanel Margin="12,8" VerticalAlignment="Top">
                                 <TextBlock Name="TextBlockUserName" Text="UserName" Style="{StaticResource TextBlock.h2}"/>
                                 <TextBlock Name="TextBlockUserRole" Text="UserRole" Style="{StaticResource TextBlock.basic}"/>
                             </StackPanel>
@@ -43,7 +43,7 @@
                              HorizontalAlignment="Left"
                              VerticalContentAlignment="Center" 
                              MaxLength="32"/>
-                        <TextBlock Name="TextBlockWrongUserName" Text="User name cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,-2" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
+                        <TextBlock Name="TextBlockWrongUserName" Text="User name cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="0,-1,16,-2" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
                         <TextBlock Text="Email" Style="{StaticResource TextBlock.h3}"/>
                         <TextBox Name="TextBoxEmail" 
                              Margin="0,2,0,12" 
@@ -53,16 +53,66 @@
                              MaxLength="255"/>
                         <TextBlock Text="Phone number" Style="{StaticResource TextBlock.h3}"/>
                         <TextBox Name="TextBoxPhoneNumber" 
-                             Margin="0,2,0,16" 
+                             Margin="0,2,0,8" 
                              Height="24" Width="320" 
                              HorizontalAlignment="Left"
                              VerticalContentAlignment="Center" 
-                             MaxLength="12"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                            <Button Content="Save changes" Style="{StaticResource Button.confirm}"
-                                Margin="0,0,20,0" Padding="12,4"
-                                Click="ButtonSaveChanges_Click"/>
-                            <Button Content="Cancel changes" Style="{StaticResource Button.cancel}"
+                             MaxLength="16"/>
+                        
+                        <!-- Password Register Part -->
+                        <StackPanel Name="DisplayPasswordsRegister" Margin="0,8,0,0" Visibility="Collapsed">
+                            <TextBlock Text="Role" Style="{StaticResource TextBlock.h3}"/>
+                            <ComboBox Name="ComboBoxRoles" 
+                                 Margin="0,2,0,12" 
+                                 Height="24" Width="320" 
+                                 HorizontalAlignment="Left"
+                                 VerticalContentAlignment="Center" />
+                            <TextBlock Text="Password" Style="{StaticResource TextBlock.h3}"/>
+                            <Grid Height="24" Width="320" 
+                                    Margin="0,2,0,0" HorizontalAlignment="Left">
+                                <TextBox Name="TextBoxRegPassword"
+                                         Height="24" 
+                                         VerticalContentAlignment="Center" 
+                                         TextWrapping="NoWrap" Visibility="Hidden" 
+                                         MaxLength="64"/>
+                                <PasswordBox Name="PasswordBoxRegPassword" 
+                                         Height="24" 
+                                         VerticalContentAlignment="Center" 
+                                         MaxLength="64"/>
+                                <TextBlock Name="RegPasswordVisible" Text="/" FontSize="18" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,4"/>
+                                <TextBlock Text="👁" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,4,0" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp" Cursor="Hand" Tag="3"/>
+                            </Grid>
+                            <TextBlock Name="TextBlockWrongRegPassword" Text="Password cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="0,-1,16,4" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
+                            <TextBlock Text="Repeat Password" Style="{StaticResource TextBlock.h3}"/>
+                            <Grid Height="24" Width="320" 
+                                Margin="0,2,0,0" HorizontalAlignment="Left">
+                                <TextBox Name="TextBoxRegPasswordConfirm"
+                                     Height="24" 
+                                     VerticalContentAlignment="Center" 
+                                     TextWrapping="NoWrap" Visibility="Hidden" 
+                                     MaxLength="64"/>
+                                <PasswordBox Name="PasswordBoxRegPasswordConfirm" 
+                                     Height="24" 
+                                     VerticalContentAlignment="Center" 
+                                     MaxLength="64"/>
+                                <TextBlock Name="RegPasswordVisibleConfirm" Text="/" FontSize="18" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,4"/>
+                                <TextBlock Text="👁" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,4,0" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp" Cursor="Hand" Tag="4"/>
+                            </Grid>
+                            <TextBlock Name="TextBlockWrongRegPasswordConfirm" Text="Password cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="0,-1,16,4" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
+                        </StackPanel>
+                        <TextBlock Name="TextBlockChangesApplied" Text="Changes succesfully applied!" 
+                                   Style="{StaticResource TextBlock.basic}" Foreground="{StaticResource Green700}"
+                                   Visibility="Hidden"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,8,0,16">
+                            <Grid>
+                                <Button Name="ButtonSaveChanges" Content="Save changes" Style="{StaticResource Button.confirm}"
+                                        Margin="0,0,20,0" Padding="12,4"
+                                        Click="ButtonSaveChanges_Click"/>
+                                <Button Name="ButtonRegister" Content="Register User" Style="{StaticResource Button.confirm}"
+                                        Margin="0,0,20,0" Padding="12,4"
+                                        Click="ButtonRegister_Click" Visibility="Hidden"/>
+                            </Grid>
+                            <Button Name="ButtonCancelChanges" Content="Cancel changes" Style="{StaticResource Button.cancel}"
                                 Padding="12,4" Click="ButtonCancelChanges_Click"/>
                         </StackPanel>
                     </StackPanel>
@@ -70,25 +120,27 @@
                     <!-- Password Reset-->
                     <StackPanel Name="DisplayPasswordReset" Margin="0,8,0,16">
                         <TextBlock Text="Password Reset" Style="{StaticResource TextBlock.h1}"/>
-                        <TextBlock Text="Old Password" Style="{StaticResource TextBlock.h3}"/>
-                        <Grid Height="24" Width="320" 
-                          Margin="0,2,0,0" HorizontalAlignment="Left">
-                            <TextBox Name="TextBoxOldPassword"
-                                Height="24" 
-                                VerticalContentAlignment="Center" 
-                                TextWrapping="NoWrap" Visibility="Hidden" 
-                                MaxLength="64"/>
-                            <PasswordBox Name="PasswordBoxOldPassword" 
-                                Height="24" 
-                                VerticalContentAlignment="Center" 
-                                MaxLength="64"/>
-                            <TextBlock Name="OldPasswordVisible" Text="/" FontSize="18" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,4"/>
-                            <TextBlock Text="👁" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,4,0" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp" Cursor="Hand" Tag="0"/>
-                        </Grid>
-                        <TextBlock Name="TextBlockWrongOldPassword" Text="Password cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,4" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
+                        <StackPanel Name="OldPasswordRow">
+                            <TextBlock Text="Old Password" Style="{StaticResource TextBlock.h3}"/>
+                            <Grid Height="24" Width="320" 
+                              Margin="0,2,0,0" HorizontalAlignment="Left">
+                                <TextBox Name="TextBoxOldPassword"
+                                    Height="24" 
+                                    VerticalContentAlignment="Center" 
+                                    TextWrapping="NoWrap" Visibility="Hidden" 
+                                    MaxLength="64"/>
+                                <PasswordBox Name="PasswordBoxOldPassword" 
+                                    Height="24" 
+                                    VerticalContentAlignment="Center" 
+                                    MaxLength="64"/>
+                                <TextBlock Name="OldPasswordVisible" Text="/" FontSize="18" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,4"/>
+                                <TextBlock Text="👁" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,4,0" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp" Cursor="Hand" Tag="0"/>
+                            </Grid>
+                            <TextBlock Name="TextBlockWrongOldPassword" Text="Password cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="0,-1,16,4" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
+                        </StackPanel>
                         <TextBlock Text="New Password" Style="{StaticResource TextBlock.h3}"/>
                         <Grid Height="24" Width="320" 
-                                Margin="0,2,0,12" HorizontalAlignment="Left">
+                                Margin="0,2,0,0" HorizontalAlignment="Left">
                             <TextBox Name="TextBoxNewPassword"
                                  Height="24" 
                                  VerticalContentAlignment="Center" 
@@ -101,6 +153,7 @@
                             <TextBlock Name="NewPasswordVisible" Text="/" FontSize="18" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,4"/>
                             <TextBlock Text="👁" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,4,0" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp" Cursor="Hand" Tag="1"/>
                         </Grid>
+                        <TextBlock Name="TextBlockWrongNewPassword" Text="Password cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="0,-1,16,4" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
                         <TextBlock Text="Repeat Password" Style="{StaticResource TextBlock.h3}"/>
                         <Grid Height="24" Width="320" 
                                 Margin="0,2,0,0" HorizontalAlignment="Left">
@@ -116,8 +169,11 @@
                             <TextBlock Name="NewPasswordVisibleConfirm" Text="/" FontSize="18" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,4"/>
                             <TextBlock Text="👁" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,4,0" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp" Cursor="Hand" Tag="2"/>
                         </Grid>
-                        <TextBlock Name="TextBlockWrongNewPassword" Text="Passwords do not match!" Style="{StaticResource TextBlock.subtext}" Margin="16,-1,16,4" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <TextBlock Name="TextBlockWrongNewPasswordConfirm" Text="Password cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="0,-1,16,4" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
+                        <TextBlock Name="TextBlockPasswordReset" Text="Password succesfully updated!" 
+                               Style="{StaticResource TextBlock.basic}" Foreground="{StaticResource Green700}"
+                               Visibility="Hidden"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,4,0,20">
                             <Button Content="Reset Password" Style="{StaticResource Button.confirm}"
                                     Margin="0,0,20,0" Padding="12,4"
                                     Click="ButtonResetPassword_Click"/>

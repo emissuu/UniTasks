@@ -135,7 +135,7 @@ namespace UI.Windows
                     case "ButtonMyProfile":
                         if (ViewPresenter.Content is ProfileView)
                             return;
-                        ViewPresenter.Content = new ProfileView(_activeUser, _services);
+                        ViewPresenter.Content = new ProfileView(_activeUser, false, _services);
                         ButtonMyProfile.Style = (Style)FindResource("Button.sidetab.chosen");
                         if (previousView == "DashboardView")
                             ButtonHome.Style = (Style)FindResource("Button.sidetab");

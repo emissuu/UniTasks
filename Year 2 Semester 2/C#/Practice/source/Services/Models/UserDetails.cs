@@ -59,5 +59,18 @@ namespace Services.Models
                 Selection = value;
             }
         }
+        public User ToUser()
+        {
+            return new User()
+            {
+                Id = Id,
+                UserName = UserName,
+                Email = Email,
+                PhoneNumber = PhoneNumber,
+                RoleId = Role.Id,
+                Role = Role,
+                CreatedAt = CreatedAt
+            };
+        }
     }
 }

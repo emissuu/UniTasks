@@ -14,8 +14,8 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Users" Style="{StaticResource TextBlock.h2}" Foreground="{StaticResource Neutral100}" VerticalAlignment="Center" Margin="12,0"/>
                         <Rectangle Style="{StaticResource Rectangle.separator.vertical}" Fill="{StaticResource Green800}"/>
-                        <Button Content="Create User" Style="{StaticResource Button.tabbar}" Margin="8,6"/>
-                        <Button Content="Remove Selected" Style="{StaticResource Button.tabbar}" Margin="0,6,8,6"/>
+                        <Button Content="Create User" Style="{StaticResource Button.tabbar}" Margin="8,6" Click="ButtonAddUser_Click"/>
+                        <Button Content="Remove Selected" Style="{StaticResource Button.tabbar}" Margin="0,6,8,6" Click="ButtonRemoveSelected_Click"/>
                     </StackPanel>
                 </Border>
                 <ItemsControl Grid.Row="1" Name="ListBoxUsers" Style="{StaticResource ItemsControl.basic}" Margin="6">
@@ -34,7 +34,7 @@
                                     <TextBlock Grid.Column="2" Text="{Binding GetEmail}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Column="3" Text="{Binding GetPhoneNumber}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Column="4" Text="{Binding GetCreatedAt}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center"/>
-                                    <Button Name="ButtonEditUser" Grid.Column="5" Style="{StaticResource Button.listbox}" Content="Edit" Margin="6,0"/>
+                                    <Button Name="ButtonEditUser" Grid.Column="5" Style="{StaticResource Button.listbox}" Content="Edit" Margin="6,0" Click="ButtonEditUser_Click"/>
                                 </Grid>
                             </Border>
                         </DataTemplate>
@@ -42,6 +42,18 @@
                 </ItemsControl>
             </Grid>
         </Grid>
-        <ContentPresenter Grid.Column="1" Name="ContentPresenterSide" Visibility="Collapsed"/>
+        <Grid Grid.Column="1" Name="SidePanel" Visibility="Hidden">
+            <Border Margin="0,56,0,0"
+                    Width="24" Height="48"
+                    VerticalAlignment="Top" HorizontalAlignment="Left"
+                    CornerRadius="6" Background="{StaticResource Neutral300}"
+                    MouseLeftButtonUp="BorderSidePanel_MouseLeftButtonUp">
+                <TextBlock Text="›" Style="{StaticResource TextBlock.h2}"
+                           Margin="4,0,0,6"
+                           VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Foreground="{StaticResource Neutral700}"/>
+            </Border>
+            <ContentPresenter Margin="16,0,0,0" Name="ContentPresenterSide"/>
+        </Grid>
     </Grid>
 </UserControl>

@@ -31,7 +31,7 @@ namespace Data.Models
         [Required]
         public DateTime CreatedAt { get; set; }
         
-        public virtual ICollection<Team> Teams { get; set; } = new List<Team>();
+        public virtual ICollection<TeamUser> TeamUsers { get; set; } = new List<TeamUser>();
 
         public virtual ICollection<Team> CreatedTeams { get; set; } = new List<Team>();
 
