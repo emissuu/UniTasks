@@ -29,5 +29,9 @@ namespace Services.Models
                 Selection = value;
             }
         }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

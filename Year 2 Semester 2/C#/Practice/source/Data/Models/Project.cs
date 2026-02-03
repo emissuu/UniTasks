@@ -19,11 +19,6 @@ namespace Data.Models
         public virtual Team? Team { get; set; } = null!;
 
         [Required]
-        public int StatusId { get; set; }
-        [ForeignKey(nameof(StatusId))]
-        public virtual Status Status { get; set; } = null!;
-
-        [Required]
         [StringLength(32)]
         public string Name { get; set; } = null!;
 
@@ -32,9 +27,6 @@ namespace Data.Models
 
         [Required]
         public DateTime CreatedAt { get; set; }
-
-        [Required]
-        public string Color { get; set; } = null!;
 
         public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
     }

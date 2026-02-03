@@ -13,5 +13,6 @@ namespace Services.Interfaces
         public (string?, User?) RegisterUser(string login, string password, string email);
         public bool ResetPassword(string login, string passwordOld, string passwordNew);
         public IEnumerable<UserDetails> GetAllUserDetails();
+        public IEnumerable<UserDetails> GetUserDetailsByTeamId(int id);
     }
 }

@@ -8,9 +8,11 @@ namespace Services.Implementations
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly IAuditLogService _auditLogService;
+        public UserService(IUserRepository userRepository, IAuditLogService auditLogService)
         {
             _userRepository = userRepository;
+            _auditLogService = auditLogService;
         }
 
         public User? GetById(int id)
@@ -21,6 +23,7 @@ namespace Services.Implementations
         public void Update(User user)
         {
             _userRepository.Update(user);
+            _userRepository.Save();
         }
 
         public void Remove(int[] ids)
@@ -114,6 +117,20 @@ namespace Services.Implementations
                     u.Role,
                     u.CreatedAt
                 ));
+        }
+
+        public IEnumerable<UserDetails> GetUserDetailsByTeamId(int id)
+        {
+            return _userRepository.GetAll()
+                .Where(u => u.TeamUsers.Any(tu => tu.TeamId == id))
+                .Select(u => new UserDetails(
+                    u.Id,
+                    u.UserName,
+                    u.Email,
+                    u.PhoneNumber,
+                    u.Role,
+                    u.CreatedAt
+                )).ToList();
         }
     }
 }

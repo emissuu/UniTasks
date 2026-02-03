@@ -72,5 +72,10 @@ namespace Services.Models
                 CreatedAt = CreatedAt
             };
         }
+
+        public override string ToString()
+        {
+            return UserName;
+        }
     }
 }

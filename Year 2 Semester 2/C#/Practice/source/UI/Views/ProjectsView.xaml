@@ -4,9 +4,203 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UI.Views"
+             xmlns:models="clr-namespace:Data.Models;assembly=Data"
+            xmlns:cmodels="clr-namespace:Services.Models;assembly=Services"
+             xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="675" d:DesignWidth="840" Background="{StaticResource Neutral100}">
-    <Grid>
-        <TextBlock Text="I contain a lot of things that are projects actually!" Style="{StaticResource TextBlock.h1}" TextWrapping="Wrap"/>
+    <Grid ColumnDefinitions="*,*">
+        <Grid Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid RowDefinitions="40,*">
+                <Border Grid.Row="0" Background="{StaticResource Green900}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="My Projects" Style="{StaticResource TextBlock.h2}" Foreground="{StaticResource Neutral100}" VerticalAlignment="Center" Margin="12,0"/>
+                        <Rectangle Style="{StaticResource Rectangle.separator.vertical}" Fill="{StaticResource Green800}"/>
+                        <Button Name="ButtonCreateProject" Content="New Project" Style="{StaticResource Button.tabbar}" Margin="8,6" Click="ButtonCreateProject_Click"/>
+                    </StackPanel>
+                </Border>
+                <ItemsControl Name="ItemsControlProjects" Grid.Row="1" Style="{StaticResource ItemsControl.basic}" Margin="6">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:Project}">
+                            <Border Background="{StaticResource Green100}" 
+                                    CornerRadius="6" 
+                                    Margin="0,2" Padding="4">
+                                <Expander Name="MainExpander" Style="{StaticResource Expander.basic}">
+                                    <Expander.Header>
+                                        <Grid ColumnDefinitions="4,*" FlowDirection="LeftToRight">
+                                            <Grid Grid.Column="1"  RowDefinitions="40,96" FlowDirection="LeftToRight"
+                                                Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Expander}}, Path=ActualWidth}">
+                                                <Grid Grid.Row="0" ColumnDefinitions="*, auto,32">
+                                                    <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                                        <TextBlock Text="{Binding Name}" Style="{StaticResource TextBlock.h3}"/>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="Owned by: " Style="{StaticResource TextBlock.basic}"/>
+                                                            <TextBlock Text="{Binding CreatedBy.UserName}" Style="{StaticResource TextBlock.basic}"/>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                                        <Button Name="ButtonEditProjectDetails" Style="{StaticResource Button.listbox}" Content="Edit Details" Margin="6,0" Click="ButtonEditProject_Click"/>
+                                                        <Button Name="ButtonCreateTask" Style="{StaticResource Button.listbox}" Content="Add Task" Margin="6,0" Click="ButtonCreateTask_Click"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                                <Border Grid.Row="1" Margin="0,8,32,4" CornerRadius="4" Padding="2"
+                                                        BorderBrush="{StaticResource Green700}" BorderThickness="2">
+                                                    <TextBlock Name="TextBlockDetails" Text="{Binding Details}" TextWrapping="Wrap" Style="{StaticResource TextBlock.basic}"/>
+                                                </Border>
+                                            </Grid>
+                                        </Grid>
+                                    </Expander.Header>
+                                    <Expander.Content>
+                                        <ItemsControl Name="ItemsControlTasks" Style="{StaticResource ItemsControl.basic}" ItemsSource="{Binding Tasks}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate DataType="{x:Type models:Task}">
+                                                    <Border BorderBrush="{StaticResource Green700}" BorderThickness="0,2,0,0">
+                                                        <Grid RowDefinitions="28,56" Margin="16,2,24,2">
+                                                            <Grid Grid.Row="0" ColumnDefinitions="2*,3*,2*,auto">
+                                                                <TextBlock Grid.Column="0" Text="{Binding Name}" Style="{StaticResource TextBlock.h3}" VerticalAlignment="Center"/>
+                                                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                                                    <TextBlock Text="Assigned to: " Style="{StaticResource TextBlock.basic}"/>
+                                                                    <TextBlock Text="{Binding AssignedTo.UserName}" Style="{StaticResource TextBlock.basic}"/>
+                                                                </StackPanel>
+                                                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                                                    <TextBlock Text="Status: " Style="{StaticResource TextBlock.basic}"/>
+                                                                    <TextBlock Text="{Binding Status.Name}" Style="{StaticResource TextBlock.basic}"/>
+                                                                </StackPanel>
+                                                                <Button Grid.Column="3" Name="ButtonEditTaskDetails" Style="{StaticResource Button.listbox}" Content="Edit" Margin="6,0" Click="ButtonEditTask_Click" VerticalAlignment="Center"/>
+                                                            </Grid>
+                                                            <Border Grid.Row="1" Margin="0,8,0,4" CornerRadius="4" Padding="2"
+                                                                    BorderBrush="{StaticResource Green700}" BorderThickness="2">
+                                                                <TextBlock Name="TextBlockDetails" Text="{Binding Details}"  TextWrapping="Wrap" Style="{StaticResource TextBlock.basic}"/>
+                                                            </Border>
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Expander.Content>
+                                </Expander>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <!-- Edit project details side -->
+            <Grid Name="SideEditProject" Visibility="Hidden">
+                <Border Margin="0,56,0,0"
+                        Width="24" Height="48"
+                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                        CornerRadius="6" Background="{StaticResource Neutral300}"
+                        MouseLeftButtonUp="BorderSideProject_MouseLeftButtonUp">
+                    <TextBlock Text="›" Style="{StaticResource TextBlock.h2}"
+                            Margin="4,0,0,6"
+                            VerticalAlignment="Center" HorizontalAlignment="Left"
+                            Foreground="{StaticResource Neutral700}"/>
+                </Border>
+                <Border Margin="16,0,0,0"
+                         BorderBrush="{StaticResource Neutral300}" BorderThickness="3,0,0,0"
+                         Background="{StaticResource Neutral100}">
+                    <Grid Margin="6">
+                        <StackPanel>
+                            <TextBlock Text="Project Details" Style="{StaticResource TextBlock.h1}"/>
+                            <TextBlock Text="Name" Style="{StaticResource TextBlock.h3}"/>
+                            <TextBox Name="TextBoxProjectName" 
+                                 Margin="0,2,0,0" 
+                                 Height="24" Width="320" 
+                                 HorizontalAlignment="Left"
+                                 VerticalContentAlignment="Center" 
+                                 MaxLength="32"/>
+                            <TextBlock Name="TextBlockWrongProjectName" Text="Project name cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="0,-1,16,-2" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
+                            <TextBlock Text="Team" Style="{StaticResource TextBlock.h3}"/>
+                            <ComboBox Name="ComboBoxTeams" 
+                                 Margin="0,2,0,12" 
+                                 Height="24" Width="320" 
+                                 HorizontalAlignment="Left"
+                                 VerticalContentAlignment="Center" />
+                            <TextBlock Text="Details" Style="{StaticResource TextBlock.h3}"/>
+                            <TextBox Name="TextBoxProjectDetails" 
+                                 Margin="0,2,0,8" 
+                                 Height="128" Width="320" 
+                                 HorizontalAlignment="Left"
+                                 VerticalContentAlignment="Top"  TextWrapping="Wrap" AcceptsReturn="True"
+                                 MaxLength="1024"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Name="ButtonSaveChangesProject" Content="Save changes" Style="{StaticResource Button.confirm}"
+                                        Margin="0,8,20,0" Padding="12,4" Width="112" HorizontalAlignment="Left"
+                                        Click="ButtonSaveChangesProject_Click"/>
+                                <Button Name="ButtonRemoveProject" Content="Remove" Style="{StaticResource Button.remove}"
+                                        Margin="0,8,20,0" Padding="12,4" Width="112" HorizontalAlignment="Left"
+                                        Click="ButtonRemoveProject_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- Edit project details side -->
+            <Grid Name="SideEditTask" Visibility="Hidden">
+                <Border Margin="0,56,0,0"
+                        Width="24" Height="48"
+                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                        CornerRadius="6" Background="{StaticResource Neutral300}"
+                        MouseLeftButtonUp="BorderSideTask_MouseLeftButtonUp">
+                    <TextBlock Text="›" Style="{StaticResource TextBlock.h2}"
+                            Margin="4,0,0,6"
+                            VerticalAlignment="Center" HorizontalAlignment="Left"
+                            Foreground="{StaticResource Neutral700}"/>
+                </Border>
+                <Border Margin="16,0,0,0"
+                         BorderBrush="{StaticResource Neutral300}" BorderThickness="3,0,0,0"
+                         Background="{StaticResource Neutral100}">
+                    <Grid Margin="6">
+                        <StackPanel>
+                            <TextBlock Text="Task Details" Style="{StaticResource TextBlock.h1}"/>
+                            <TextBlock Text="Name" Style="{StaticResource TextBlock.h3}"/>
+                            <TextBox Name="TextBoxTaskName" 
+                                     Margin="0,2,0,0" 
+                                     Height="24" Width="320" 
+                                     HorizontalAlignment="Left"
+                                     VerticalContentAlignment="Center" 
+                                     MaxLength="32"/>
+                            <TextBlock Name="TextBlockWrongTaskName" Text="Project name cannot be empty!" Style="{StaticResource TextBlock.subtext}" Margin="0,-1,16,-2" Visibility="Hidden" Foreground="{StaticResource Danger}"/>
+                            <TextBlock Text="Assign to" Style="{StaticResource TextBlock.h3}"/>
+                            <ComboBox Name="ComboBoxAssignedTo" 
+                                     Margin="0,2,0,12" 
+                                     Height="24" Width="320" 
+                                     HorizontalAlignment="Left"
+                                     VerticalContentAlignment="Center" />
+                            <TextBlock Text="Status" Style="{StaticResource TextBlock.h3}"/>
+                            <ComboBox Name="ComboBoxStatus" 
+                                     Margin="0,2,0,12" 
+                                     Height="24" Width="320" 
+                                     HorizontalAlignment="Left"
+                                     VerticalContentAlignment="Center" />
+                            <TextBlock Text="Due to" Style="{StaticResource TextBlock.h3}"/>
+                            <wpfTool:DateTimePicker Name="DateTimePickerTask"
+                                    Margin="0,2,0,12" 
+                                    Height="24" Width="320" 
+                                    HorizontalAlignment="Left"
+                                    VerticalContentAlignment="Center" />
+                            <TextBlock Text="Details" Style="{StaticResource TextBlock.h3}"/>
+                            <TextBox Name="TextBoxTaskDetails" 
+                                     Margin="0,2,0,8" 
+                                     Height="128" Width="320" 
+                                     HorizontalAlignment="Left"
+                                     VerticalContentAlignment="Top"  TextWrapping="Wrap" AcceptsReturn="True"
+                                     MaxLength="1024"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Name="ButtonSaveChangesTask" Content="Save changes" Style="{StaticResource Button.confirm}"
+                                        Margin="0,8,20,0" Padding="12,4" Width="112" HorizontalAlignment="Left"
+                                        Click="ButtonSaveChangesTask_Click"/>
+                                <Button Name="ButtonRemoveTask" Content="Remove" Style="{StaticResource Button.remove}"
+                                        Margin="0,8,20,0" Padding="12,4" Width="112" HorizontalAlignment="Left"
+                                        Click="ButtonRemoveTask_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

@@ -8,9 +8,11 @@ namespace Services.Implementations
     public class TeamService : ITeamService
     {
         private readonly ITeamRepository _teamRepository;
-        public TeamService(ITeamRepository teamRepository)
+        private readonly IAuditLogService _auditLogService;
+        public TeamService(ITeamRepository teamRepository, IAuditLogService auditLogService)
         {
             _teamRepository = teamRepository;
+            _auditLogService = auditLogService;
         }
         
         public IEnumerable<Team> GetAll()

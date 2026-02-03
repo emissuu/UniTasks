@@ -1,7 +1,12 @@
-﻿namespace Services.Interfaces
+﻿using Task = Data.Models.Task;
+
+namespace Services.Interfaces
 {
     public interface ITaskService
     {
-        // Stuff will be written here shortly
+        public Task? GetById(int id);
+        public void Add(Task task);
+        public void Update(Task task);
+        public void Delete(int id);
     }
 }

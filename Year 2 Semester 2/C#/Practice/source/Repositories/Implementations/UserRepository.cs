@@ -13,6 +13,7 @@ namespace Repositories.Implementations
         {
             return _dbSet
                 .Include(u => u.Role)
+                .Include(u => u.TeamUsers)
                 .ToList();
         }
 

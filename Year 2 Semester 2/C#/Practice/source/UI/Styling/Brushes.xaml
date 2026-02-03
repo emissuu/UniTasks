@@ -18,4 +18,7 @@
     <SolidColorBrush x:Key="Neutral300" Color="#E0E0E0"/>
     <SolidColorBrush x:Key="Neutral200" Color="#EEEEEE"/>
     <SolidColorBrush x:Key="Neutral100" Color="#F5F5F5"/>
+    <SolidColorBrush x:Key="Red500" Color="#E74C3C"/>
+    <SolidColorBrush x:Key="Red600" Color="#CB4335"/>
+    <SolidColorBrush x:Key="Red700" Color="#B03A2E"/>
 </ResourceDictionary>

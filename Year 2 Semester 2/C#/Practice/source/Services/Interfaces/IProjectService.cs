@@ -1,7 +1,13 @@
-﻿namespace Services.Interfaces
+﻿using Data.Models;
+
+namespace Services.Interfaces
 {
     public interface IProjectService
     {
-        // Stuff will be written here shortly
+        public IEnumerable<Project> GetAll();
+        public Project? GetById(int id);
+        public void Add(Project project);
+        public void Update(Project project);
+        public void Delete(int id);
     }
 }

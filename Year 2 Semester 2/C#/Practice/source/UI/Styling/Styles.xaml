@@ -164,6 +164,28 @@ BasedOn="{StaticResource Button.basic}">
         </Style.Triggers>
     </Style>
 
+    <!-- Button.remove-->
+    <Style TargetType="Button" x:Key="Button.remove"
+            BasedOn="{StaticResource Button.basic}">
+        <Setter Property="Background" Value="{StaticResource Red500}"/>
+        <Setter Property="Foreground" Value="{StaticResource Neutral100}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="6"/>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="6"/>
+            </Style>
+        </Style.Resources>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource Red600}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource Red700}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!-- ========== TextBlock ========== -->
     
     <!-- TextBlock.basic -->

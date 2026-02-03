@@ -29,6 +29,10 @@ namespace UI.Windows
             {
                 ButtonUsers.Visibility = Visibility.Visible;
             }
+            else if (_activeUser.RoleId == 2)
+            {
+                ButtonReports.Visibility = Visibility.Visible;
+            }
             else if (_activeUser.RoleId == 3)
             {
                 ButtonMyTodo.Visibility = Visibility.Visible;
@@ -47,8 +51,8 @@ namespace UI.Windows
                             return;
                         ViewPresenter.Content = new DashboardView(_activeUser, _services);
                         ButtonHome.Style = (Style)FindResource("Button.sidetab.chosen");
-                        if (previousView == "InboxView")
-                            ButtonInbox.Style = (Style)FindResource("Button.sidetab");
+                        if (previousView == "ReportsView")
+                            ButtonReports.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "ToDoView")
                             ButtonMyTodo.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "ProjectsView")
@@ -60,11 +64,11 @@ namespace UI.Windows
                         else if (previousView == "UsersView")
                             ButtonUsers.Style = (Style)FindResource("Button.sidetab");
                         break;
-                    case "ButtonInbox":
-                        if (ViewPresenter.Content is InboxView)
+                    case "ButtonReports":
+                        if (ViewPresenter.Content is ReportsView)
                             return;
-                        ViewPresenter.Content = new InboxView(_activeUser, _services);
-                        ButtonInbox.Style = (Style)FindResource("Button.sidetab.chosen");
+                        ViewPresenter.Content = new ReportsView(_activeUser, _services);
+                        ButtonReports.Style = (Style)FindResource("Button.sidetab.chosen");
                         if (previousView == "DashboardView")
                             ButtonHome.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "ToDoView")
@@ -85,8 +89,8 @@ namespace UI.Windows
                         ButtonMyTodo.Style = (Style)FindResource("Button.sidetab.chosen");
                         if (previousView == "DashboardView")
                             ButtonHome.Style = (Style)FindResource("Button.sidetab");
-                        else if (previousView == "InboxView")
-                            ButtonInbox.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ReportsView")
+                            ButtonReports.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "ProjectsView")
                             ButtonMyProjects.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "TeamsView")
@@ -103,8 +107,8 @@ namespace UI.Windows
                         ButtonMyProjects.Style = (Style)FindResource("Button.sidetab.chosen");
                         if (previousView == "DashboardView")
                             ButtonHome.Style = (Style)FindResource("Button.sidetab");
-                        else if (previousView == "InboxView")
-                            ButtonInbox.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ReportsView")
+                            ButtonReports.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "ToDoView")
                             ButtonMyTodo.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "TeamsView")
@@ -121,8 +125,8 @@ namespace UI.Windows
                         ButtonMyTeams.Style = (Style)FindResource("Button.sidetab.chosen");
                         if (previousView == "DashboardView")
                             ButtonHome.Style = (Style)FindResource("Button.sidetab");
-                        else if (previousView == "InboxView")
-                            ButtonInbox.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ReportsView")
+                            ButtonReports.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "ToDoView")
                             ButtonMyTodo.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "ProjectsView")
@@ -139,8 +143,8 @@ namespace UI.Windows
                         ButtonMyProfile.Style = (Style)FindResource("Button.sidetab.chosen");
                         if (previousView == "DashboardView")
                             ButtonHome.Style = (Style)FindResource("Button.sidetab");
-                        else if (previousView == "InboxView")
-                            ButtonInbox.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ReportsView")
+                            ButtonReports.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "ToDoView")
                             ButtonMyTodo.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "ProjectsView")
@@ -157,8 +161,8 @@ namespace UI.Windows
                         ButtonUsers.Style = (Style)FindResource("Button.sidetab.chosen");
                         if (previousView == "DashboardView")
                             ButtonHome.Style = (Style)FindResource("Button.sidetab");
-                        else if (previousView == "InboxView")
-                            ButtonInbox.Style = (Style)FindResource("Button.sidetab");
+                        else if (previousView == "ReportsView")
+                            ButtonReports.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "ToDoView")
                             ButtonMyTodo.Style = (Style)FindResource("Button.sidetab");
                         else if (previousView == "ProjectsView")

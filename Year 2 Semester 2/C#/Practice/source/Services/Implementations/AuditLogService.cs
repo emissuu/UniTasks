@@ -1,5 +1,7 @@
-﻿using Repositories.Interfaces;
+﻿using Data.Models;
+using Repositories.Interfaces;
 using Services.Interfaces;
+using System.Text.Json;
 
 namespace Services.Implementations
 {
@@ -10,6 +12,41 @@ namespace Services.Implementations
         {
             _auditlogRepository = auditlogRepository;
         }
-        // Stuff will be written here shortly
+
+        public IEnumerable<AuditLog> GetAll()
+        {
+            return _auditlogRepository.GetAll();
+        }
+
+        public void Log(int userId, string entityType, int entityId, string action, object? oldValue, object? newValue)
+        {
+            string? oldValueSerialized, newValueSerialized;
+            if (oldValue != null)
+            {
+                oldValueSerialized = JsonSerializer.Serialize(oldValue);
+            }
+            else
+            {
+                oldValueSerialized = null;
+            }
+            if (newValue != null)
+            {
+                newValueSerialized = JsonSerializer.Serialize(newValue);
+            }
+            else
+            {
+                newValueSerialized = null;
+            }
+                _auditlogRepository.Add(new AuditLog()
+                {
+                    UserId = userId,
+                    EntityType = entityType,
+                    EntityId = entityId,
+                    Action = action,
+                    CreatedAt = DateTime.UtcNow,
+                    OldValue = oldValueSerialized,
+                    NewValue = newValueSerialized
+                });
+        }
     }
 }

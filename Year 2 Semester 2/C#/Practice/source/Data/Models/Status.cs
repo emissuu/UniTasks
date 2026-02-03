@@ -13,7 +13,6 @@ namespace Data.Models
         [StringLength(32)]
         public string Name { get; set; } = null!;
 
-        public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
         public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
     }
 }
