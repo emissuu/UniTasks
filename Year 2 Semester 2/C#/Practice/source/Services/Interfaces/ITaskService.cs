@@ -1,4 +1,5 @@
-﻿using Task = Data.Models.Task;
+﻿using Services.Models;
+using Task = Data.Models.Task;
 
 namespace Services.Interfaces
 {
@@ -8,5 +9,6 @@ namespace Services.Interfaces
         public void Add(Task task);
         public void Update(Task task);
         public void Delete(int id);
+        public IEnumerable<TaskDetails> GetTaskDetailsByUserId(int id);
     }
 }

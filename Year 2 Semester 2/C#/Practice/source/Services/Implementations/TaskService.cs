@@ -1,6 +1,7 @@
 ﻿using Repositories.Interfaces;
 using Task = Data.Models.Task;
 using Services.Interfaces;
+using Services.Models;
 
 namespace Services.Implementations
 {
@@ -35,6 +36,14 @@ namespace Services.Implementations
         {
             _taskRepository.Delete(id);
             _taskRepository.Save();
+        }
+
+        public IEnumerable<TaskDetails> GetTaskDetailsByUserId(int id)
+        {
+            return _taskRepository.GetAll()
+                .Where(t => t.AssignedToId == id)
+                .Select(t => new TaskDetails() { task = t})
+                .ToList();
         }
     }
 }

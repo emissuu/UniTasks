@@ -4,9 +4,55 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UI.Views"
+             xmlns:cmodels="clr-namespace:Services.Models;assembly=Services"
              mc:Ignorable="d" 
              d:DesignHeight="675" d:DesignWidth="840" Background="{StaticResource Neutral100}">
-    <Grid>
-        <TextBlock Text="Hi! I am todo view! You will never see me silly administrator!" Style="{StaticResource TextBlock.h1}" TextWrapping="Wrap"/>
+    <Grid RowDefinitions="40,*">
+        <Border Grid.Row="0" Background="{StaticResource Green900}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="My To-Do" Style="{StaticResource TextBlock.h2}" Foreground="{StaticResource Neutral100}" VerticalAlignment="Center" Margin="12,0"/>
+                <Rectangle Style="{StaticResource Rectangle.separator.vertical}" Fill="{StaticResource Green800}"/>
+            </StackPanel>
+        </Border>
+        <ItemsControl Name="ItemsControlTasks" Grid.Row="1" Style="{StaticResource ItemsControl.basic}" Margin="6">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type cmodels:TaskDetails}">
+                    <Border Background="{StaticResource Green100}" 
+                            CornerRadius="6" 
+                            Margin="0,2" Padding="4">
+                        <Grid RowDefinitions="40,96">
+                            <Grid Grid.Row="0" ColumnDefinitions="4*,3*, auto">
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                    <TextBlock Text="{Binding Name}" Style="{StaticResource TextBlock.h3}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Assigned by: " Style="{StaticResource TextBlock.basic}"/>
+                                        <TextBlock Text="{Binding CreatedBy.UserName}" Style="{StaticResource TextBlock.basic}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Due: " Style="{StaticResource TextBlock.basic}"/>
+                                    <TextBlock Text="{Binding GetDueTo}" Style="{StaticResource TextBlock.basic}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,8,0">
+                                    <ComboBox SelectedIndex="{Binding GetStatus}" 
+                                            Width="128" VerticalAlignment="Center">
+                                        <ComboBoxItem Content="New"/>
+                                        <ComboBoxItem Content="InProgress"/>
+                                        <ComboBoxItem Content="Completed"/>
+                                        <ComboBoxItem Content="OnHold"/>
+                                        <ComboBoxItem Content="Canceled"/>
+                                    </ComboBox>
+                                    <Button Style="{StaticResource Button.listbox}" Content="Save" Margin="6,0" Click="ButtonSaveStatus_Click"/>
+                                </StackPanel>
+                            </Grid>
+                            <Border Grid.Row="1" Margin="0,8,32,4" CornerRadius="4" Padding="2"
+                                        BorderBrush="{StaticResource Green700}" BorderThickness="2">
+                                <TextBlock Name="TextBlockDetails" Text="{Binding Details}" TextWrapping="Wrap" Style="{StaticResource TextBlock.basic}"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>

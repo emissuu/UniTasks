@@ -1,15 +1,22 @@
 ﻿using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Interfaces;
-using Models = Data.Models;
+using Task = Data.Models.Task;
 
 namespace Repositories.Implementations
 {
-    public class TaskRepository : Repository<Models.Task>, ITaskRepository
+    public class TaskRepository : Repository<Task>, ITaskRepository
     {
         public TaskRepository(AppDbContext context) : base(context) { }
 
-        public override Models.Task? GetById(int id)
+        public override IEnumerable<Task> GetAll()
+        {
+            return _dbSet
+                .Include(t => t.CreatedBy)
+                .ToList();
+        }
+
+        public override Task? GetById(int id)
         {
             return _dbSet
                 .Include(t => t.Status)
@@ -18,7 +25,7 @@ namespace Repositories.Implementations
                 .FirstOrDefault(t => t.Id == id);
         }
 
-        public override void Update(Models.Task entity)
+        public override void Update(Task entity)
         {
             var existingEntity = _dbSet.Find(entity.Id);
             if (existingEntity != null)
