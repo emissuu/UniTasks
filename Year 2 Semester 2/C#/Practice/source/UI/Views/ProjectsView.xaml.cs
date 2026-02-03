@@ -113,7 +113,7 @@ namespace UI.Views
                 project.Name = name;
                 project.Details = details;
                 project.TeamId = teamDetails.Id;
-                _services.GetService<IProjectService>().Update(project);
+                _services.GetService<IProjectService>().Update(project, _activeUser.Id);
             }
             else
             {
@@ -124,7 +124,7 @@ namespace UI.Views
                     TeamId = teamDetails.Id,
                     CreatedById = _activeUser.Id,
                     CreatedAt = DateTime.UtcNow
-                });
+                }, _activeUser.Id);
             }
             TextBoxProjectName.Text = String.Empty;
             TextBoxProjectDetails.Text = String.Empty;
@@ -160,7 +160,7 @@ namespace UI.Views
                 task.AssignedToId = assignedTo.Id;
                 task.DueDate = (DateTime)dueTo;
                 task.UpdatedAt = DateTime.UtcNow;
-                _services.GetService<ITaskService>().Update(task);
+                _services.GetService<ITaskService>().Update(task, _activeUser.Id);
             }
             else
             {
@@ -175,7 +175,7 @@ namespace UI.Views
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     CreatedById = _activeUser.Id
-                });
+                }, _activeUser.Id);
             }
             TextBoxTaskName.Text = String.Empty;
             TextBoxTaskDetails.Text = String.Empty;
@@ -242,7 +242,7 @@ namespace UI.Views
             var result = MessageBox.Show($"Are you sure you want to remove {_editedProject.Name}?", "TeamTask", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                _services.GetService<IProjectService>().Delete(_editedProject.Id);
+                _services.GetService<IProjectService>().Delete(_editedProject.Id, _activeUser.Id);
             }
             TextBoxProjectName.Text = String.Empty;
             TextBoxProjectDetails.Text = String.Empty;
@@ -255,7 +255,7 @@ namespace UI.Views
         {
             var result = MessageBox.Show($"Are you sure you want to remove {_editedTask.Name}?", "TeamTask", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             {
-                _services.GetService<ITaskService>().Delete(_editedTask.Id);
+                _services.GetService<ITaskService>().Delete(_editedTask.Id, _activeUser.Id);
             }
             TextBoxTaskName.Text = String.Empty;
             TextBoxTaskDetails.Text = String.Empty;

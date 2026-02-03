@@ -251,12 +251,6 @@ namespace UI.Windows
 
         private void TextBoxLogin_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key == System.Windows.Input.Key.Enter && Keyboard.Modifiers == ModifierKeys.Control)
-            {
-                e.Handled = true;
-                UserKey = _services.GetService<IUserService>().LoginUser("Admin", "admin");
-                Close();
-            }
             if (e.Key != System.Windows.Input.Key.Enter)
                 return;
 

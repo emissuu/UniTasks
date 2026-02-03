@@ -60,7 +60,7 @@ namespace UI.Views
                 .Where(td => td.IsChecked == true);
             var result = MessageBox.Show($"Are you sure you want to remove {teams.Count()} teams?", "TeamTask", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
-                _services.GetService<ITeamService>().Remove(teams.Select(td => td.Id).ToArray());
+                _services.GetService<ITeamService>().Remove(teams.Select(td => td.Id).ToArray(), _activeUser.Id);
             Update();
         }
 
@@ -96,13 +96,13 @@ namespace UI.Views
                 {
                     Name = teamName,
                     CreatedById = _activeUser.Id
-                });
+                }, _activeUser.Id);
             }
             else
             {
                 var team = _services.GetService<ITeamService>().GetById(_editedTeam.Id);
                 team.Name = teamName;
-                _services.GetService<ITeamService>().Update(team);
+                _services.GetService<ITeamService>().Update(team, _activeUser.Id);
             }
             Update();
             // Close the side panel
@@ -118,7 +118,10 @@ namespace UI.Views
                 return;
             }
             _editedTeam = (sender as Button).DataContext as TeamDetails;
-            var userDetails = _services.GetService<IUserService>().GetAllUserDetails().ToList();
+            var userDetails = _services.GetService<IUserService>().GetAllUserDetails()
+                .OrderBy(u => u.Role.Id)
+                .ThenBy(u => u.UserName)
+                .ToList();
             for (int i = 0; i < userDetails.Count(); i++)
             {
                 if (_editedTeam.TeamUsers.Any(tu => tu.UserId == userDetails[i].Id))

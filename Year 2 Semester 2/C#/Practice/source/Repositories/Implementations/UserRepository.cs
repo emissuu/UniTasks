@@ -24,6 +24,12 @@ namespace Repositories.Implementations
                 .FirstOrDefault(u => u.Id == id);
         }
 
+        public User? GetByIdSimple(int id)
+        {
+            return _dbSet
+                .FirstOrDefault(u => u.Id == id);
+        }
+
         public override void Update(User entity)
         {
             var existingEntity = _dbSet.Find(entity.Id);
@@ -45,6 +51,12 @@ namespace Repositories.Implementations
             return _dbSet
                 .Include(u => u.Role)
                 .FirstOrDefault(u => u.Email == email);
+        }
+
+        public User? GetByName(string name)
+        {
+            return _dbSet
+                .FirstOrDefault(u => u.UserName == name);
         }
     }
 }

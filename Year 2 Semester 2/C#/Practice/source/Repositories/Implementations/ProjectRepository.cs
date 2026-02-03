@@ -31,6 +31,12 @@ namespace Repositories.Implementations
                 .FirstOrDefault(p => p.Id == id);
         }
 
+        public Project? GetByIdSimple(int id)
+        {
+            return _dbSet
+                .FirstOrDefault(p => p.Id == id);
+        }
+
         public override void Update(Project entity)
         {
             var existingEntity = _dbSet.Find(entity.Id);
@@ -38,6 +44,12 @@ namespace Repositories.Implementations
             {
                 _context.Entry(existingEntity).CurrentValues.SetValues(entity);
             }
+        }
+
+        public Project? GetByName(string name)
+        {
+            return _dbSet
+                .FirstOrDefault(e => e.Name == name);
         }
     }
 }

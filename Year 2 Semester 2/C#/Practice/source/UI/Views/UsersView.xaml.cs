@@ -38,7 +38,7 @@ namespace UI.Views
 
         private void ButtonAddUser_Click(object sender, RoutedEventArgs e)
         {
-            ContentPresenterSide.Content = new ProfileView(null, null, _services);
+            ContentPresenterSide.Content = new ProfileView(null, null, _activeUser.Id, _services);
             SidePanel.Visibility = Visibility.Visible;
         }
 
@@ -55,7 +55,7 @@ namespace UI.Views
             }
             var result = MessageBox.Show($"Are you sure you want to remove {users.Count()} users?", "TeamTask", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
-                _services.GetService<IUserService>().Remove(users.Select(ud => ud.Id).ToArray());
+                _services.GetService<IUserService>().Remove(users.Select(ud => ud.Id).ToArray(), _activeUser.Id);
             UpdateUsersList();
         }
 
@@ -75,7 +75,7 @@ namespace UI.Views
                 return;
             }
             var selectedUser = _services.GetService<IUserService>().GetById(user.Id);
-            ContentPresenterSide.Content = new ProfileView(selectedUser, true, _services);
+            ContentPresenterSide.Content = new ProfileView(selectedUser, true, _activeUser.Id, _services);
             SidePanel.Visibility = Visibility.Visible;
         }
     }

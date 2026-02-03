@@ -6,8 +6,8 @@ namespace Services.Interfaces
     {
         public IEnumerable<Project> GetAll();
         public Project? GetById(int id);
-        public void Add(Project project);
-        public void Update(Project project);
-        public void Delete(int id);
+        public void Add(Project project, int userId);
+        public void Update(Project project, int userId);
+        public void Delete(int id, int userId);
     }
 }

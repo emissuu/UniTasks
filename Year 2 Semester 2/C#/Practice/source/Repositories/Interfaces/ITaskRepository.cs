@@ -1,6 +1,10 @@
-﻿using Models = Data.Models;
+﻿using Task = Data.Models.Task;
 
 namespace Repositories.Interfaces
 {
-    public interface ITaskRepository : IRepository<Models.Task>;
+    public interface ITaskRepository : IRepository<Task>
+    {
+        public Task? GetByIdSimple(int id);
+        public Task? GetByName(string name);
+    }
 }

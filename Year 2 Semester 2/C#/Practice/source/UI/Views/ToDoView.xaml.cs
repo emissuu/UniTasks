@@ -43,7 +43,7 @@ namespace UI.Views
         private void ButtonSaveStatus_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             var taskDetail = (sender as Button).DataContext as TaskDetails;
-            _services.GetService<ITaskService>().Update(taskDetail.task);
+            _services.GetService<ITaskService>().Update(taskDetail.task, _activeUser.Id);
             Update();
         }
     }

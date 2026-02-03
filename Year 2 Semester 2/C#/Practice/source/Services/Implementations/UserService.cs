@@ -20,17 +20,22 @@ namespace Services.Implementations
             return _userRepository.GetById(id);
         }
 
-        public void Update(User user)
+        public void Update(User user, int userId)
         {
+            var oldUser = _userRepository.GetByIdSimple(user.Id);
             _userRepository.Update(user);
             _userRepository.Save();
+            var newUser = _userRepository.GetByIdSimple(userId);
+            _auditLogService.Log(userId, "User", user.Id, "UPDATE", oldUser, newUser);
         }
 
-        public void Remove(int[] ids)
+        public void Remove(int[] ids, int userId)
         {
             foreach (int id in ids)
             {
+                var oldUser = _userRepository.GetByIdSimple(id);
                 _userRepository.Delete(id);
+                _auditLogService.Log(userId, "User", id, "REMOVE", oldUser, null);
             }
             _userRepository.Save();
         }
@@ -46,7 +51,7 @@ namespace Services.Implementations
                 return userByLogin;
         }
 
-        public bool RegisterUser(User user)
+        public bool RegisterUser(User user, int userId)
         {
             if (_userRepository.GetByLogin(user.UserName) != null)
                 return false;
@@ -62,6 +67,8 @@ namespace Services.Implementations
                     CreatedAt = DateTime.UtcNow
                 });
                 _userRepository.Save();
+                var newUser = _userRepository.GetByName(user.UserName);
+                _auditLogService.Log(userId, "User", newUser.Id, "CREATE", null, newUser);
                 return true;
             }
             catch
@@ -87,6 +94,8 @@ namespace Services.Implementations
                     CreatedAt = DateTime.UtcNow
                 });
                 _userRepository.Save();
+                var newUser = _userRepository.GetByName(login);
+                _auditLogService.Log(newUser.Id, "User", newUser.Id, "CREATE", null, newUser);
                 return (null, _userRepository.GetByLogin(login));
             }
             catch
@@ -95,13 +104,15 @@ namespace Services.Implementations
             }
         }
 
-        public bool ResetPassword(string login, string passwordOld, string passwordNew)
+        public bool ResetPassword(string login, string passwordOld, string passwordNew, int userId)
         {
-            var userByLogin = _userRepository.GetByLogin(login);
-            if (!BCrypt.Net.BCrypt.Verify(passwordOld, userByLogin.PasswordHash))
+            var oldUser = _userRepository.GetByLogin(login);
+            if (!BCrypt.Net.BCrypt.Verify(passwordOld, oldUser.PasswordHash))
                 return false;
-            userByLogin.PasswordHash = BCrypt.Net.BCrypt.HashPassword(passwordNew);
-            _userRepository.Update(userByLogin);
+            oldUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(passwordNew);
+            _userRepository.Update(oldUser);
+            var newUser = _userRepository.GetByName(login);
+            _auditLogService.Log(userId, "User", newUser.Id, "UPDATE", oldUser, newUser);
             _userRepository.Save();
             return true;
         }

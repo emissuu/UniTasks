@@ -25,23 +25,30 @@ namespace Services.Implementations
             return _teamRepository.GetById(id);
         }
 
-        public void Add(Team team)
+        public void Add(Team team, int userId)
         {
             _teamRepository.Add(team);
             _teamRepository.Save();
+            var newTeam = _teamRepository.GetByName(team.Name);
+            _auditLogService.Log(userId, "Team", newTeam.Id, "CREATE", null, newTeam);
         }
 
-        public void Update(Team team)
+        public void Update(Team team, int userId)
         {
+            var oldTeam = _teamRepository.GetByIdSimple(team.Id);
             _teamRepository.Update(team);
             _teamRepository.Save();
+            var newTeam = _teamRepository.GetByIdSimple(team.Id);
+            _auditLogService.Log(userId, "Team", newTeam.Id, "UPDATE", oldTeam, newTeam);
         }
 
-        public void Remove(int[] ids)
+        public void Remove(int[] ids, int userId)
         {
             foreach (int id in ids)
             {
+                var oldValue = _teamRepository.GetByIdSimple(id);
                 _teamRepository.Delete(id);
+                _auditLogService.Log(userId, "Team", id, "REMOVE", oldValue, null);
             }
             _teamRepository.Save();
         }

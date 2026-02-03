@@ -1,4 +1,5 @@
 ﻿using Data.Context;
+using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Interfaces;
 using Task = Data.Models.Task;
@@ -25,6 +26,12 @@ namespace Repositories.Implementations
                 .FirstOrDefault(t => t.Id == id);
         }
 
+        public Task? GetByIdSimple(int id)
+        {
+            return _dbSet
+                .FirstOrDefault(t => t.Id == id);
+        }
+
         public override void Update(Task entity)
         {
             var existingEntity = _dbSet.Find(entity.Id);
@@ -32,6 +39,12 @@ namespace Repositories.Implementations
             {
                 _context.Entry(existingEntity).CurrentValues.SetValues(entity);
             }
+        }
+
+        public Task? GetByName(string name)
+        {
+            return _dbSet
+                .FirstOrDefault(e => e.Name == name);
         }
     }
 }

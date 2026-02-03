@@ -29,6 +29,12 @@ namespace Repositories.Implementations
                 .FirstOrDefault(t => t.Id == id);
         }
 
+        public Team? GetByIdSimple(int id)
+        {
+            return _dbSet
+                .FirstOrDefault(t => t.Id == id);
+        }
+
         public override void Update(Team entity)
         {
             var existingEntity = _dbSet.Find(entity.Id);
@@ -36,6 +42,12 @@ namespace Repositories.Implementations
             {
                 _context.Entry(existingEntity).CurrentValues.SetValues(entity);
             }
+        }
+
+        public Team? GetByName(string name)
+        {
+            return _dbSet
+                .FirstOrDefault(e => e.Name == name);
         }
 
         public void AddTeamUser(TeamUser teamUser)

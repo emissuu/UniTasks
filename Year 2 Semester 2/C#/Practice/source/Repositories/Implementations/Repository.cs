@@ -21,7 +21,7 @@ namespace Repositories.Implementations
 
         public virtual void Update(T entity)
         {
-            _dbSet.Update(entity);
+            throw new NotImplementedException();
         }
 
         public virtual void Delete(int id)

@@ -6,9 +6,9 @@ namespace Services.Interfaces
     public interface ITaskService
     {
         public Task? GetById(int id);
-        public void Add(Task task);
-        public void Update(Task task);
-        public void Delete(int id);
+        public void Add(Task task, int userId);
+        public void Update(Task task, int userId);
+        public void Delete(int id, int userId);
         public IEnumerable<TaskDetails> GetTaskDetailsByUserId(int id);
     }
 }

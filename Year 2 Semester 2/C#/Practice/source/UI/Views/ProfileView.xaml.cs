@@ -17,11 +17,13 @@ namespace UI.Views
         private IServiceProvider _services;
         private User? _user;
         private bool? _isEditedByAdmin;
-        public ProfileView(User? user, bool? isEditedByAdmin, IServiceProvider services)
+        private int _activeUserId;
+        public ProfileView(User? user, bool? isEditedByAdmin, int activeUserId, IServiceProvider services)
         {
             _user = user;
             _isEditedByAdmin = isEditedByAdmin;
             _services = services;
+            _activeUserId = activeUserId;
             InitializeComponent();
             Initialize();
         }
@@ -124,7 +126,7 @@ namespace UI.Views
             TextBlockChangesApplied.Text = "Changes succesfully applied";
             TextBlockChangesApplied.Visibility = Visibility.Visible;
 
-            _services.GetService<IUserService>().Update(updatedUser);
+            _services.GetService<IUserService>().Update(updatedUser, _activeUserId);
             Update();
         }
 
@@ -194,7 +196,7 @@ namespace UI.Views
                 Email = email,
                 PhoneNumber = phoneNumber
             };
-            var loginResult = _services.GetService<IUserService>().RegisterUser(user);
+            var loginResult = _services.GetService<IUserService>().RegisterUser(user, _activeUserId);
             if (!loginResult)
             {
                 TextBlockWrongUserName.Text = "Login is already taken!";
@@ -366,7 +368,7 @@ namespace UI.Views
             if (isWrong)
                 return;
 
-            var loginResult = _services.GetService<IUserService>().ResetPassword(_user.UserName, secretOld, secretNew1);
+            var loginResult = _services.GetService<IUserService>().ResetPassword(_user.UserName, secretOld, secretNew1, _activeUserId);
             if (loginResult)
             {
                 TextBlockWrongOldPassword.Visibility = Visibility.Hidden;

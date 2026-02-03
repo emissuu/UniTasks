@@ -16,7 +16,10 @@ namespace Services.Models
             Id = id;
             Name = name;
             CreatedBy = createdBy;
-            TeamUsers = teamUsers;
+            TeamUsers = teamUsers
+                .OrderBy(tu => tu.User.RoleId)
+                .ThenBy(tu => tu.User.UserName)
+                .ToList();
         }
         public bool IsChecked
         {
