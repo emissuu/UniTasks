@@ -20,6 +20,13 @@ namespace Services.Implementations
             return _auditlogRepository.GetAll();
         }
 
+        public IEnumerable<AuditLogDetails> GetAllAuditDetails()
+        {
+            return _auditlogRepository.GetAll()
+                .Select(a => new AuditLogDetails(a))
+                .ToList();
+        }
+
         public void Log(int userId, string entityType, int entityId, string action, object? oldValue, object? newValue)
          {
             string? oldValueSerialized = Serialize(oldValue);

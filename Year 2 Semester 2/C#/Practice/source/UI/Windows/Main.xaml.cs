@@ -28,6 +28,7 @@ namespace UI.Windows
             if (_activeUser.RoleId == 1)
             {
                 ButtonUsers.Visibility = Visibility.Visible;
+                ButtonReports.Visibility = Visibility.Visible;
             }
             else if (_activeUser.RoleId == 2)
             {

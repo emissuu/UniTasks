@@ -4,9 +4,101 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UI.Views"
+             xmlns:models="clr-namespace:Data.Models;assembly=Data"
+             xmlns:cmodels="clr-namespace:Services.Models;assembly=Services"
              mc:Ignorable="d" 
              d:DesignHeight="675" d:DesignWidth="840" Background="{StaticResource Neutral100}">
-    <Grid>
-        <TextBlock Text="What common do I have with your gmail?          No one reads us!" Style="{StaticResource TextBlock.h1}" TextWrapping="Wrap"/>
+    <Grid RowDefinitions="40,*">
+        <Border Grid.Row="0" Background="{StaticResource Green900}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Reports" Style="{StaticResource TextBlock.h2}" Foreground="{StaticResource Neutral100}" VerticalAlignment="Center" Margin="12,0"/>
+                <Rectangle Style="{StaticResource Rectangle.separator.vertical}" Fill="{StaticResource Green800}"/>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Row="1" RowDefinitions="72,*">
+            <Border Grid.Row="0" Background="{StaticResource Green200}">
+                <Grid RowDefinitions="*,*" ColumnDefinitions="auto,*,auto">
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Margin="16,0">
+                            <TextBlock Text="Type: " Style="{StaticResource TextBlock.h3}"/>
+                            <ComboBox Name="ComboBoxType" Width="96" VerticalAlignment="Center" SelectedIndex="0" SelectionChanged="ComboBoxType_SelectionChanged">
+                                <ComboBoxItem Content="All"/>
+                                <ComboBoxItem Content="Users"/>
+                                <ComboBoxItem Content="Projects"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="16,0">
+                            <TextBlock Text="Entry: " Style="{StaticResource TextBlock.h3}"/>
+                            <ComboBox Name="ComboBoxEntry" Width="156" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Margin="0,0">
+                            <TextBlock Text="Sort by: " Style="{StaticResource TextBlock.h3}"/>
+                            <ComboBox Name="ComboBoxSortBy" Width="84" VerticalAlignment="Center" SelectedIndex="0">
+                                <ComboBoxItem Content="Date"/>
+                                <ComboBoxItem Content="Entity Id"/>
+                                <ComboBoxItem Content="User"/>
+                                <ComboBoxItem Content="Action"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="16,0">
+                            <ComboBox Name="ComboBoxOrder" Width="96" VerticalAlignment="Center" SelectedIndex="0">
+                                <ComboBoxItem Content="Ascending"/>
+                                <ComboBoxItem Content="Descending"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="ButtonApplyFilters" Content="Apply filters" Style="{StaticResource Button.listbox}" 
+                                VerticalAlignment="Center" HorizontalAlignment="Right" Margin="13,0,0,6" Click="ButtonApplyFilters_Click"/>
+                        <Button Name="ButtonCreateReport" Content="Create Report" Style="{StaticResource Button.listbox}" 
+                                VerticalAlignment="Center" HorizontalAlignment="Right" Margin="13,0,14,6" Click="ButtonCreateReport_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <ScrollViewer Grid.Row="1">
+                <StackPanel Margin="0,0,-16,6">
+                    <Border Background="{StaticResource Green100}">
+                        <Grid ColumnDefinitions="56,auto,3*,auto,56,auto,80,auto,80,auto,2*" Height="20">
+                            <TextBlock Grid.Column="0" Text="Id" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                            <Rectangle Grid.Column="1" Style="{StaticResource Rectangle.separator.vertical}"/>
+                            <TextBlock Grid.Column="2" Text="User" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                            <Rectangle Grid.Column="3" Style="{StaticResource Rectangle.separator.vertical}"/>
+                            <TextBlock Grid.Column="4" Text="Entity Id" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                            <Rectangle Grid.Column="5" Style="{StaticResource Rectangle.separator.vertical}"/>
+                            <TextBlock Grid.Column="6" Text="Entity Type" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                            <Rectangle Grid.Column="7" Style="{StaticResource Rectangle.separator.vertical}"/>
+                            <TextBlock Grid.Column="8" Text="Action" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                            <Rectangle Grid.Column="9" Style="{StaticResource Rectangle.separator.vertical}"/>
+                            <TextBlock Grid.Column="10" Text="Date And Time" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <ItemsControl Name="ItemsControlLogs" Style="{StaticResource ItemsControl.basic}" Margin="0,0,0,6">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type cmodels:AuditLogDetails}">
+                                <Border Background="{StaticResource Green100}" 
+                                        Margin="0" Height="28"
+                                        BorderBrush="{StaticResource Green900}" BorderThickness="0,2,0,0">
+                                    <Grid ColumnDefinitions="56,auto,3*,auto,56,auto,80,auto,80,auto,2*">
+                                        <TextBlock Grid.Column="0" Text="{Binding Id}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                                        <Rectangle Grid.Column="1" Style="{StaticResource Rectangle.separator.vertical}"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding User.UserName}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                                        <Rectangle Grid.Column="3" Style="{StaticResource Rectangle.separator.vertical}"/>
+                                        <TextBlock Grid.Column="4" Text="{Binding EntityId}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                                        <Rectangle Grid.Column="5" Style="{StaticResource Rectangle.separator.vertical}"/>
+                                        <TextBlock Grid.Column="6" Text="{Binding EntityType}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                                        <Rectangle Grid.Column="7" Style="{StaticResource Rectangle.separator.vertical}"/>
+                                        <TextBlock Grid.Column="8" Text="{Binding Action}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                                        <Rectangle Grid.Column="9" Style="{StaticResource Rectangle.separator.vertical}"/>
+                                        <TextBlock Grid.Column="10" Text="{Binding GetCreatedAt}" Style="{StaticResource TextBlock.basic}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </UserControl>
