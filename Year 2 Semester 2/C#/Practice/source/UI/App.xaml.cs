@@ -17,11 +17,13 @@ namespace UI
 
             var services = new ServiceCollection();
 
+            
             services.AddDbContext<AppDbContext>();
             ServiceCollectionExtensions.AddRepositories(services);
             ServiceCollectionExtensions.AddServices(services);
 
             var servicesProvider = services.BuildServiceProvider();
+            var context = servicesProvider.GetService<AppDbContext>().Database.EnsureCreated();
 
             var login = new Login(servicesProvider);
             login.ShowDialog();

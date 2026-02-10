@@ -32,6 +32,17 @@ namespace Repositories.Implementations
                 .FirstOrDefault(t => t.Id == id);
         }
 
+        public override void Add(Task task)
+        {
+            _dbSet.Add(task);
+        }
+
+        public override void Delete(int id)
+        {
+            var entity = GetById(id);
+            if (entity != null) _dbSet.Remove(entity);
+        }
+
         public override void Update(Task entity)
         {
             var existingEntity = _dbSet.Find(entity.Id);

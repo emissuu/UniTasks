@@ -45,6 +45,8 @@ namespace Services.Implementations
             var userByLogin = _userRepository.GetByLogin(login);
             if (userByLogin == null)
                 userByLogin = _userRepository.GetByEmail(login);
+            if (userByLogin == null)
+                return null;
             if (!BCrypt.Net.BCrypt.Verify(password, userByLogin.PasswordHash))
                 return null;
             else

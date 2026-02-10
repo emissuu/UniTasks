@@ -22,21 +22,29 @@ namespace UI.Windows
 
         private void Initialize()
         {
+            
+            ButtonHome.Visibility = Visibility.Collapsed;
             TextBlockUserName.Text = _activeUser.UserName;
             TextBlockUserRole.Text = _activeUser.Role.Name;
-            ViewPresenter.Content = new DashboardView(_activeUser, _services);
+            
             if (_activeUser.RoleId == 1)
             {
                 ButtonUsers.Visibility = Visibility.Visible;
                 ButtonReports.Visibility = Visibility.Visible;
+                ViewPresenter.Content = new ProjectsView(_activeUser, _services);
+                ButtonMyProjects.Style = (Style)FindResource("Button.sidetab.chosen");
             }
             else if (_activeUser.RoleId == 2)
             {
                 ButtonReports.Visibility = Visibility.Visible;
+                ViewPresenter.Content = new ProjectsView(_activeUser, _services);
+                ButtonMyProjects.Style = (Style)FindResource("Button.sidetab.chosen");
             }
             else if (_activeUser.RoleId == 3)
             {
                 ButtonMyTodo.Visibility = Visibility.Visible;
+                ViewPresenter.Content = new ToDoView(_activeUser, _services);
+                ButtonMyTodo.Style = (Style)FindResource("Button.sidetab.chosen");
             }
         }
 
