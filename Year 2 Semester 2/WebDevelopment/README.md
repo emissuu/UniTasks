@@ -1,6 +1,0 @@
-# Web-development repository
-Stuff will be there soon  
-Or should I say...  
-It's still in development...   
-***Web***-development  
-You get it? Hehheheh
