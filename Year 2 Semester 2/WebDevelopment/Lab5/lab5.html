@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/08632b264c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="m-4">
+        <!-- pretable div -->
+        <div class="flex justify-between mb-3 py-2">
+            <div class="flex items-left">
+                <p class="text-sm text-gray-600 font-medium">0 selected</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-1 text-gray-600 cursor-pointer hover:text-gray-400 transition-colors">
+                    <i class="fa-solid fa-arrow-down-wide-short"></i>
+                    <p class="text-sm font-semibold">Sort by</p>
+                </div>
+                <div class="flex items-center gap-1 text-gray-600 cursor-pointer hover:text-gray-400 transition-colors">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                    <p class="text-sm font-semibold">Actions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- table div -->
+        <div class="w-full mb-2 rounded-lg border-1 border-gray-300 overflow-hidden">
+            <table class="w-full font-medium">
+                <thead class="">
+                    <tr class="bg-gray-100 text-gray-500 text-sm">
+                        <th class="px-4 py-2 w-[80px]">
+                            <div class="flex items-left justify-center">
+                                <input type="checkbox" class="w-4 h-4 rounded-lg border-2 border-gray-600">
+                                <i class="fa-solid fa-angle-down scale-75"></i>
+                            </div>
+                        </th>
+                        <th class="px-4 py-2 w-[25%] text-left font-medium">Name</th>
+                        <th class="px-4 py-2 w-[15%] text-right font-medium">Properties</th>
+                        <th class="px-4 py-2 w-[15%] text-right font-medium">Created By</th>
+                        <th class="px-4 py-2 w-[30%] text-left font-medium">Last Updated</th>
+                        <th class="px-4 py-2 w-[10%] text-right"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-gray-0 text-gray-600 text-sm p-2 text-right border-b border-gray-100 items-center hover:bg-gray-100 transition-colors">
+                        <th class="pl-2 pr-6 py-4 text-center">
+                            <input type="checkbox" class="w-4 h-4 rounded border-2 border-gray-400">
+                        </th>
+                        <th class="font-semibold text-left p-4">denver</th>
+                        <th class="font-medium p-4">24</th>
+                        <th class="font-medium p-4">Me</th>
+                        <th class="font-medium text-left p-4">02/27/2026 at 1:41PM</th>
+                        <th class="p-4"><i class="fa-solid fa-ellipsis-vertical"></i></th>
+                    </tr>
+                    <tr class="bg-gray-0 text-gray-600 text-sm p-2 text-right border-b border-gray-100  items-center hover:bg-gray-100 transition-colors">
+                        <th class="pl-2 pr-6 py-4 text-center">
+                            <input type="checkbox" class="w-4 h-4 rounded border-2 border-gray-400">
+                        </th>
+                        <th class="font-semibold text-left p-4">test save</th>
+                        <th class="font-medium p-4">10</th>
+                        <th class="font-medium p-4">Me</th>
+                        <th class="font-medium text-left p-4">02/10/2026 at 5:52PM</th>
+                        <th class="p-4"><i class="fa-solid fa-ellipsis-vertical"></i></th>
+                    </tr>
+                    <tr class="bg-gray-0 text-gray-600 text-sm p-2 text-right border-b border-gray-100  items-center hover:bg-gray-100 transition-colors">
+                        <th class="pl-2 pr-6 py-4 text-center">
+                            <input type="checkbox" class="w-4 h-4 rounded border-2 border-gray-400">
+                        </th>
+                        <th class="font-semibold text-left p-4">gggg</th>
+                        <th class="font-medium p-4">10</th>
+                        <th class="font-medium p-4">Me</th>
+                        <th class="font-medium text-left p-4">02/04/2026 at 5:49PM</th>
+                        <th class="p-4"><i class="fa-solid fa-ellipsis-vertical"></i></th>
+                    </tr>
+                    <tr class="bg-gray-0 text-gray-600 text-sm p-2 text-right border-b border-gray-100  items-center hover:bg-gray-100 transition-colors">
+                        <th class="pl-2 pr-6 py-4 text-center">
+                            <input type="checkbox" class="w-4 h-4 rounded border-2 border-gray-400">
+                        </th>
+                        <th class="font-semibold text-left p-4">test full export</th>
+                        <th class="font-medium p-4">4059</th>
+                        <th class="font-medium p-4">Me</th>
+                        <th class="font-medium text-left p-4">02/02/2026 at 11:49AM</th>
+                        <th class="p-4"><i class="fa-solid fa-ellipsis-vertical"></i></th>
+                    </tr>
+                    <tr class="bg-gray-0 text-gray-600 text-sm p-2 text-right border-b border-gray-100  items-center hover:bg-gray-100 transition-colors">
+                        <th class="pl-2 pr-6 py-4 text-center">
+                            <input type="checkbox" class="w-4 h-4 rounded border-2 border-gray-400">
+                        </th>
+                        <th class="font-semibold text-left p-4">denver 1</th>
+                        <th class="font-medium p-4">14</th>
+                        <th class="font-medium p-4">Me</th>
+                        <th class="font-medium text-left p-4">01/23/2026 at 9:20AM</th>
+                        <th class="p-4"><i class="fa-solid fa-ellipsis-vertical"></i></th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="flex justify-between items-center p-4">
+                <div class="flex justify-center items-center gap-1 text-xs text-gray-600">
+                    <p>Show</p>
+                    <input type="text" value="5" class="border-1 border-gray-300 text-sm text-gray-700 font-bold w-6 h-8 rounded text-center">
+                    <p> of 5 results</p>
+                </div>
+                <div class="">
+                    <div class="h-8 w-8 font-semibold rounded-full bg-green-100 border-1 border-green-500 items-center text-center pt-0.5">1</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
