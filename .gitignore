@@ -3,6 +3,14 @@
 bin
 obj
 .idea
+.nuxt
+node_modules
+.env
+.output
+.data
+.nitro
+.cache
+dist
 
 dbconnection.txt
 
