@@ -5,7 +5,6 @@
     "priceMonthly": 83.25,
     "priceYearly": 1188,
     "priceYearlyDiscounted": 999,
-    "isFreeTrialAvailable": true,
     "descriptionItems": [
       {
         "mainText": "Primary user only",
@@ -45,7 +44,6 @@
     "priceMonthly": 207.50,
     "priceYearly": 2988,
     "priceYearlyDiscounted": 2490,
-    "isFreeTrialAvailable": true,
     "descriptionItems": [
       {
         "mainText": "Primary user + 2 free team members",
@@ -85,7 +83,6 @@
     "priceMonthly": 457.50,
     "priceYearly": 6588,
     "priceYearlyDiscounted": 5490,
-    "isFreeTrialAvailable": false,
     "descriptionItems": [
       {
         "mainText": "Primary user + 6 free team members",

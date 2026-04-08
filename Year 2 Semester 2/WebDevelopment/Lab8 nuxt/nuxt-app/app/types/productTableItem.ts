@@ -1,4 +1,4 @@
-export interface DummyProduct {
+export interface ProductTableItem {
   id: number,
   title: string,
   description: string,

@@ -1,9 +1,19 @@
 <script setup lang="ts">
-import type { Product } from "~/types/product";
 
 const props = defineProps<{
-  product: Product;
+  product: ProductCard,
+  status: string,
+  isCheckout: boolean | null
 }>()
+
+async function redirectToCheckout() {
+  navigateTo({
+    path: "/products/checkout",
+    query: {
+      plan: props.product.id
+    }
+  })
+}
 </script>
 
 <template>
@@ -19,35 +29,38 @@ const props = defineProps<{
 
   <!-- Actual card itself -->
   <div class="flex py-6 px-2">
-    <div class="relative w-[100%] max-w-[360px] min-w-[260px] rounded-xl shadow-xl overflow-hidden border-gray-200 border-1
+    <div v-if="status === 'pending'">
+      <USkeleton class="w-[100%] max-w-[360px] min-w-[260px] h-120 rounded-xl" />
+    </div>
+    <div v-else class="relative w-[100%] max-w-[360px] min-w-[260px] rounded-xl shadow-xl overflow-hidden border-gray-200 border
                 hover:border-gray-600 hover:shadow-xl/15 transition duration-300 bg-white">
       <div class="w-full overflow-hidden bg-linear-to-r from-lime-500 to-cyan-500 h-1"></div>
 
       <div class="px-8 pt-6 pb-8">
-        <h2 class="text-xl font-bold text-gray-800 mb-4">{{ product.name }}</h2>
+        <h2 class="text-xl font-bold text-gray-800 mb-2">{{ product.name }}</h2>
 
         <span class="inline-block bg-gray-100 text-gray-500 text-xs px-2 py-0.5 font-bold rounded mb-1">
                         3-days free then:</span>
 
         <div class="flex items-baseline mb-1.5">
-          <span class="text-4xl text-gray-800 font-bold">${{ product.priceMonthly.toFixed(2) }}</span>
+          <span class="text-4xl text-gray-800 font-bold">${{ product.priceMonthly?.toFixed(2) }}</span>
           <span class="text-base text-gray-500">/month</span>
         </div>
         <p class="text-sm text-gray-500 mb-2">
-          Billed yearly at <span class="line-through decoration-gray-800 decoration-2">${{ product.priceYearly.toLocaleString() }}</span> <span class="text-gray-700 font-semibold">${{ product.priceYearlyDiscounted.toLocaleString() }}</span></p>
+          Billed yearly at <span class="line-through decoration-gray-800 decoration-2">${{ product.priceYearly?.toLocaleString() }}</span> <span class="text-gray-700 font-semibold">${{ product.priceYearlyDiscounted?.toLocaleString() }}</span></p>
 
         <span class="inline-block bg-gray-200 text-green-700 text-sm px-3 py-0.5 font-medium rounded mb-4">
-                        ${{ (product.priceYearly - product.priceYearlyDiscounted).toLocaleString() }} in savings</span>
+                        ${{ (product.priceYearly - product.priceYearlyDiscounted)?.toLocaleString() }} in savings</span>
 
-        <button v-if="product.isFreeTrialAvailable" class="py-2 w-[100%] cursor-pointer
+        <UButton
+          v-if="!isCheckout"
+          @click="redirectToCheckout"
+          class="mb-3 py-3 w-[100%] cursor-pointer
           bg-linear-to-r from-amber-300 to-orange-400
           hover:from-yellow-300 hover:to-amber-400 transition duration-200
-          rounded-sm items-center text-black">
-          Try It Free</button>
-        <button v-else class="py-2 w-[100%] text-black disabled cursor-not-allowed
-          bg-gray-300
-          rounded-sm items-center text-black">
-          Try It Free</button>
+          rounded-sm items-center text-black
+          justify-center font-semibold">
+          Try It Free</UButton>
 
         <hr class="border-gray-200 mb-4"/>
 

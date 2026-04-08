@@ -34,8 +34,6 @@ useSeoMeta({
         </NuxtLink>
 
         <TemplateMenu />
-
-        <a href="/Products/List" class="m-4 mt-5 font-bold text-black">Products</a>
       </template>
 
       <template #right>

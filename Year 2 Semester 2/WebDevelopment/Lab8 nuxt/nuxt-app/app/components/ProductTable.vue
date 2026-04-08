@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import type { DummyProduct} from "~/types/DummyProduct";
-import type { TableColumn } from "@nuxt/ui/components/Table.vue";
-import {UBadge, UButton, UDropdownMenu} from "#components";
 import { getPaginationRowModel } from '@tanstack/vue-table';
+import {UBadge, UButton, UDropdownMenu} from "#components";
+import type {TableColumn} from "@nuxt/ui/components/Table.vue";
+import type {ProductTableItem} from "~/types/productTableItem";
 
 const table = useTemplateRef('table');
 const props = defineProps<{
-  products: DummyProduct[];
+  products: ProductTableItem[],
+  status: string
 }>();
 
 // ===== Column initialization thing =====
-const columns: TableColumn<DummyProduct>[] = [
+const columns: TableColumn<ProductTableItem>[] = [
   {
     accessorKey: "title",
     header: ({ column }) => getHeader(column, "Title"),
@@ -118,7 +119,7 @@ const sorting = ref([
   }
 ])
 
-function getHeader(column: Column<DummyProduct>, label: string) {
+function getHeader(column: Column<ProductTableItem>, label: string) {
   const isSorted = column.getIsSorted()
 
   return h(
