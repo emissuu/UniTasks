@@ -4,6 +4,7 @@ import { vMaska } from 'maska/vue'
 
 const route = useRoute()
 const planId = (route.query['plan'])?.toString()
+const billing = (route.query['billing'])?.toString()
 const { data: plans, status } = await useLazyFetch<ProductCard[]>('/api/product-cards')
 const plan: ProductCard = computed(() => {
   if (status.value === 'success' && plans)
@@ -17,6 +18,7 @@ const year = date.getFullYear()
 
 const state = reactive({
   planId: planId,
+  billing: billing,
   cardNumber: undefined,
   expirationDate: undefined,
   verificationCode: undefined,
@@ -41,6 +43,11 @@ async function handleSubmit(event: FormSubmitEvent<Submission>) {
   state.address = undefined
   state.isConsent = undefined
 }
+
+useSeoMeta({
+  title: 'Checkout',
+  description: `Purchasing ${plan.name}`
+})
 </script>
 
 <template>
@@ -56,6 +63,7 @@ async function handleSubmit(event: FormSubmitEvent<Submission>) {
           <ProductCard
             :product="plan"
             :status="status"
+            :billing="billing"
             :isCheckout="true"/>
         </div>
 
@@ -65,15 +73,15 @@ async function handleSubmit(event: FormSubmitEvent<Submission>) {
           <h3 class="text-md font-bold mb-6">Order Summary</h3>
 
           <div class="flex justify-between mb-2">
-            <p>Annual Plan</p>
-            <p>${{ plan.priceYearlyDiscounted?.toFixed(2) }}</p>
+            <p>{{ billing === 'annual' ? "Annual" : "Monthly" }} Plan</p>
+            <p>${{ billing === 'annual' ? plan.priceYearlyDiscounted?.toFixed(2) : plan.priceMonthly }}</p>
           </div>
 
           <hr class="border-gray-200 mb-2"/>
 
           <div class="flex justify-between mb-2">
             <p>Total Due <span class="text-[10px] font-baseline text-gray-600">(*not including sales tax where applicable)</span></p>
-            <p>${{ plan.priceYearlyDiscounted?.toFixed(2) }}</p>
+            <p>${{ billing === 'annual' ? plan.priceYearlyDiscounted?.toFixed(2) : plan.priceMonthly }}</p>
           </div>
           <div class="flex justify-between mb-6 font-semibold">
             <p>Due Today</p>

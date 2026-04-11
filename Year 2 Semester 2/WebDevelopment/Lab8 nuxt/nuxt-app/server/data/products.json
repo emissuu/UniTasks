@@ -1,8 +1,9 @@
 [
   {
     "id": 0,
-    "name": "Starter - Annual",
-    "priceMonthly": 83.25,
+    "name": "Starter",
+    "priceMonthly": 99,
+    "priceAnnualMonthly": 83.25,
     "priceYearly": 1188,
     "priceYearlyDiscounted": 999,
     "descriptionItems": [
@@ -40,8 +41,9 @@
   },
   {
     "id": 1,
-    "name": "Team - Annual",
-    "priceMonthly": 207.50,
+    "name": "Team",
+    "priceMonthly": 249,
+    "priceAnnualMonthly": 207.50,
     "priceYearly": 2988,
     "priceYearlyDiscounted": 2490,
     "descriptionItems": [
@@ -79,8 +81,9 @@
   },
   {
     "id": 2,
-    "name": "Business - Annual",
-    "priceMonthly": 457.50,
+    "name": "Business",
+    "priceMonthly": 549,
+    "priceAnnualMonthly": 457.50,
     "priceYearly": 6588,
     "priceYearlyDiscounted": 5490,
     "descriptionItems": [
