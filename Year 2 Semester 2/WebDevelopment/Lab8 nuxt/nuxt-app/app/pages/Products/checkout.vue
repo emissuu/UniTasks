@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import type {ProductCard} from "~/types/productCard";
 import { vMaska } from 'maska/vue'
+import {useSubscriptionStore } from "~/stores/useSubscriptionStore";
 
-const route = useRoute()
-const planId = (route.query['plan'])?.toString()
-const billing = (route.query['billing'])?.toString()
-const { data: plans, status } = await useLazyFetch<ProductCard[]>('/api/product-cards')
-const plan: ProductCard = computed(() => {
-  if (status.value === 'success' && plans)
-    return plans.value[parseInt(planId)]
-})
+const subscriptionStore = useSubscriptionStore()
+const { subscription: plan, billing} = storeToRefs(subscriptionStore)
 
 const date = new Date()
 const day = date.getDate()
@@ -17,7 +12,7 @@ const month = date.getMonth()
 const year = date.getFullYear()
 
 const state = reactive({
-  planId: planId,
+  planId: plan.value?.id,
   billing: billing,
   cardNumber: undefined,
   expirationDate: undefined,
@@ -46,12 +41,12 @@ async function handleSubmit(event: FormSubmitEvent<Submission>) {
 
 useSeoMeta({
   title: 'Checkout',
-  description: `Purchasing ${plan.name}`
+  description: `Purchasing ${plan.value?.name}`
 })
 </script>
 
 <template>
-  <div v-if="planId && plans" class="flex justify-center w-full">
+  <div v-if="plan" class="flex justify-center w-full">
     <div class="min-w-[540px] w-full max-w-[900px]">
       <div class="mt-8 mb-4">
         <NuxtLink to="/products" class="text-sm text-gray-500"> << back</NuxtLink>
@@ -62,7 +57,6 @@ useSeoMeta({
         <div class="h-fit">
           <ProductCard
             :product="plan"
-            :status="status"
             :billing="billing"
             :isCheckout="true"/>
         </div>

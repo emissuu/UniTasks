@@ -1,7 +1,9 @@
 <script setup lang="ts">
-const { data: products, status } = await useLazyFetch<ProductCard[]>('/api/product-cards')
+import {useSubscriptionStore} from "~/stores/useSubscriptionStore";
 
-const billingPeriod = ref<"annual" | "monthly">("annual");
+const { data: products, status } = useLazyFetch<ProductCard[]>('/api/product-cards')
+const subscriptionStore = useSubscriptionStore()
+const { billing } = storeToRefs(subscriptionStore)
 
 useSeoMeta({
   title: 'Products List',
@@ -22,30 +24,31 @@ useSeoMeta({
           <div class="bg-gray-100 rounded-md ml-2 font-semibold">
             <UButton variant="ghost"
                      class="border-gray-200"
-                     :class="billingPeriod === 'annual' ?
+                     :class="billing === 'annual' ?
                         'border-2 bg-white text-black cursor-normal hover:bg-white active:bg-white' :
                         'border-0 bg-transparent text-gray-500 cursor-pointer hover:bg-transparent active:bg-transparent'"
                      label="Annual"
-                     @click="billingPeriod = 'annual'"
+                     @click="billing = 'annual'"
             />
             <UButton variant="ghost"
                      class="border-gray-200 hover:bg-transparent"
-                     :class="billingPeriod === 'monthly' ?
+                     :class="billing === 'monthly' ?
                         'border-2 bg-white text-black cursor-normal hover:bg-white active:bg-white' :
                         'border-0 bg-transparent text-gray-500 cursor-pointer hover:bg-transparent active:bg-transparent'"
                      label="Monthly"
-                     @click="billingPeriod = 'monthly'"
+                     @click="billing = 'monthly'"
             />
           </div>
         </div>
       </div>
       <div class="flex justify-center">
-        <ProductCard v-for="product in products"
+        <ProductCard v-if="status !== 'pending'" v-for="product in products"
                      :key="product.id"
                      :product="product"
-                     :status="status"
-                     :billing="billingPeriod"
+                     :billing="billing as string"
                      :isCheckout="false"/>
+        <USkeleton v-else v-for="i in 3"
+                   class="w-[100%] max-w-[360px] min-w-[260px] h-120 rounded-xl  my-6 mx-2"/>
       </div>
 
     </div>

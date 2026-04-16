@@ -1,20 +1,19 @@
 <script setup lang="ts">
 
+import type {ProductCard} from "~/types/productCard";
+import { useSubscriptionStore} from "~/stores/useSubscriptionStore";
+
+const subscriptionStore = useSubscriptionStore();
+
 const props = defineProps<{
   product: ProductCard,
-  status: string,
   billing: string,
-  isCheckout: boolean | null
+  isCheckout: boolean | null,
 }>()
 
 async function redirectToCheckout() {
-  navigateTo({
-    path: "/products/checkout",
-    query: {
-      plan: props.product.id,
-      billing: props.billing
-    }
-  })
+  await subscriptionStore.saveSubscription(props.product, props.billing)
+  navigateTo('/products/checkout')
 }
 </script>
 
@@ -31,10 +30,7 @@ async function redirectToCheckout() {
 
   <!-- Actual card itself -->
   <div class="flex py-6 px-2">
-    <div v-if="status === 'pending'">
-      <USkeleton class="w-[100%] max-w-[360px] min-w-[260px] h-120 rounded-xl" />
-    </div>
-    <div v-else class="relative w-[100%] max-w-[360px] min-w-[260px] rounded-xl shadow-xl overflow-hidden border-gray-200 border
+    <div class="relative w-[100%] max-w-[360px] min-w-[260px] rounded-xl shadow-xl overflow-hidden border-gray-200 border
                 hover:border-gray-600 hover:shadow-xl/15 transition duration-300 bg-white">
       <div class="w-full overflow-hidden bg-linear-to-r from-lime-500 to-cyan-500 h-1"></div>
 
