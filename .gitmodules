@@ -1,3 +1,6 @@
 [submodule "Year 2 Semester 1"]
 	path = Year 2 Semester 1
 	url = https://github.com/emissuu/Uni-Y2S1
+[submodule "Year 2 Semester 2"]
+	path = Year 2 Semester 2
+	url = https://github.com/emissuu/Uni-Y2S2
