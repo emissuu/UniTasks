@@ -16,10 +16,10 @@ UniTasks's only goal is to bring all the projects together and create a modular 
 - Web Development Client
 - Web Development Server
  
-### <span style="color:#FFAA96;">Year 3 Semester 1</span> \[soon]
+### [<span style="color:#FFAA96;">Year 3 Semester 1</span>](https://github.com/emissuu/Uni-Y3S1)
+ -  Rest API 
 
 
-
-  
+ 
 ---
 Soon to have *even* more content and even more silly decisions! 🎉
