@@ -18,6 +18,7 @@ UniTasks's only goal is to bring all the projects together and create a modular 
  
 ### [<span style="color:#FFAA96;">Year 3 Semester 1</span>](https://github.com/emissuu/Uni-Y3S1)
  -  Rest API 
+ -  OOP and Architecture
 
 
  
